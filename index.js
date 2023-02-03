@@ -7,6 +7,8 @@ import morgan from "morgan";
 import IndexRoute from "./routes/index.js";
 import AuthRoute from "./routes/auth.js";
 import UserRoute from "./routes/user.js";
+import RoleRoute from "./routes/role.js";
+import PermissionRoute from "./routes/permission.js";
 
 dotenv.config();
 
@@ -32,6 +34,8 @@ app.use(
 
 app.use("/", IndexRoute);
 app.use("/api", UserRoute);
+app.use("/api", RoleRoute);
+app.use("/api", PermissionRoute);
 app.use("/api/auth", AuthRoute);
 
 app.listen(port, () => {
