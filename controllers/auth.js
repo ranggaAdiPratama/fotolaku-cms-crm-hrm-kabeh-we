@@ -14,11 +14,7 @@ export const login = async (req, res) => {
       case !username:
         return helper.response(res, 400, "username is required");
       case !password:
-        return helper.response(
-          res,
-          400,
-          "password must be at least 6 characters long"
-        );
+        return helper.response(res, 400, "password is required");
       case password.length < 6:
         return helper.response(
           res,

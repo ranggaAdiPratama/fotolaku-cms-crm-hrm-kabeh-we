@@ -12,5 +12,33 @@ router.get(
   middleware.checkPermission("view user"),
   controller.index
 );
+// NOTE GET /api/user/:id
+router.get(
+  "/user/:id",
+  middleware.auth,
+  middleware.checkPermission("view user"),
+  controller.show
+);
+// NOTE POST /api/user
+router.post(
+  "/user",
+  middleware.auth,
+  middleware.checkPermission("add user"),
+  controller.store
+);
+// NOTE PUT /api/user/:id
+router.put(
+  "/user/:id",
+  middleware.auth,
+  middleware.checkPermission("update user"),
+  controller.update
+);
+// NOTE DELETE /api/user/:id
+router.delete(
+  "/user/:id",
+  middleware.auth,
+  middleware.checkPermission("delete user"),
+  controller.destroy
+);
 
 export default router;
