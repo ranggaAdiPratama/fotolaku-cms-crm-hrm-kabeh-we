@@ -248,6 +248,10 @@ export const update = async (req, res) => {
     if (brand) {
       if (!user.brand) {
         const brandExist = await User.findOne({ brand });
+
+        if (brandExist) {
+          return helper.response(res, 400, "brand is already registered");
+        }
       } else {
         const brandExist = await User.findOne({
           brand,
@@ -259,10 +263,10 @@ export const update = async (req, res) => {
             },
           ],
         });
-      }
 
-      if (brandExist) {
-        return helper.response(res, 400, "brand is already registered");
+        if (brandExist) {
+          return helper.response(res, 400, "brand is already registered");
+        }
       }
     } else {
       brand = user.brand;
