@@ -43,6 +43,30 @@ export const destroy = async (req, res) => {
   }
 };
 // !SECTION destroy
+// SECTION model
+export const model = async (req, res) => {
+  try {
+    const model = await Role.findOne({
+      name: "Model",
+    });
+
+    const data = await User.find({
+      role: model._id,
+      $and: [
+        {
+          status: true,
+        },
+      ],
+    }).select("_id name");
+
+    return helper.response(res, 200, "Data found", data);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err);
+  }
+};
+// !SECTION model
 // SECTION show
 export const show = async (req, res) => {
   try {

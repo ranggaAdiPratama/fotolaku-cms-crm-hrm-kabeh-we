@@ -6,6 +6,7 @@ import morgan from "morgan";
 
 import IndexRoute from "./routes/index.js";
 import AuthRoute from "./routes/auth.js";
+import ModelRoute from "./routes/model.js";
 import UserRoute from "./routes/user.js";
 
 dotenv.config();
@@ -31,6 +32,7 @@ app.use(
 );
 
 app.use("/", IndexRoute);
+app.use("/api", ModelRoute);
 app.use("/api", UserRoute);
 app.use("/api/auth", AuthRoute);
 
