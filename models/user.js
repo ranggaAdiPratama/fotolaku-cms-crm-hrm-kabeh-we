@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
     role: {
       type: ObjectId,
       ref: Role,
