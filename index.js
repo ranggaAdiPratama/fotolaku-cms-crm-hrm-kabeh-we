@@ -15,6 +15,8 @@ import PropertyRoute from "./routes/property.js";
 import RatioRoute from "./routes/ratio.js";
 import ThemeRoute from "./routes/theme.js";
 import UserRoute from "./routes/user.js";
+import RoleRoute from "./routes/role.js";
+import PermissionRoute from "./routes/permission.js";
 
 dotenv.config();
 
@@ -47,6 +49,8 @@ app.use("/api", ProductRoute);
 app.use("/api", PropertyRoute);
 app.use("/api", RatioRoute);
 app.use("/api", UserRoute);
+app.use("/api", RoleRoute);
+app.use("/api", PermissionRoute);
 app.use("/api", ThemeRoute);
 app.use("/api/auth", AuthRoute);
 
