@@ -28,7 +28,7 @@ export const store = async (req, res) => {
 
     const moduleExist = await Module.findOne({ _id: module });
 
-    if (!moduleExist) {
+    if (! moduleExist) {
       return helper.response(res, 400, "module is not registered");
     }
 

@@ -12,4 +12,25 @@ router.get(
   controller.index
 );
 
+// NOTE POST /api/roles
+router.post(
+  "/roles",
+  middleware.auth,
+  controller.store
+);
+
+// NOTE PUT /api/roles/:id
+router.put(
+  "/roles/:id",
+  middleware.auth,
+  controller.update
+);
+
+// NOTE DELETE /api/roles/:id
+router.delete(
+  "/roles/:id",
+  middleware.auth,
+  controller.destroy
+);
+
 export default router;

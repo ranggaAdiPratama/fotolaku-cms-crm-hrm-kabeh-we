@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c617a979-2a42-47ed-bd0b-d3e1003d9f72",
+		"_postman_id": "6cd51394-d198-4688-ae61-cb0f8dee6207",
 		"name": "Fotolaku",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11108847"
+		"_exporter_id": "17289911"
 	},
 	"item": [
 		{
@@ -321,7 +321,7 @@
 								},
 								{
 									"key": "role",
-									"value": "63dc8f1f889d1cacd80feb45",
+									"value": "63dbe417bf06ec29c47eb441",
 									"type": "text"
 								},
 								{
@@ -332,12 +332,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}user/63dc8f527d7618a847a0438f",
+							"raw": "{{url}}user/63dcf5b72abca2014021852d",
 							"host": [
 								"{{url}}user"
 							],
 							"path": [
-								"63dc8f527d7618a847a0438f"
+								"63dcf5b72abca2014021852d"
 							]
 						}
 					},
@@ -721,6 +721,275 @@
 							"raw": "{{url}}themes",
 							"host": [
 								"{{url}}themes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "List Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}roles",
+							"host": [
+								"{{url}}roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "fsdfdsafsd",
+									"type": "text"
+								},
+								{
+									"key": "permissions[0]",
+									"value": "63dde3a15318a2def882ca42",
+									"type": "text"
+								},
+								{
+									"key": "permissions[1]",
+									"value": "63dde3a15318a2def882ca42",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}roles",
+							"host": [
+								"{{url}}roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}roles/63dcf5b62abca2014021851c",
+							"host": [
+								"{{url}}roles"
+							],
+							"path": [
+								"63dcf5b62abca2014021851c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Permission",
+			"item": [
+				{
+					"name": "List Permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}permissions",
+							"host": [
+								"{{url}}permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Nama Permission",
+									"type": "text"
+								},
+								{
+									"key": "alias",
+									"value": "Alisan Permission",
+									"type": "text"
+								},
+								{
+									"key": "module",
+									"value": "63dbe417bf06ec29c47eb3d1",
+									"type": "text"
+								},
+								{
+									"key": "submodule",
+									"value": "fdsfsdf",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}permissions",
+							"host": [
+								"{{url}}permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}permissions/63dcea10dd00aa1fee3c4127",
+							"host": [
+								"{{url}}permissions"
+							],
+							"path": [
+								"63dcea10dd00aa1fee3c4127"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Permission Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "update permission",
+									"type": "text"
+								},
+								{
+									"key": "alias",
+									"value": "update permission",
+									"type": "text"
+								},
+								{
+									"key": "module",
+									"value": "63dcf5b62abca201402184b1",
+									"type": "text"
+								},
+								{
+									"key": "submodule",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}permissions/63dcf5b62abca201402184c8",
+							"host": [
+								"{{url}}permissions"
+							],
+							"path": [
+								"63dcf5b62abca201402184c8"
 							]
 						}
 					},
