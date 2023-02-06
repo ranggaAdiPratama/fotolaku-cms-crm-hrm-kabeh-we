@@ -9,27 +9,39 @@ const router = express.Router();
 router.get(
   "/permissions",
   middleware.auth,
+  middleware.checkPermission("view role and permission"),
   controller.index
-  );
-  
-// NOTE POST /api/permissions
-router.post(
-  "/permissions",
+);
+
+// NOTE GET /api/permission/:id
+router.get(
+  "/permission/:id",
   middleware.auth,
+  middleware.checkPermission("view role and permission"),
+  controller.show
+);
+
+// NOTE POST /api/permission
+router.post(
+  "/permission",
+  middleware.auth,
+  middleware.checkPermission("add role and permission"),
   controller.store
 );
 
-// NOTE PUT /api/permissions/:id
+// NOTE PUT /api/permission/:id
 router.put(
-  "/permissions/:id",
+  "/permission/:id",
   middleware.auth,
+  middleware.checkPermission("update role and permission"),
   controller.update
 );
 
-// NOTE DELETE /api/permissions/:id
+// NOTE DELETE /api/permission/:id
 router.delete(
-  "/permissions/:id",
+  "/permission/:id",
   middleware.auth,
+  middleware.checkPermission("delete role and permission"),
   controller.destroy
 );
 

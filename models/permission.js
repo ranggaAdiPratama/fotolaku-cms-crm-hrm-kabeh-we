@@ -21,6 +21,10 @@ const permissionSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "Module",
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
