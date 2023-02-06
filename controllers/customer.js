@@ -6,12 +6,12 @@ import * as helper from "../helper.js";
 // SECTION list
 export const index = async (req, res) => {
   try {
-    const model = await Role.findOne({
+    const customer = await Role.findOne({
       name: "Customer",
     });
 
     const data = await User.find({
-      role: model._id,
+      role: customer._id,
       $and: [
         {
           status: true,

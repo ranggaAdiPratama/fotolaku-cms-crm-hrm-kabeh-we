@@ -7,14 +7,17 @@ const orderSchema = new mongoose.Schema(
     customer: {
       type: ObjectId,
       ref: "User",
+      required: true,
     },
     brand: {
       type: String,
+      required: true,
     },
     sales: [
       {
         type: ObjectId,
         ref: "User",
+        required: true,
       },
     ],
     product: [
@@ -31,7 +34,7 @@ const orderSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-      required: true,
+      default: "New Lead",
     },
     payment: {
       type: ObjectId,
@@ -39,7 +42,6 @@ const orderSchema = new mongoose.Schema(
     },
     link: {
       type: String,
-      default: "",
     },
   },
   {

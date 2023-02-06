@@ -503,6 +503,24 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "sales1",
+    email: "sales1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: sales._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "sales2",
+    email: "sales2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: sales._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
     username: "model1",
     email: "model1@mail.com",
     password: await helper.hashPassword("12345678"),
