@@ -5,6 +5,16 @@ import * as middleware from "../middleware.js";
 
 const router = express.Router();
 
+// NOTE GET /api/orders
+router.get(
+  "/orders",
+  middleware.auth,
+  middleware.checkMultiplePermission(
+    "view all crud card",
+    "view own crud card"
+  ),
+  controller.index
+);
 // NOTE POST /api/order
 router.post(
   "/order",
