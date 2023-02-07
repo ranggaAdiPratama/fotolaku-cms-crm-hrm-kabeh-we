@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 import Order from "../models/order.js";
 import Role from "../models/role.js";
 import User from "../models/user.js";
+import UserActivity from "../models/userActivity.js";
 
 import * as helper from "../helper.js";
 
@@ -13,6 +14,8 @@ const ObjectId = mongoose.Types.ObjectId;
 export const index = async (req, res) => {
   try {
     const { status } = req.query;
+
+    if (!status) return helper.response(res, 400, "Please provide status");
 
     let all = false;
 
@@ -25,10 +28,27 @@ export const index = async (req, res) => {
     }
 
     if (all) {
-    } else {
-    }
+      const data = await Order.find({
+        status,
+      })
+        .populate("customer")
+        .populate("sales");
 
-    return res.send({ status, all });
+      return helper.response(res, 200, "Data found", data);
+    } else {
+      const data = await Order.find({
+        status,
+        $and: [
+          {
+            customer: req.user._id,
+          },
+        ],
+      })
+        .populate("customer")
+        .populate("sales");
+
+      return helper.response(res, 200, "Data found", data);
+    }
   } catch (err) {
     console.log(err);
 
@@ -57,7 +77,7 @@ export const store = async (req, res) => {
         return helper.response(res, 400, "sales is required");
       case !Array.isArray(sales):
         return helper.response(res, 400, "sales should be an array");
-      case !newcustomer:
+      case newcustomer < 0:
         return helper.response(res, 400, "newcustomer is required");
     }
 
@@ -161,6 +181,11 @@ export const store = async (req, res) => {
         sales: karyawanSales,
       });
 
+      await UserActivity.create({
+        user: req.user._id,
+        activity: `menambahkan lead atas nama ${name}`,
+      });
+
       order = await Order.findById(order._id)
         .populate("customer", "_id name")
         .populate("sales", "_id name");
@@ -196,6 +221,11 @@ export const store = async (req, res) => {
       order = await Order.findById(order._id)
         .populate("customer", "_id name")
         .populate("sales", "_id name");
+
+      await UserActivity.create({
+        user: req.user._id,
+        activity: `menambahkan lead atas nama ${isValidCustomer.name}`,
+      });
 
       return helper.response(res, 201, "Lead berhasil ditambahkan", order);
     }

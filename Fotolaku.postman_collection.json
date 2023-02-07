@@ -860,7 +860,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e0c8e01ac76237296a3012\",\r\n        \"63e0c8e01ac76237296a3014\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"username\":\"rangga\",\r\n    \"phone\":\"081573650396\"\r\n}",
+							"raw": "{\r\n    \"customer\":\"63e1e8ef7d8d6c0951dcfcc0\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e1e8f07d8d6c0951dcfcc2\",\r\n        \"63e1e8f07d8d6c0951dcfcc4\"\r\n    ],\r\n    \"newcustomer\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -882,7 +882,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ],\r\n    \"newCostumer\": 0\r\n}",
+									"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ],\r\n    \"newcustomer\": 0\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

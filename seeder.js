@@ -14,6 +14,7 @@ import Section from "./models/section.js";
 import Theme from "./models/theme.js";
 import TokenBlackList from "./models/tokenBlackList.js";
 import User from "./models/user.js";
+import UserActivity from "./models/userActivity.js";
 
 import * as helper from "./helper.js";
 
@@ -30,6 +31,7 @@ mongoose
   .catch((err) => console.log(`DB error => ${err}`));
 
 const seedDB = async () => {
+  await UserActivity.deleteMany({});
   await User.deleteMany({});
   await TokenBlackList.deleteMany({});
   await Role.deleteMany({});
@@ -459,6 +461,7 @@ const seedDB = async () => {
 
   const customer = await Role.create({
     name: "Customer",
+    permission: [viewOwnCrudCardPermission],
   });
 
   const model = await Role.create({
