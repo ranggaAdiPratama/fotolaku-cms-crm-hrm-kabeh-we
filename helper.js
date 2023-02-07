@@ -1,5 +1,19 @@
 import bcrypt from "bcrypt";
 
+export const checkPermission = (alias, user) => {
+  let canUpdate = false;
+
+  for (let index = 0; index < user.role.permission.length; index++) {
+    if (user.role.permission[index].alias == alias) {
+      canUpdate = true;
+
+      break;
+    }
+  }
+
+  return canUpdate;
+};
+
 export const comparePassword = (password, hashed) => {
   return bcrypt.compare(password, hashed);
 };

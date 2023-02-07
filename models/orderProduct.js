@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 
+import Product from "./product.js";
+
 const { ObjectId } = mongoose.Schema;
 
 const orderProductSchema = new mongoose.Schema(
   {
     product: {
       type: ObjectId,
-      ref: "Product",
+      ref: Product,
     },
     qty: {
       type: Number,

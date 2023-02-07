@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 
 import Order from "../models/order.js";
+import OrderProduct from "../models/orderProduct.js";
+import Product from "../models/product.js";
 import Role from "../models/role.js";
 import User from "../models/user.js";
 import UserActivity from "../models/userActivity.js";
@@ -171,8 +173,6 @@ export const store = async (req, res) => {
 
             return helper.response(res, 400, "Error :(", error);
           }
-
-          console.log(info);
         });
 
       let order = await Order.create({
@@ -236,7 +236,7 @@ export const store = async (req, res) => {
   }
 };
 // !SECTION buat order baru
-// !SECTION buat order baru
+// SECTION status list
 export const statusList = async (req, res) => {
   try {
     return helper.response(res, 200, "Order Status", [
@@ -253,3 +253,205 @@ export const statusList = async (req, res) => {
     return helper.response(res, 400, "Error", err.message);
   }
 };
+// !SECTION status list
+// SECTION update order
+export const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let { customer, brand, sales, product } = req.body;
+
+    const oldOrder = await Order.findById(id);
+
+    if (!oldOrder) return helper.response(res, 400, "Data not found");
+
+    let karyawanSales = [];
+    let productIds = [];
+
+    const canUpdateName = helper.checkPermission(
+      "update nama customer of crud card",
+      req.user
+    );
+
+    const canUpdateBrand = helper.checkPermission(
+      "update brand of crud card",
+      req.user
+    );
+
+    const canUpdateSales = helper.checkPermission(
+      "update PIC sales of crud card",
+      req.user
+    );
+
+    if (canUpdateName) {
+      if (!customer) {
+        return helper.response(res, 400, "customer is required");
+      }
+
+      const customerRole = await Role.findOne({
+        name: "Customer",
+      });
+
+      const isValidCustomer = await User.findOne({
+        _id: customer,
+        $and: [
+          {
+            role: customerRole._id,
+          },
+          {
+            status: true,
+          },
+        ],
+      });
+
+      if (!isValidCustomer) {
+        return helper.response(res, 400, "customer is not available");
+      }
+    } else {
+      customer = oldOrder.customer;
+    }
+
+    const isValidCustomer = await User.findOne({
+      _id: customer,
+      $and: [
+        {
+          status: true,
+        },
+      ],
+    });
+
+    if (canUpdateBrand) {
+      if (!brand) {
+        return helper.response(res, 400, "brand is required");
+      }
+    } else {
+      brand = oldOrder.brand;
+    }
+
+    if (canUpdateSales) {
+      switch (true) {
+        case !sales:
+          return helper.response(res, 400, "sales is required");
+        case !Array.isArray(sales):
+          return helper.response(res, 400, "sales should be an array");
+      }
+
+      if (sales.length > 0) {
+        for (var i = 0; i < sales.length; i++) {
+          const salesRole = await Role.findOne({
+            name: "Sales",
+          });
+
+          const isValidSales = await User.findOne({
+            _id: sales[i],
+            $and: [
+              {
+                role: salesRole._id,
+              },
+              {
+                status: true,
+              },
+            ],
+          });
+
+          if (!isValidSales) {
+            return helper.response(res, 400, "sales is not available");
+          }
+        }
+
+        karyawanSales = sales.map((id) => ObjectId(id));
+      } else {
+        karyawanSales = [];
+      }
+    } else {
+      karyawanSales = oldOrder.sales;
+    }
+
+    if (product) {
+      if (oldOrder.status === "Won") {
+        return helper.response(res, 400, "Can't change product on won lead");
+      }
+
+      const oldOnes = oldOrder.product;
+
+      let tobeDeleted = [];
+
+      for (let i = 0; i < oldOrder.product.length; i++) {
+        tobeDeleted.push(oldOrder.product[i]);
+      }
+
+      if (oldOnes.length > 1) {
+        await OrderProduct.find({
+          _id: { $in: tobeDeleted },
+        }).deleteMany();
+      }
+
+      let orderProducts = [];
+
+      for (let i = 0; i < product.length; i++) {
+        const validProduct = await Product.find({
+          _id: product[i].product,
+        });
+
+        if (!validProduct) {
+          return helper.response(res, 400, "Product unavailable");
+        }
+
+        if (product[i].brief && !Array.isArray(product[i].brief)) {
+          return helper.response(res, 400, "brief must be an array");
+        }
+
+        let orderProduct = await OrderProduct.create({
+          product: product[i].product,
+          qty: product[i].qty,
+          price: product[i].price,
+          total: product[i].total,
+        });
+
+        orderProducts.push(orderProduct._id);
+
+        productIds = orderProducts.map((id) => ObjectId(id));
+
+        if (product[i].brief) {
+        }
+      }
+    } else {
+      productIds = oldOrder.product;
+    }
+
+    let order = await Order.findByIdAndUpdate(
+      id,
+      {
+        customer,
+        brand,
+        sales: karyawanSales,
+        product: productIds,
+      },
+      {
+        new: true,
+      }
+    );
+
+    order = await Order.findById(order._id)
+      .populate("customer", "_id name")
+      .populate("product")
+      .populate("sales", "_id name");
+
+    order = await Product.populate(order, {
+      path: "product.product",
+      select: "_id name price",
+    });
+
+    await UserActivity.create({
+      user: req.user._id,
+      activity: `mengubah lead atas nama ${isValidCustomer.name}`,
+    });
+
+    return helper.response(res, 200, "Order updated", order);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION update order

@@ -32,5 +32,15 @@ router.get(
   ),
   controller.statusList
 );
+// NOTE PUT /api/order/:id
+router.put(
+  "/order/:id",
+  middleware.auth,
+  middleware.checkMultiplePermission(
+    "view all crud card",
+    "view own crud card"
+  ),
+  controller.update
+);
 
 export default router;
