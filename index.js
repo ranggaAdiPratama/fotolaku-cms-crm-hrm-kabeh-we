@@ -18,6 +18,7 @@ import ThemeRoute from "./routes/theme.js";
 import UserRoute from "./routes/user.js";
 import RoleRoute from "./routes/role.js";
 import PermissionRoute from "./routes/permission.js";
+import UserActivityRoute from "./routes/userActivity.js";
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use("/api", UserRoute);
 app.use("/api", RoleRoute);
 app.use("/api", PermissionRoute);
 app.use("/api", ThemeRoute);
+app.use("/api", UserActivityRoute);
 app.use("/api/auth", AuthRoute);
 
 app.listen(port, () => {

@@ -15,6 +15,16 @@ router.get(
   ),
   controller.index
 );
+// NOTE GET /api/order/:id
+router.get(
+  "/order/:id",
+  middleware.auth,
+  middleware.checkMultiplePermission(
+    "view all crud card",
+    "view own crud card"
+  ),
+  controller.show
+);
 // NOTE POST /api/order
 router.post(
   "/order",
@@ -41,6 +51,13 @@ router.put(
     "view own crud card"
   ),
   controller.update
+);
+// NOTE PUT /api/order-status/:id
+router.put(
+  "/order-status/:id",
+  middleware.auth,
+  middleware.checkPermission("update status crud card"),
+  controller.statusUpdate
 );
 
 export default router;

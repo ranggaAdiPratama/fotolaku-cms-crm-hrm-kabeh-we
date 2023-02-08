@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 
 import Order from "../models/order.js";
+import OrderBrief from "../models/orderBrief.js";
+import OrderItem from "../models/orderItem.js";
 import OrderProduct from "../models/orderProduct.js";
 import Product from "../models/product.js";
 import Role from "../models/role.js";
@@ -29,16 +31,18 @@ export const index = async (req, res) => {
       }
     }
 
+    let data = {};
+
     if (all) {
-      const data = await Order.find({
+      data = await Order.find({
         status,
       })
-        .populate("customer")
-        .populate("sales");
-
-      return helper.response(res, 200, "Data found", data);
+        .populate("customer", "_id name")
+        .populate("product", "product qty price brief")
+        .populate("sales", "_id name")
+        .populate("items", "_id item status");
     } else {
-      const data = await Order.find({
+      data = await Order.find({
         status,
         $and: [
           {
@@ -46,11 +50,22 @@ export const index = async (req, res) => {
           },
         ],
       })
-        .populate("customer")
-        .populate("sales");
-
-      return helper.response(res, 200, "Data found", data);
+        .populate("customer", "_id name")
+        .populate("product", "product qty price brief")
+        .populate("sales", "_id name")
+        .populate("items", "_id item status");
     }
+
+    data = await Product.populate(data, {
+      path: "product.product",
+      select: "_id name price",
+    });
+
+    data = await OrderBrief.populate(data, {
+      path: "product.brief",
+    });
+
+    return helper.response(res, 200, "Data found", data);
   } catch (err) {
     console.log(err);
 
@@ -58,6 +73,36 @@ export const index = async (req, res) => {
   }
 };
 // !SECTION list order
+// SECTION ambil order
+export const show = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let data = await Order.findById(id, {})
+      .populate("customer", "_id name")
+      .populate("product", "product qty price brief")
+      .populate("sales", "_id name")
+      .populate("items", "_id item status");
+
+    if (!data) return helper.response(res, 404, "Data not found");
+
+    data = await Product.populate(data, {
+      path: "product.product",
+      select: "_id name price",
+    });
+
+    data = await OrderBrief.populate(data, {
+      path: "product.brief",
+    });
+
+    return helper.response(res, 200, "Data found", data);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION ambil order
 // SECTION buat order baru
 export const store = async (req, res) => {
   try {
@@ -254,12 +299,73 @@ export const statusList = async (req, res) => {
   }
 };
 // !SECTION status list
+// SECTION status update
+export const statusUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { status } = req.body;
+
+    const oldOrder = await Order.findById(id);
+
+    if (!oldOrder) return helper.response(res, 400, "Data not found");
+
+    if (!status) return helper.response(res, 400, "status is required");
+
+    if (
+      status !== "New Lead" &&
+      status !== "Cold" &&
+      status !== "Hot" &&
+      status !== "Invoice State" &&
+      status !== "Won" &&
+      status !== "Failed"
+    ) {
+      return helper.response(res, 400, "status is undefined");
+    }
+
+    if (oldOrder.status === "Won" || oldOrder.status === "Failed") {
+      return helper.response(res, 400, "order status can't be changed");
+    }
+
+    let order = await Order.findByIdAndUpdate(
+      id,
+      {
+        status,
+      },
+      {
+        new: true,
+      }
+    );
+
+    order = await Order.findById(id)
+      .populate("customer", "_id name")
+      .populate("product")
+      .populate("sales", "_id name");
+
+    order = await Product.populate(order, {
+      path: "product.product",
+      select: "_id name price",
+    });
+
+    await UserActivity.create({
+      user: req.user._id,
+      activity: `mengubah status lead atas nama ${isValidCustomer.name}`,
+    });
+
+    return helper.response(res, 200, "Order status updated", order);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION status list
 // SECTION update order
 export const update = async (req, res) => {
   try {
     const { id } = req.params;
 
-    let { customer, brand, sales, product } = req.body;
+    let { customer, brand, sales, product, items } = req.body;
 
     const oldOrder = await Order.findById(id);
 
@@ -267,6 +373,7 @@ export const update = async (req, res) => {
 
     let karyawanSales = [];
     let productIds = [];
+    let productItemIds = [];
 
     const canUpdateName = helper.checkPermission(
       "update nama customer of crud card",
@@ -381,6 +488,16 @@ export const update = async (req, res) => {
       }
 
       if (oldOnes.length > 1) {
+        const deleteProduct = await OrderProduct.find({
+          _id: { $in: tobeDeleted },
+        });
+
+        for (var i = 0; i < deleteProduct.length; i++) {
+          if (deleteProduct[i].brief) {
+            await OrderBrief.findByIdAndRemove(deleteProduct[i].brief);
+          }
+        }
+
         await OrderProduct.find({
           _id: { $in: tobeDeleted },
         }).deleteMany();
@@ -397,8 +514,8 @@ export const update = async (req, res) => {
           return helper.response(res, 400, "Product unavailable");
         }
 
-        if (product[i].brief && !Array.isArray(product[i].brief)) {
-          return helper.response(res, 400, "brief must be an array");
+        if (product[i].brief && typeof product[i].brief !== "object") {
+          return helper.response(res, 400, "brief must be an object");
         }
 
         let orderProduct = await OrderProduct.create({
@@ -413,10 +530,68 @@ export const update = async (req, res) => {
         productIds = orderProducts.map((id) => ObjectId(id));
 
         if (product[i].brief) {
+          const theme = product[i].brief.theme ?? null;
+          const model = product[i].brief.model ?? null;
+          const pose = product[i].brief.pose ?? null;
+          const ratio = product[i].brief.ratio ?? null;
+          const background = product[i].brief.background ?? null;
+          const property = product[i].brief.property ?? null;
+          const note = product[i].brief.note ?? null;
+
+          const orderBrief = await OrderBrief.create({
+            theme,
+            model,
+            pose,
+            ratio,
+            background,
+            property,
+            note,
+          });
+
+          await OrderProduct.findByIdAndUpdate(orderProduct._id, {
+            brief: orderBrief.id,
+          });
         }
       }
     } else {
       productIds = oldOrder.product;
+    }
+
+    if (items) {
+      switch (true) {
+        case !Array.isArray(items):
+          return helper.response(res, 400, "items should be an array");
+        case oldOrder.status === "Won":
+          return helper.response(res, 400, "Can't change items on won lead");
+      }
+
+      const oldOnes = oldOrder.items;
+
+      let tobeDeleted = [];
+
+      for (let i = 0; i < oldOrder.items.length; i++) {
+        tobeDeleted.push(oldOrder.items[i]);
+      }
+
+      if (oldOnes.length > 1) {
+        await OrderItem.find({
+          _id: { $in: tobeDeleted },
+        }).deleteMany();
+      }
+
+      let orderItems = [];
+
+      for (let i = 0; i < items.length; i++) {
+        let orderItem = await OrderItem.create({
+          item: items[i],
+        });
+
+        orderItems.push(orderItem._id);
+      }
+
+      productItemIds = orderItems.map((id) => ObjectId(id));
+    } else {
+      productItemIds = oldOrder.items;
     }
 
     let order = await Order.findByIdAndUpdate(
@@ -426,6 +601,7 @@ export const update = async (req, res) => {
         brand,
         sales: karyawanSales,
         product: productIds,
+        items: productItemIds,
       },
       {
         new: true,

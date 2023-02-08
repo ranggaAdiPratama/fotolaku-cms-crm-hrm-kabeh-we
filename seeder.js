@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 
 import Background from "./models/background.js";
 import Module from "./models/module.js";
+import Order from "./models/order.js";
+import OrderBrief from "./models/orderBrief.js";
+import OrderProduct from "./models/orderProduct.js";
 import Permission from "./models/permission.js";
 import Pose from "./models/pose.js";
 import Product from "./models/product.js";
@@ -31,6 +34,9 @@ mongoose
   .catch((err) => console.log(`DB error => ${err}`));
 
 const seedDB = async () => {
+  await OrderBrief.deleteMany({});
+  await OrderProduct.deleteMany({});
+  await Order.deleteMany({});
   await UserActivity.deleteMany({});
   await User.deleteMany({});
   await TokenBlackList.deleteMany({});

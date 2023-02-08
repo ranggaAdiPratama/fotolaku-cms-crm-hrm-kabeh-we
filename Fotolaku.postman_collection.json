@@ -833,6 +833,56 @@
 					"response": []
 				},
 				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order/63e30c817260680a0b1bc8c9",
+							"host": [
+								"{{url}}order"
+							],
+							"path": [
+								"63e30c817260680a0b1bc8c9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add lead",
 					"event": [
 						{
@@ -860,7 +910,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"63e1e8ef7d8d6c0951dcfcc0\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e1e8f07d8d6c0951dcfcc2\",\r\n        \"63e1e8f07d8d6c0951dcfcc4\"\r\n    ],\r\n    \"newcustomer\": 0\r\n}",
+							"raw": "{\r\n    \"customer\":\"63e30beabd0a0cf3e8f0736c\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e30bebbd0a0cf3e8f07370\",\r\n        \"63e30bebbd0a0cf3e8f07372\"\r\n    ],\r\n    \"newcustomer\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -957,7 +1007,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"63e1e8ef7d8d6c0951dcfcc0\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e1e8f07d8d6c0951dcfcc2\",\r\n        \"63e1e8f07d8d6c0951dcfcc4\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63e1e8f37d8d6c0951dcfcd6\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63e1e8f37d8d6c0951dcfcd8\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"63e30beabd0a0cf3e8f0736c\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e30bebbd0a0cf3e8f07370\",\r\n        \"63e30bebbd0a0cf3e8f07372\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63e30beebd0a0cf3e8f07384\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"63e30becbd0a0cf3e8f07378\"\r\n                ],\r\n                \"model\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ]\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"63e30befbd0a0cf3e8f07386\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -965,69 +1015,63 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}order/63e1ea07e369cdebe26f7d1d",
+							"raw": "{{url}}order/63e30c817260680a0b1bc8c9",
 							"host": [
 								"{{url}}order"
 							],
 							"path": [
-								"63e1ea07e369cdebe26f7d1d"
+								"63e30c817260680a0b1bc8c9"
 							]
 						}
 					},
-					"response": [
+					"response": []
+				},
+				{
+					"name": "Update Status Lead",
+					"event": [
 						{
-							"name": "existing customer",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ],\r\n    \"newcustomer\": 0\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}order",
-									"host": [
-										"{{url}}order"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "new customer",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"username\":\"rangga\",\r\n    \"phone\":\"081573650396\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}order",
-									"host": [
-										"{{url}}order"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"Cold\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order-status/63e30c817260680a0b1bc8c9",
+							"host": [
+								"{{url}}order-status"
+							],
+							"path": [
+								"63e30c817260680a0b1bc8c9"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1514,6 +1558,102 @@
 							],
 							"path": [
 								"63e06f1c8c0c954fcaef115d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Activity",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-activities",
+							"host": [
+								"{{url}}user-activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start\":\"2023-02-07\",\r\n    \"end\":\"2023-02-08\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-activities",
+							"host": [
+								"{{url}}user-activities"
 							]
 						}
 					},

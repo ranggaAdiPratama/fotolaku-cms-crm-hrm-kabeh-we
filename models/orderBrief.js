@@ -41,7 +41,7 @@ const orderBriefSchema = new mongoose.Schema(
       },
     ],
     note: {
-      type: Text,
+      type: {},
     },
   },
   {
