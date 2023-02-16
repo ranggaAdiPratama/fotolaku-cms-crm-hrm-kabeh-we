@@ -4,6 +4,9 @@ const { ObjectId } = mongoose.Schema;
 
 const orderBriefSchema = new mongoose.Schema(
   {
+    item: {
+      type: String,
+    },
     theme: [
       {
         type: ObjectId,

@@ -42,6 +42,14 @@ const orderSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "Payment",
     },
+    total: {
+      type: Number,
+      trim: true,
+      default: 0,
+    },
+    closing_deadline: {
+      type: Date,
+    },
     link: {
       type: String,
     },

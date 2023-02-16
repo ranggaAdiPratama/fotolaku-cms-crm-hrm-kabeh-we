@@ -115,6 +115,9 @@ export const store = async (req, res) => {
       email,
       username,
       phone,
+      total,
+      closing_deadline,
+      product,
     } = req.body;
 
     switch (true) {
@@ -161,6 +164,10 @@ export const store = async (req, res) => {
     const customerRole = await Role.findOne({
       name: "Customer",
     });
+
+    let theTotal = 0;
+
+    if (total) theTotal = total;
 
     if (newcustomer == 1) {
       switch (true) {
@@ -224,6 +231,7 @@ export const store = async (req, res) => {
         customer: user._id,
         brand,
         sales: karyawanSales,
+        total: theTotal,
       });
 
       await UserActivity.create({
@@ -261,11 +269,68 @@ export const store = async (req, res) => {
         customer,
         brand,
         sales: karyawanSales,
+        total: theTotal,
+        closing_deadline,
       });
 
       order = await Order.findById(order._id)
         .populate("customer", "_id name")
         .populate("sales", "_id name");
+
+      if (product) {
+        let orderProducts = [];
+
+        for (let i = 0; i < product.length; i++) {
+          const validProduct = await Product.find({
+            _id: product[i].product,
+          });
+
+          if (!validProduct) {
+            return helper.response(res, 400, "Product unavailable");
+          }
+
+          let orderProduct = await OrderProduct.create({
+            product: product[i].product,
+            qty: product[i].qty,
+            price: product[i].price,
+            total: product[i].total,
+          });
+
+          orderProducts.push(orderProduct._id);
+        }
+
+        let updatedOrder = await Order.findByIdAndUpdate(
+          order._id,
+          {
+            product: orderProducts,
+          },
+          {
+            new: true,
+          }
+        );
+
+        updatedOrder = await Order.findById(order._id)
+          .populate("customer", "_id name")
+          .populate("product")
+          .populate("sales", "_id name");
+
+        updatedOrder = await Product.populate(updatedOrder, {
+          path: "product.product",
+          select: "_id name price",
+        });
+
+        await UserActivity.create({
+          user: req.user._id,
+          activity: `menambahkan lead atas nama ${isValidCustomer.name}`,
+        });
+
+        return helper.response(
+          res,
+          201,
+          "Lead berhasil ditambahkan",
+          updatedOrder
+        );
+      }
 
       await UserActivity.create({
         user: req.user._id,
@@ -286,7 +351,7 @@ export const statusList = async (req, res) => {
   try {
     return helper.response(res, 200, "Order Status", [
       "New Lead",
-      "Cold",
+      "Opps",
       "Hot",
       "Invoice State",
       "Won",
@@ -537,6 +602,7 @@ export const update = async (req, res) => {
           const background = product[i].brief.background ?? null;
           const property = product[i].brief.property ?? null;
           const note = product[i].brief.note ?? null;
+          const item = product[i].brief.item ?? null;
 
           const orderBrief = await OrderBrief.create({
             theme,
@@ -546,6 +612,7 @@ export const update = async (req, res) => {
             background,
             property,
             note,
+            item,
           });
 
           await OrderProduct.findByIdAndUpdate(orderProduct._id, {

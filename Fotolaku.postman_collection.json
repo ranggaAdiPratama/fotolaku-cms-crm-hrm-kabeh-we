@@ -910,7 +910,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"63e30beabd0a0cf3e8f0736c\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e30bebbd0a0cf3e8f07370\",\r\n        \"63e30bebbd0a0cf3e8f07372\"\r\n    ],\r\n    \"newcustomer\": 0\r\n}",
+							"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -958,7 +958,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"username\":\"rangga\",\r\n    \"phone\":\"081573650396\"\r\n}",
+									"raw": "{\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"username\":\"rangga\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1007,7 +1007,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"63e30beabd0a0cf3e8f0736c\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e30bebbd0a0cf3e8f07370\",\r\n        \"63e30bebbd0a0cf3e8f07372\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63e30beebd0a0cf3e8f07384\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"63e30becbd0a0cf3e8f07378\"\r\n                ],\r\n                \"model\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ]\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"63e30befbd0a0cf3e8f07386\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"63e30beabd0a0cf3e8f0736c\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e30bebbd0a0cf3e8f07370\",\r\n        \"63e30bebbd0a0cf3e8f07372\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63e30beebd0a0cf3e8f07384\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"63e30becbd0a0cf3e8f07378\"\r\n                ],\r\n                \"model\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"pose\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"ratio\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"background\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"property\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"note\": \"a\",\r\n                \"item\": \"a\"\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"63e30befbd0a0cf3e8f07386\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
