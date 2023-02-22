@@ -7,6 +7,7 @@ const router = express.Router();
 
 // NOTE POST /api/auth/login
 router.post("/login", controller.login);
+router.get("/test", middleware.auth, controller.test);
 // NOTE POST /api/auth/logout
 router.post("/logout", middleware.auth, controller.logout);
 

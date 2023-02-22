@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 
-import User from "../models/user.js";
+import Permission from "../models/permission.js";
 import TokenBlackList from "../models/tokenBlackList.js";
+import User from "../models/user.js";
 
 import * as helper from "../helper.js";
 
@@ -23,7 +24,7 @@ export const login = async (req, res) => {
         );
     }
 
-    const user = await User.findOne({ username }).populate("role");
+    let user = await User.findOne({ username }).populate("role");
 
     if (!user) {
       return helper.response(res, 400, "User not found");
@@ -45,11 +46,17 @@ export const login = async (req, res) => {
       }
     );
 
+    user = await Permission.populate(user, {
+      path: "role.permission",
+      select: "alias",
+    });
+
     const data = {
       user: {
         name: user.name,
         email: user.email,
         role: user.role.name,
+        permission: user.role.permission,
       },
       token,
     };
@@ -79,3 +86,14 @@ export const logout = async (req, res) => {
   }
 };
 // !SECTION logout
+// SECTION test
+export const test = async (req, res) => {
+  try {
+    helper.response(res, 200, "success");
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err);
+  }
+};
+// !SECTION test

@@ -53,7 +53,7 @@ export const newCustomerMailTemplate = (user) => {
 };
 
 export const response = (res, code, message, data = {}) => {
-  return res.status(code).json({
+  return res.status(200).json({
     meta: {
       code,
       message,
