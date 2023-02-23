@@ -553,15 +553,11 @@ const seedDB = async () => {
   });
 
   await Pose.create({
-    name: "Cheese",
+    name: "Statis",
   });
 
   await Pose.create({
-    name: "Berdiri",
-  });
-
-  await Pose.create({
-    name: "Hail H....",
+    name: "Dinamis",
   });
 
   await Theme.create({
@@ -573,21 +569,195 @@ const seedDB = async () => {
   });
 
   await Product.create({
-    name: "Look Book",
+    name: "Plain Catalogue",
     price: "99000",
+    background: 1,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 1,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 0,
+    bts: 1,
+    outdoor: 0,
   });
 
   await Product.create({
-    name: "Creative Book",
-    price: "119000",
+    name: "Lookbook Catalogue",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 0,
+    fashion_props: 1,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 1,
+    outdoor: 1,
+  });
+
+  await Product.create({
+    name: "Product on white",
+    price: "99000",
+    background: 1,
+    ratio: 1,
+    duration: 0,
+    model: 0,
+    pose: 0,
+    fashion_props: 0,
+    angle: 1,
+    product_type: 1,
+    referrence: 0,
+    bts: 0,
+    outdoor: 0,
+  });
+
+  await Product.create({
+    name: "Creative shot",
+    price: "99000",
+    background: 1,
+    ratio: 1,
+    duration: 0,
+    model: 0,
+    pose: 0,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 0,
+    outdoor: 0,
+  });
+
+  await Product.create({
+    name: "Creative shot with hand",
+    price: "99000",
+    background: 1,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 0,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 1,
+    outdoor: 0,
+  });
+
+  await Product.create({
+    name: "Couple",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 0,
+    fashion_props: 1,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 1,
+    outdoor: 1,
+  });
+
+  await Product.create({
+    name: "Video Catalogue",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 1,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 1,
+    outdoor: 0,
+  });
+
+  await Product.create({
+    name: "Video Creative",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 1,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 1,
+    outdoor: 0,
+  });
+
+  await Product.create({
+    name: "3D",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 1,
+    model: 0,
+    pose: 0,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 0,
+    outdoor: 0,
+  });
+
+  await Product.create({
+    name: "Digital Imaging",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 0,
+    model: 0,
+    pose: 0,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 0,
+    outdoor: 0,
+  });
+
+  await Product.create({
+    name: "Beauty Shot",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 0,
+    fashion_props: 0,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 1,
+    outdoor: 0,
   });
 
   await Ratio.create({
-    name: "4 X 6",
+    name: "1:1",
   });
 
   await Ratio.create({
-    name: "16 X 9",
+    name: "4:5",
+  });
+
+  await Ratio.create({
+    name: "9:16",
+  });
+
+  await Ratio.create({
+    name: "16:9",
   });
 
   await Property.create({
