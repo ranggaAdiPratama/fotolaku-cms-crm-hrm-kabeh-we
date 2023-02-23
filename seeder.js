@@ -3,6 +3,7 @@ import { faker } from "@faker-js/faker";
 import mongoose from "mongoose";
 
 import Background from "./models/background.js";
+import Brand from "./models/brand.js";
 import Module from "./models/module.js";
 import Order from "./models/order.js";
 import OrderBrief from "./models/orderBrief.js";
@@ -34,6 +35,7 @@ mongoose
   .catch((err) => console.log(`DB error => ${err}`));
 
 const seedDB = async () => {
+  await Brand.deleteMany({});
   await OrderBrief.deleteMany({});
   await OrderProduct.deleteMany({});
   await Order.deleteMany({});
@@ -610,6 +612,18 @@ const seedDB = async () => {
 
   await Background.create({
     name: "Putih",
+  });
+
+  await Brand.create({
+    name: "Kyou Hobby Shop",
+  });
+
+  await Brand.create({
+    name: "Usagi Paw",
+  });
+
+  await Brand.create({
+    name: "Printpoi",
   });
 };
 

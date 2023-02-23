@@ -7,6 +7,7 @@ import morgan from "morgan";
 import IndexRoute from "./routes/index.js";
 import AuthRoute from "./routes/auth.js";
 import BackgroundRoute from "./routes/background.js";
+import BrandRoute from "./routes/brand.js";
 import CustomerRoute from "./routes/customer.js";
 import ModelRoute from "./routes/model.js";
 import OrderRoute from "./routes/order.js";
@@ -44,6 +45,7 @@ app.use(
 
 app.use("/", IndexRoute);
 app.use("/api", BackgroundRoute);
+app.use("/api", BrandRoute);
 app.use("/api", CustomerRoute);
 app.use("/api", ModelRoute);
 app.use("/api", PoseRoute);
