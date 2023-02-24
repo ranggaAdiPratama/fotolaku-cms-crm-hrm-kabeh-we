@@ -118,6 +118,7 @@ export const store = async (req, res) => {
       total,
       closing_deadline,
       product,
+      note,
     } = req.body;
 
     switch (true) {
@@ -232,6 +233,8 @@ export const store = async (req, res) => {
         brand,
         sales: karyawanSales,
         total: theTotal,
+        closing_deadline,
+        note,
       });
 
       await UserActivity.create({
@@ -271,6 +274,7 @@ export const store = async (req, res) => {
         sales: karyawanSales,
         total: theTotal,
         closing_deadline,
+        note,
       });
 
       order = await Order.findById(order._id)

@@ -50,6 +50,9 @@ const orderSchema = new mongoose.Schema(
     closing_deadline: {
       type: Date,
     },
+    note: {
+      type: String,
+    },
     link: {
       type: String,
     },
