@@ -24,7 +24,7 @@ export const emailConfig = () => {
     host: "smtp.gmail.com",
     auth: {
       user: "masterrangga@gmail.com",
-      pass: "rnlrulxtccutcrxn",
+      pass: "crwlgkhgmnnmltkp",
     },
     secure: true,
   };
