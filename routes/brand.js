@@ -7,5 +7,6 @@ const router = express.Router();
 
 // NOTE GET /api/brands
 router.get("/brands", middleware.auth, controller.index);
+router.get("/brand", middleware.auth, controller.store);
 
 export default router;
