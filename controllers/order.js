@@ -383,7 +383,7 @@ export const statusUpdate = async (req, res) => {
 
     if (
       status !== "New Lead" &&
-      status !== "Cold" &&
+      status !== "Opps" &&
       status !== "Hot" &&
       status !== "Invoice State" &&
       status !== "Won" &&
