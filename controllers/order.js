@@ -418,7 +418,7 @@ export const statusUpdate = async (req, res) => {
 
     await UserActivity.create({
       user: req.user._id,
-      activity: `mengubah status lead atas nama ${isValidCustomer.name}`,
+      activity: `mengubah status lead atas nama ${order.customer.name}`,
     });
 
     return helper.response(res, 200, "Order status updated", order);
