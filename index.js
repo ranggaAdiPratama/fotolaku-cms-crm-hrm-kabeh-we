@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 
 import IndexRoute from "./routes/index.js";
+import AngleRoute from "./routes/angle.js";
 import AuthRoute from "./routes/auth.js";
 import BackgroundRoute from "./routes/background.js";
 import BrandRoute from "./routes/brand.js";
@@ -14,6 +15,7 @@ import OrderRoute from "./routes/order.js";
 import PoseRoute from "./routes/pose.js";
 import ServiceRoute from "./routes/service.js";
 import PropertyRoute from "./routes/property.js";
+import ProductTypeRoute from "./routes/productType.js";
 import RatioRoute from "./routes/ratio.js";
 import SalesRoute from "./routes/sales.js";
 import ThemeRoute from "./routes/theme.js";
@@ -46,6 +48,7 @@ app.use(
 );
 
 app.use("/", IndexRoute);
+app.use("/api", AngleRoute);
 app.use("/api", BackgroundRoute);
 app.use("/api", BrandRoute);
 app.use("/api", CustomerRoute);
@@ -58,6 +61,7 @@ app.use("/api", RatioRoute);
 app.use("/api", UserRoute);
 app.use("/api", RoleRoute);
 app.use("/api", PermissionRoute);
+app.use("/api", ProductTypeRoute);
 app.use("/api", SalesRoute);
 app.use("/api", ThemeRoute);
 app.use("/api", UserActivityRoute);

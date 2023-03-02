@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema(
+const { ObjectId } = mongoose.Schema;
+
+const serviceSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -57,10 +59,58 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    backgroundList: [
+      {
+        type: ObjectId,
+        ref: "Background",
+      },
+    ],
+    modelList: [
+      {
+        type: ObjectId,
+        ref: "User",
+      },
+    ],
+    ratioList: [
+      {
+        type: ObjectId,
+        ref: "Ratio",
+      },
+    ],
+    poseList: [
+      {
+        type: ObjectId,
+        ref: "Pose",
+      },
+    ],
+    propertyList: [
+      {
+        type: ObjectId,
+        ref: "Property",
+      },
+    ],
+    productTypeList: [
+      {
+        type: ObjectId,
+        ref: "ProductType",
+      },
+    ],
+    angleList: [
+      {
+        type: ObjectId,
+        ref: "Angle",
+      },
+    ],
+    themeList: [
+      {
+        type: ObjectId,
+        ref: "Theme",
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model("Product", productSchema);
+export default mongoose.model("Service", serviceSchema);

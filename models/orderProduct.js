@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import Product from "./product.js";
+import Product from "./service.js";
 
 const { ObjectId } = mongoose.Schema;
 

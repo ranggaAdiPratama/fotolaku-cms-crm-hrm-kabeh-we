@@ -601,7 +601,7 @@
 					"response": []
 				},
 				{
-					"name": "Product",
+					"name": "Service",
 					"event": [
 						{
 							"listen": "test",
@@ -634,9 +634,9 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{url}}products",
+							"raw": "{{url}}services",
 							"host": [
-								"{{url}}products"
+								"{{url}}services"
 							]
 						}
 					},
@@ -763,6 +763,98 @@
 							"raw": "{{url}}themes",
 							"host": [
 								"{{url}}themes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}product-types",
+							"host": [
+								"{{url}}product-types"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Aksesoris",
+									"description": "Aksesoris, Bawahan, Atasan",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Angle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}angles",
+							"host": [
+								"{{url}}angles"
 							]
 						}
 					},

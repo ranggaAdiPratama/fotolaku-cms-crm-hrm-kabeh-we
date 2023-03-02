@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { faker } from "@faker-js/faker";
 import mongoose from "mongoose";
 
+import Angle from "./models/angle.js";
 import Background from "./models/background.js";
 import Brand from "./models/brand.js";
 import Module from "./models/module.js";
@@ -10,7 +11,8 @@ import OrderBrief from "./models/orderBrief.js";
 import OrderProduct from "./models/orderProduct.js";
 import Permission from "./models/permission.js";
 import Pose from "./models/pose.js";
-import Product from "./models/product.js";
+import Service from "./models/service.js";
+import ProductType from "./models/productType.js";
 import Property from "./models/property.js";
 import Ratio from "./models/ratio.js";
 import Role from "./models/role.js";
@@ -49,9 +51,11 @@ const seedDB = async () => {
   await Section.deleteMany({});
   await Property.deleteMany({});
   await Background.deleteMany({});
-  await Theme.deleteMany({});
   await Ratio.deleteMany({});
-  await Product.deleteMany({});
+  await Angle.deleteMany({});
+  await Theme.deleteMany({});
+  await ProductType.deleteMany({});
+  await Service.deleteMany({});
 
   const generalSettingSection = await Section.create({
     name: "General Setting",
@@ -334,9 +338,9 @@ const seedDB = async () => {
 
   const updateProductServiceDetailsofSPCardPermission = await Permission.create(
     {
-      name: "Product Service Details",
+      name: "Service Service Details",
       module: spCardModule._id,
-      alias: "update product service details of SP card",
+      alias: "update Service service details of SP card",
       sub_module: updateCardofSpCardModule._id,
     }
   );
@@ -530,7 +534,27 @@ const seedDB = async () => {
     role: sales._id,
   });
 
-  await User.create({
+  const lightGreyBg = await Background.create({
+    name: "Light Grey",
+  });
+
+  const pureWhiteBg = await Background.create({
+    name: "Pure White",
+  });
+
+  const property1 = await Property.create({
+    name: "Kursi",
+  });
+
+  const property2 = await Property.create({
+    name: "Meja",
+  });
+
+  const property3 = await Property.create({
+    name: "Tangga",
+  });
+
+  const model1 = await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
     username: "model1",
     email: "model1@mail.com",
@@ -539,7 +563,7 @@ const seedDB = async () => {
     role: model._id,
   });
 
-  await User.create({
+  const model2 = await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
     username: "model2",
     email: "model2@mail.com",
@@ -548,27 +572,92 @@ const seedDB = async () => {
     role: model._id,
   });
 
-  await Theme.create({
-    name: "Ceria",
+  const ratio1 = await Ratio.create({
+    name: "1:1",
   });
 
-  await Pose.create({
+  const ratio2 = await Ratio.create({
+    name: "4:5",
+  });
+
+  const ratio3 = await Ratio.create({
+    name: "9:16",
+  });
+
+  const ratio4 = await Ratio.create({
+    name: "16:9",
+  });
+
+  const pose1 = await Pose.create({
     name: "Statis",
   });
 
-  await Pose.create({
+  const pose2 = await Pose.create({
     name: "Dinamis",
   });
 
-  await Theme.create({
-    name: "Kasual",
+  const productType1 = await ProductType.create({
+    name: "Tas",
+    type: "Aksesoris",
   });
 
-  await Theme.create({
-    name: "Depresi",
+  const productType2 = await ProductType.create({
+    name: "Celana",
+    type: "Bawahan",
   });
 
-  await Product.create({
+  const productType3 = await ProductType.create({
+    name: "Jaket",
+    type: "Atasan",
+  });
+
+  const productType4 = await ProductType.create({
+    name: "Topi",
+    type: "Aksesoris",
+  });
+
+  const productType5 = await ProductType.create({
+    name: "Kemeja",
+    type: "Aksesoris",
+  });
+
+  const productType6 = await ProductType.create({
+    name: "Celana Pendek",
+    type: "Bawahan",
+  });
+
+  const productType7 = await ProductType.create({
+    name: "Kaos",
+    type: "Atasan",
+  });
+
+  const productType8 = await ProductType.create({
+    name: "Sweater",
+    type: "Atasan",
+  });
+
+  const productType9 = await ProductType.create({
+    name: "Kacamata",
+    type: "Aksesoris",
+  });
+
+  const angle1 = await Angle.create({
+    name: "Atas",
+  });
+
+  const angle2 = await Angle.create({
+    name: "Bawah",
+  });
+
+  const theme1 = await Theme.create({
+    name: "Atas",
+  });
+
+  const theme2 = await Theme.create({
+    name: "Bawah",
+  });
+
+  await Service.create({
     name: "Plain Catalogue",
     price: "99000",
     background: 1,
@@ -582,9 +671,27 @@ const seedDB = async () => {
     referrence: 0,
     bts: 1,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "Lookbook Catalogue",
     price: "99000",
     background: 0,
@@ -598,10 +705,28 @@ const seedDB = async () => {
     referrence: 1,
     bts: 1,
     outdoor: 1,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
-    name: "Product on white",
+  await Service.create({
+    name: "Service on white",
     price: "99000",
     background: 1,
     ratio: 1,
@@ -614,9 +739,27 @@ const seedDB = async () => {
     referrence: 0,
     bts: 0,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "Creative shot",
     price: "99000",
     background: 1,
@@ -630,9 +773,27 @@ const seedDB = async () => {
     referrence: 1,
     bts: 0,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "Creative shot with hand",
     price: "99000",
     background: 1,
@@ -646,9 +807,61 @@ const seedDB = async () => {
     referrence: 1,
     bts: 1,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
+    name: "Outdoor",
+    price: "99000",
+    background: 0,
+    ratio: 1,
+    duration: 0,
+    model: 1,
+    pose: 0,
+    fashion_props: 1,
+    angle: 0,
+    product_type: 1,
+    referrence: 1,
+    bts: 1,
+    outdoor: 1,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
+  });
+
+  await Service.create({
     name: "Couple",
     price: "99000",
     background: 0,
@@ -662,9 +875,27 @@ const seedDB = async () => {
     referrence: 1,
     bts: 1,
     outdoor: 1,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "Video Catalogue",
     price: "99000",
     background: 0,
@@ -678,9 +909,27 @@ const seedDB = async () => {
     referrence: 1,
     bts: 1,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "Video Creative",
     price: "99000",
     background: 0,
@@ -694,9 +943,27 @@ const seedDB = async () => {
     referrence: 1,
     bts: 1,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "3D",
     price: "99000",
     background: 0,
@@ -710,9 +977,27 @@ const seedDB = async () => {
     referrence: 1,
     bts: 0,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "Digital Imaging",
     price: "99000",
     background: 0,
@@ -726,9 +1011,27 @@ const seedDB = async () => {
     referrence: 1,
     bts: 0,
     outdoor: 0,
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
-  await Product.create({
+  await Service.create({
     name: "Beauty Shot",
     price: "99000",
     background: 0,
@@ -742,46 +1045,24 @@ const seedDB = async () => {
     referrence: 1,
     bts: 1,
     outdoor: 0,
-  });
-
-  await Ratio.create({
-    name: "1:1",
-  });
-
-  await Ratio.create({
-    name: "4:5",
-  });
-
-  await Ratio.create({
-    name: "9:16",
-  });
-
-  await Ratio.create({
-    name: "16:9",
-  });
-
-  await Property.create({
-    name: "Kursi",
-  });
-
-  await Property.create({
-    name: "Meja",
-  });
-
-  await Property.create({
-    name: "Tangga",
-  });
-
-  await Background.create({
-    name: "Merah",
-  });
-
-  await Background.create({
-    name: "Biru",
-  });
-
-  await Background.create({
-    name: "Putih",
+    backgroundList: [lightGreyBg._id, pureWhiteBg._id],
+    modelList: [model1._id, model2._id],
+    ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
+    poseList: [pose1._id, pose2._id],
+    propertyList: [property1._id, property2._id, property3._id],
+    productTypeList: [
+      productType1,
+      productType2,
+      productType3,
+      productType4,
+      productType5,
+      productType6,
+      productType7,
+      productType8,
+      productType9,
+    ],
+    angleList: [angle1, angle2],
+    themeList: [theme1, theme2],
   });
 
   await Brand.create({

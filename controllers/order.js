@@ -5,7 +5,7 @@ import Order from "../models/order.js";
 import OrderBrief from "../models/orderBrief.js";
 import OrderItem from "../models/orderItem.js";
 import OrderProduct from "../models/orderProduct.js";
-import Product from "../models/product.js";
+import Product from "../models/service.js";
 import Role from "../models/role.js";
 import User from "../models/user.js";
 import UserActivity from "../models/userActivity.js";
