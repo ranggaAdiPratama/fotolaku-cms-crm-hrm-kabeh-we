@@ -1044,7 +1044,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"640195c860e53d7c94d77ef7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640195c960e53d7c94d77ef9\",\r\n        \"640195c960e53d7c94d77efb\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"640195c960e53d7c94d77efb\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"640195d360e53d7c94d77f33\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1188,7 +1188,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"status\":\"Cold\"\r\n}",
+							"raw": "{\r\n    \"status\":\"Won\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1196,12 +1196,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}order-status/63e30c817260680a0b1bc8c9",
+							"raw": "{{url}}order-status/6401996f3d5d74de69033204",
 							"host": [
 								"{{url}}order-status"
 							],
 							"path": [
-								"63e30c817260680a0b1bc8c9"
+								"6401996f3d5d74de69033204"
 							]
 						}
 					},

@@ -6,6 +6,7 @@ import OrderBrief from "../models/orderBrief.js";
 import OrderItem from "../models/orderItem.js";
 import OrderProduct from "../models/orderProduct.js";
 import Product from "../models/service.js";
+import Project from "../models/project.js";
 import Role from "../models/role.js";
 import User from "../models/user.js";
 import UserActivity from "../models/userActivity.js";
@@ -405,6 +406,12 @@ export const statusUpdate = async (req, res) => {
         new: true,
       }
     );
+
+    if (status == "Won") {
+      await Project.create({
+        lead: id,
+      });
+    }
 
     order = await Order.findById(id)
       .populate("customer", "_id name")
