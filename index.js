@@ -14,6 +14,7 @@ import ModelRoute from "./routes/model.js";
 import OrderRoute from "./routes/order.js";
 import PoseRoute from "./routes/pose.js";
 import ServiceRoute from "./routes/service.js";
+import ProjectRoute from "./routes/project.js";
 import PropertyRoute from "./routes/property.js";
 import ProductTypeRoute from "./routes/productType.js";
 import RatioRoute from "./routes/ratio.js";
@@ -66,6 +67,7 @@ app.use("/api", SalesRoute);
 app.use("/api", ThemeRoute);
 app.use("/api", UserActivityRoute);
 app.use("/api", ModuleRoute);
+app.use("/api", ProjectRoute);
 app.use("/api/auth", AuthRoute);
 
 app.listen(port, () => {
