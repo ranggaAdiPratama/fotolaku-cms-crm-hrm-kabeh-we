@@ -23,6 +23,7 @@ import ThemeRoute from "./routes/theme.js";
 import UserRoute from "./routes/user.js";
 import RoleRoute from "./routes/role.js";
 import PermissionRoute from "./routes/permission.js";
+import StaffRoute from "./routes/staff.js";
 import UserActivityRoute from "./routes/userActivity.js";
 import ModuleRoute from "./routes/module.js";
 
@@ -68,6 +69,7 @@ app.use("/api", ThemeRoute);
 app.use("/api", UserActivityRoute);
 app.use("/api", ModuleRoute);
 app.use("/api", ProjectRoute);
+app.use("/api", StaffRoute);
 app.use("/api/auth", AuthRoute);
 
 app.listen(port, () => {

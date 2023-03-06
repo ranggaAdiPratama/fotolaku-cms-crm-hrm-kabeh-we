@@ -534,6 +534,150 @@ const seedDB = async () => {
     role: sales._id,
   });
 
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "projectManager1",
+    email: "projectManager1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: project_manager._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "projectManager2",
+    email: "projectManager2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: project_manager._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "photographerLead1",
+    email: "photographerLead1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: photographer_lead._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "photographerLead2",
+    email: "photographerLead2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: photographer_lead._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "photographer1",
+    email: "photographer1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: photographer._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "photographer2",
+    email: "photographer2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: photographer._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "videografer1",
+    email: "videografer1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: videografer._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "videografer2",
+    email: "videografer2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: videografer._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "costumerCare1",
+    email: "costumerCare1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: costumer_care._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "costumerCare2",
+    email: "costumerCare2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: costumer_care._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "stylist1",
+    email: "stylist1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: stylist._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "stylist2",
+    email: "stylist2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: stylist._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "modelHandler1",
+    email: "modelHandler1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: model_handler._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "modelHandler2",
+    email: "modelHandler2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: model_handler._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
+    username: "productHandler1",
+    email: "productHandler1@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: product_handler._id,
+  });
+
+  await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    username: "productHandler2",
+    email: "productHandler2@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: product_handler._id,
+  });
+
   const lightGreyBg = await Background.create({
     name: "Light Grey",
   });

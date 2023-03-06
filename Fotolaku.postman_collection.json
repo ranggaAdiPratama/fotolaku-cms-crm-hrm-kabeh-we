@@ -859,6 +859,55 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}staffs?position=Project Manager",
+							"host": [
+								"{{url}}staffs"
+							],
+							"query": [
+								{
+									"key": "position",
+									"value": "Project Manager",
+									"description": "Project Manager, Photografer Lead, Photografer / Editor, Videografer, Costumer Care, Makeup Artis / Stylist, Model Handler, Product Handler"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
