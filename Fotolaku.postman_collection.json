@@ -1093,7 +1093,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"640195c860e53d7c94d77ef7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640195c960e53d7c94d77ef9\",\r\n        \"640195c960e53d7c94d77efb\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"640195c960e53d7c94d77efb\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"640195d360e53d7c94d77f33\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"640562116c0a98646b603c63\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640562126c0a98646b603c67\",\r\n        \"640562126c0a98646b603c69\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"640562236c0a98646b603cc1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"640562236c0a98646b603cbf\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1245,12 +1245,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}order-status/6401996f3d5d74de69033204",
+							"raw": "{{url}}order-status/6405700d17c5406ea9342b59",
 							"host": [
 								"{{url}}order-status"
 							],
 							"path": [
-								"6401996f3d5d74de69033204"
+								"6405700d17c5406ea9342b59"
 							]
 						}
 					},
@@ -1889,6 +1889,54 @@
 							"raw": "{{url}}projects",
 							"host": [
 								"{{url}}projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectLead\":\"640562136c0a98646b603c6b\",\r\n    \"preparedBy\":\"640562136c0a98646b603c6b\",\r\n    \"photographer\":\"640562136c0a98646b603c6b\",\r\n    \"editor\":\"640562136c0a98646b603c6b\",\r\n    \"revised_by\":\"640562136c0a98646b603c6b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/assign/640570a67640d2691ea54b8e",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
+								"assign",
+								"640570a67640d2691ea54b8e"
 							]
 						}
 					},

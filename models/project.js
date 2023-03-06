@@ -14,31 +14,31 @@ const projectSchema = new Schema(
     projectLead: {
       type: ObjectId,
       ref: "User",
-      default: "",
+      default: null,
     },
     preparedBy: {
       type: ObjectId,
       ref: "User",
-      default: "",
+      default: null,
     },
     photographer: {
       type: ObjectId,
       ref: "User",
-      default: "",
+      default: null,
     },
     editor: {
       type: ObjectId,
       ref: "User",
-      default: "",
+      default: null,
     },
     revised_by: {
       type: ObjectId,
       ref: "User",
-      default: "",
+      default: null,
     },
     status: {
       type: String,
-      default: "Waiting Product",
+      default: "Pending Project",
     },
   },
   {
