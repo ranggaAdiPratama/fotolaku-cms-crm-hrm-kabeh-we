@@ -1,3 +1,4 @@
+import Order from "../models/order.js";
 import Project from "../models/project.js";
 import Service from "../models/service.js";
 import User from "../models/user.js";
@@ -114,3 +115,104 @@ export const assign = async (req, res) => {
   }
 };
 // !SECTION assign aktor project
+// SECTION status list
+export const statusList = async (req, res) => {
+  try {
+    return helper.response(res, 200, "Project Status", [
+      "Pending Project",
+      "New Deals",
+      "Not Arrived (Product only)",
+      "Not Arrived (W/model)",
+      "Product only",
+      "On Model",
+      "digital Image",
+      "video Visual",
+      "Foto FNB",
+      "Video FOTOLAKU",
+      "3D Video",
+      "Editing Video",
+      "Revisi Video",
+      "Editing Foto",
+      "Revisi Foto & DI",
+      "Retake Model",
+      "Done",
+      "Delivery",
+      "FAIL",
+    ]);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION status list
+// SECTION status update
+export const statusUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { status } = req.body;
+
+    const oldProject = await Project.findById(id);
+
+    if (!oldProject) return helper.response(res, 400, "Data not found");
+
+    if (!status) return helper.response(res, 400, "status is required");
+
+    if (
+      status !== "Pending Project" &&
+      status !== "New Deals" &&
+      status !== "Not Arrived (Product only)" &&
+      status !== "Not Arrived (W/model)" &&
+      status !== "Product only" &&
+      status !== "On Model" &&
+      status !== "digital Image" &&
+      status !== "video Visual" &&
+      status !== "Foto FNB" &&
+      status !== "Video FOTOLAKU" &&
+      status !== "3D Video" &&
+      status !== "Editing Video" &&
+      status !== "Revisi Video" &&
+      status !== "Editing Foto" &&
+      status !== "Revisi Foto & DI" &&
+      status !== "Retake Model" &&
+      status !== "Done" &&
+      status !== "Delivery" &&
+      status !== "FAIL"
+    ) {
+      return helper.response(res, 400, "status is undefined");
+    }
+
+    const project = await Project.findByIdAndUpdate(
+      id,
+      {
+        status,
+      },
+      {
+        new: true,
+      }
+    );
+
+    let order = await Order.findById(project.lead)
+      .populate("customer", "_id name")
+      .populate("product")
+      .populate("sales", "_id name");
+
+    order = await Product.populate(order, {
+      path: "product.product",
+      select: "_id name price",
+    });
+
+    await UserActivity.create({
+      user: req.user._id,
+      activity: `mengubah status project atas nama ${order.customer.name}`,
+    });
+
+    return helper.response(res, 200, "Project status updated", order);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION status list

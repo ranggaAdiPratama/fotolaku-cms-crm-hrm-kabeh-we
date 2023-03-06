@@ -1895,6 +1895,56 @@
 					"response": []
 				},
 				{
+					"name": "List status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/status",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Assign Staff",
 					"event": [
 						{
@@ -1936,6 +1986,54 @@
 							],
 							"path": [
 								"assign",
+								"640570a67640d2691ea54b8e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"New Deals\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/status/640570a67640d2691ea54b8e",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
+								"status",
 								"640570a67640d2691ea54b8e"
 							]
 						}
