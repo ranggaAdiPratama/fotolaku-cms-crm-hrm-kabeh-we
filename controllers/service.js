@@ -1,4 +1,5 @@
 import Service from "../models/service.js";
+import CategoryService from "../models/serviceCategory.js";
 
 import * as helper from "../helper.js";
 
@@ -50,3 +51,18 @@ export const showbyCategory = async (req, res) => {
   }
 };
 // !SECTION showbyCategory
+
+// SECTION list categories service
+export const categoriesService = async (req, res) => {
+  try {
+
+    const data = await CategoryService.find({})
+
+    return helper.response(res, 200, "Data found", data);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err);
+  }
+};
+// !SECTION list categories services

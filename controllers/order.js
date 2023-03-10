@@ -288,7 +288,7 @@ export const store = async (req, res) => {
 
         for (let i = 0; i < product.length; i++) {
           let validProduct = await Product.findOne({
-            name: product[i].product,
+            name  : product[i].product,
           });
 
           if (!validProduct) {
