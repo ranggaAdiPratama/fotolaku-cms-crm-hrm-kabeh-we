@@ -706,6 +706,10 @@ export const update = async (req, res) => {
       select: "_id name price",
     });
 
+    order = await OrderBrief.populate(order, {
+      path: "product.brief",
+    });
+
     await UserActivity.create({
       user: req.user._id,
       activity: `mengubah lead atas nama ${isValidCustomer.name}`,
