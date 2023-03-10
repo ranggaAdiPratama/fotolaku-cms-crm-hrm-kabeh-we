@@ -248,6 +248,65 @@ export const store = async (req, res) => {
         .populate("customer", "_id name")
         .populate("sales", "_id name");
 
+      if (product) {
+        let orderProducts = [];
+
+        for (let i = 0; i < product.length; i++) {
+          let validProduct = await Product.findOne({
+            name: product[i].product,
+          });
+
+          if (!validProduct) {
+            const dll = await ServiceCategory.findOne({
+              name: "DLL",
+            });
+
+            validProduct = await Product.create({
+              name: product[i].product,
+              price: product[i].price,
+              category: dll._id,
+            });
+          }
+
+          let orderProduct = await OrderProduct.create({
+            product: validProduct._id,
+            category: validProduct.category,
+            qty: product[i].qty,
+            price: product[i].price,
+            total: product[i].total,
+          });
+
+          orderProducts.push(orderProduct._id);
+        }
+
+        let updatedOrder = await Order.findByIdAndUpdate(
+          order._id,
+          {
+            product: orderProducts,
+          },
+          {
+            new: true,
+          }
+        );
+
+        updatedOrder = await Order.findById(order._id)
+          .populate("customer", "_id name")
+          .populate("product")
+          .populate("sales", "_id name");
+
+        updatedOrder = await Product.populate(updatedOrder, {
+          path: "product.product",
+          select: "_id name price",
+        });
+
+        return helper.response(
+          res,
+          201,
+          "Lead berhasil ditambahkan",
+          updatedOrder
+        );
+      }
+
       return helper.response(res, 201, "Lead berhasil ditambahkan", order);
     } else {
       if (!customer) {

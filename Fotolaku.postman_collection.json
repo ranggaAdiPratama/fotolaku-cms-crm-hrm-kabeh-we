@@ -943,12 +943,12 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{url}}service-by-category/640a970015f96dd4e7000606",
+							"raw": "{{url}}service-by-category/640a9e7d0f67203939ff3f46",
 							"host": [
 								"{{url}}service-by-category"
 							],
 							"path": [
-								"640a970015f96dd4e7000606"
+								"640a9e7d0f67203939ff3f46"
 							]
 						}
 					},
@@ -2079,6 +2079,53 @@
 							],
 							"path": [
 								"status",
+								"640570a67640d2691ea54b8e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\":\"mamamama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/640570a67640d2691ea54b8e",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
 								"640570a67640d2691ea54b8e"
 							]
 						}

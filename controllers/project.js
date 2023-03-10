@@ -216,3 +216,49 @@ export const statusUpdate = async (req, res) => {
   }
 };
 // !SECTION status list
+// SECTION update
+export const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { note } = req.body;
+
+    const oldProject = await Project.findById(id);
+
+    if (!oldProject) return helper.response(res, 400, "Data not found");
+
+    if (!note) return helper.response(res, 400, "note is required");
+
+    const project = await Project.findByIdAndUpdate(
+      id,
+      {
+        note,
+      },
+      {
+        new: true,
+      }
+    );
+
+    let order = await Order.findById(project.lead)
+      .populate("customer", "_id name")
+      .populate("product")
+      .populate("sales", "_id name");
+
+    order = await Product.populate(order, {
+      path: "product.product",
+      select: "_id name price",
+    });
+
+    await UserActivity.create({
+      user: req.user._id,
+      activity: `mengubah note project atas nama ${order.customer.name}`,
+    });
+
+    return helper.response(res, 200, "Project note updated", order);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION update
