@@ -40,6 +40,10 @@ const projectSchema = new Schema(
       type: String,
       default: "Pending Project",
     },
+    note: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

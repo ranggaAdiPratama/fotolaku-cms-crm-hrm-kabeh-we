@@ -33,5 +33,12 @@ router.put(
   middleware.checkPermission("view all SP card"),
   controller.statusUpdate
 );
+// NOTE PUT /api/project/:id
+router.put(
+  "/project/:id",
+  middleware.auth,
+  middleware.checkPermission("view all SP card"),
+  controller.update
+);
 
 export default router;
