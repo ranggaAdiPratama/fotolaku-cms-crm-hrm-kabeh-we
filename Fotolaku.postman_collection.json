@@ -908,6 +908,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Service by category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}service-by-category/640a970015f96dd4e7000606",
+							"host": [
+								"{{url}}service-by-category"
+							],
+							"path": [
+								"640a970015f96dd4e7000606"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1093,7 +1138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"640562116c0a98646b603c63\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640562126c0a98646b603c67\",\r\n        \"640562126c0a98646b603c69\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"640562236c0a98646b603cc1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"640562236c0a98646b603cbf\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"640a9d5a2ee9233697b5708f\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640a9d5c2ee9233697b57093\",\r\n        \"640a9d5d2ee9233697b57095\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

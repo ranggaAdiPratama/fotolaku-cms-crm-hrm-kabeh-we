@@ -38,6 +38,26 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    ig: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    shopee: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    tokped: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    webiste: {
+      type: String,
+      trim: true,
+      default: "",
+    },
     status: {
       type: Boolean,
       default: true,

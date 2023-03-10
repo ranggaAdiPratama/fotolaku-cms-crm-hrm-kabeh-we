@@ -11,12 +11,13 @@ import OrderBrief from "./models/orderBrief.js";
 import OrderProduct from "./models/orderProduct.js";
 import Permission from "./models/permission.js";
 import Pose from "./models/pose.js";
-import Service from "./models/service.js";
 import ProductType from "./models/productType.js";
 import Property from "./models/property.js";
 import Ratio from "./models/ratio.js";
 import Role from "./models/role.js";
 import Section from "./models/section.js";
+import Service from "./models/service.js";
+import ServiceCategory from "./models/serviceCategory.js";
 import Theme from "./models/theme.js";
 import TokenBlackList from "./models/tokenBlackList.js";
 import User from "./models/user.js";
@@ -56,6 +57,7 @@ const seedDB = async () => {
   await Theme.deleteMany({});
   await ProductType.deleteMany({});
   await Service.deleteMany({});
+  await ServiceCategory.deleteMany({});
 
   const generalSettingSection = await Section.create({
     name: "General Setting",
@@ -801,8 +803,21 @@ const seedDB = async () => {
     name: "Bawah",
   });
 
+  const fotoCategory = await ServiceCategory.create({
+    name: "Foto",
+  });
+
+  const videoCategory = await ServiceCategory.create({
+    name: "Video",
+  });
+
+  const dllCategory = await ServiceCategory.create({
+    name: "DLL",
+  });
+
   await Service.create({
     name: "Plain Catalogue",
+    category: fotoCategory._id,
     price: "99000",
     background: 1,
     ratio: 1,
@@ -838,6 +853,7 @@ const seedDB = async () => {
   await Service.create({
     name: "Lookbook Catalogue",
     price: "99000",
+    category: fotoCategory._id,
     background: 0,
     ratio: 1,
     duration: 0,
@@ -872,6 +888,7 @@ const seedDB = async () => {
   await Service.create({
     name: "Service on white",
     price: "99000",
+    category: fotoCategory._id,
     background: 1,
     ratio: 1,
     duration: 0,
@@ -906,6 +923,7 @@ const seedDB = async () => {
   await Service.create({
     name: "Creative shot",
     price: "99000",
+    category: fotoCategory._id,
     background: 1,
     ratio: 1,
     duration: 0,
@@ -940,6 +958,7 @@ const seedDB = async () => {
   await Service.create({
     name: "Creative shot with hand",
     price: "99000",
+    category: fotoCategory._id,
     background: 1,
     ratio: 1,
     duration: 0,
@@ -973,6 +992,7 @@ const seedDB = async () => {
 
   await Service.create({
     name: "Outdoor",
+    category: videoCategory._id,
     price: "99000",
     background: 0,
     ratio: 1,
@@ -1008,6 +1028,7 @@ const seedDB = async () => {
   await Service.create({
     name: "Couple",
     price: "99000",
+    category: fotoCategory._id,
     background: 0,
     ratio: 1,
     duration: 0,
@@ -1040,8 +1061,9 @@ const seedDB = async () => {
   });
 
   await Service.create({
-    name: "Video Catalogue",
+    name: "Video Lookbook",
     price: "99000",
+    category: videoCategory._id,
     background: 0,
     ratio: 1,
     duration: 0,
@@ -1076,6 +1098,7 @@ const seedDB = async () => {
   await Service.create({
     name: "Video Creative",
     price: "99000",
+    category: videoCategory._id,
     background: 0,
     ratio: 1,
     duration: 0,
@@ -1110,6 +1133,7 @@ const seedDB = async () => {
   await Service.create({
     name: "3D",
     price: "99000",
+    category: dllCategory._id,
     background: 0,
     ratio: 1,
     duration: 1,
@@ -1143,6 +1167,7 @@ const seedDB = async () => {
 
   await Service.create({
     name: "Digital Imaging",
+    category: fotoCategory._id,
     price: "99000",
     background: 0,
     ratio: 1,
@@ -1178,6 +1203,7 @@ const seedDB = async () => {
   await Service.create({
     name: "Beauty Shot",
     price: "99000",
+    category: fotoCategory._id,
     background: 0,
     ratio: 1,
     duration: 0,

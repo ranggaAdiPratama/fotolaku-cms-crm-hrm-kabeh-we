@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import Product from "./service.js";
+import ServiceCategory from "./serviceCategory.js";
 
 const { ObjectId } = mongoose.Schema;
 
@@ -9,6 +10,10 @@ const orderProductSchema = new mongoose.Schema(
     product: {
       type: ObjectId,
       ref: Product,
+    },
+    category: {
+      type: ObjectId,
+      ref: ServiceCategory,
     },
     qty: {
       type: Number,

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const { ObjectId } = mongoose.Schema;
+import ServiceCategory from "./serviceCategory.js";
+
+const { ObjectId } = mongoose.SchemaTypes;
 
 const serviceSchema = new mongoose.Schema(
   {
@@ -9,6 +11,10 @@ const serviceSchema = new mongoose.Schema(
       trim: true,
       required: true,
       maxlength: 160,
+    },
+    category: {
+      type: ObjectId,
+      ref: ServiceCategory,
     },
     price: {
       type: Number,

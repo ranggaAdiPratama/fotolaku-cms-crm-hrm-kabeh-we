@@ -8,6 +8,7 @@ import OrderProduct from "../models/orderProduct.js";
 import Product from "../models/service.js";
 import Project from "../models/project.js";
 import Role from "../models/role.js";
+import ServiceCategory from "../models/serviceCategory.js";
 import User from "../models/user.js";
 import UserActivity from "../models/userActivity.js";
 
@@ -286,16 +287,25 @@ export const store = async (req, res) => {
         let orderProducts = [];
 
         for (let i = 0; i < product.length; i++) {
-          const validProduct = await Product.find({
-            _id: product[i].product,
+          let validProduct = await Product.findOne({
+            name: product[i].product,
           });
 
           if (!validProduct) {
-            return helper.response(res, 400, "Product unavailable");
+            const dll = await ServiceCategory.findOne({
+              name: "DLL",
+            });
+
+            validProduct = await Product.create({
+              name: product[i].product,
+              price: product[i].price,
+              category: dll._id,
+            });
           }
 
           let orderProduct = await OrderProduct.create({
-            product: product[i].product,
+            product: validProduct._id,
+            category: validProduct.category,
             qty: product[i].qty,
             price: product[i].price,
             total: product[i].total,
