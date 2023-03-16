@@ -36,13 +36,13 @@ export const index = async (req, res) => {
     let data = {};
 
     if (all) {
-      data = await Order.find({
-        status,
-      })
-        .populate("customer", "_id name")
-        .populate("product", "product qty price brief")
-        .populate("sales", "_id name")
-        .populate("items", "_id item status");
+        data = await Order.find({
+          status,
+        })
+          .populate("customer", "_id name")
+          .populate("product", "product qty price brief")
+          .populate("sales", "_id name")
+          .populate("items", "_id item status");
     } else {
       data = await Order.find({
         status,
