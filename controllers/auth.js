@@ -9,11 +9,11 @@ import * as helper from "../helper.js";
 // SECTION login
 export const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     switch (true) {
-      case !username:
-        return helper.response(res, 400, "username is required");
+      case !email:
+        return helper.response(res, 400, "email is required");
       case !password:
         return helper.response(res, 400, "password is required");
       case password.length < 6:
@@ -24,7 +24,7 @@ export const login = async (req, res) => {
         );
     }
 
-    let user = await User.findOne({ username }).populate("role");
+    let user = await User.findOne({ email }).populate("role");
 
     if (!user) {
       return helper.response(res, 400, "User not found");
