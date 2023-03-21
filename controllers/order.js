@@ -782,3 +782,31 @@ export const update = async (req, res) => {
   }
 };
 // !SECTION update order
+
+// DELETE /orders/:id
+export const destroy = async (req, res, next) => {
+  try {
+    const orderId = req.params.id;
+
+    // Mencari order berdasarkan id
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      // Jika order tidak ditemukan
+      return helper.response(res, 404, "Order not found");
+    }
+    
+    if (order.status === "Won") {
+      return helper.response(res, 400, "Can't delete won lead");
+    }
+
+    // Menghapus order
+    await order.remove();
+    
+    return helper.response(res, 200, "Order deleted");
+
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};

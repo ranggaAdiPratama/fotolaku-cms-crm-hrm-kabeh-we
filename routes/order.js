@@ -60,4 +60,13 @@ router.put(
   controller.statusUpdate
 );
 
+router.delete(
+  "/order/:id",
+  middleware.auth,
+  middleware.checkMultiplePermission(
+    "delete crud card",
+  ),
+  controller.destroy
+);
+
 export default router;
