@@ -21,8 +21,6 @@ export const index = async (req, res) => {
   try {
     const { status } = req.query;
 
-    if (!status) return helper.response(res, 400, "Please provide status");
-
     let all = false;
 
     for (let index = 0; index < req.user.role.permission.length; index++) {
@@ -34,11 +32,16 @@ export const index = async (req, res) => {
     }
 
     let data = {};
-
+    
     if (all) {
-      data = await Order.find({
-        status,
-      })
+    
+      let query = {};
+  
+      if (status) {
+        query.status = status;
+      }
+      
+      data = await Order.find(query)
         .populate("customer", "_id name")
         .populate("product", "product qty price brief")
         .populate("sales", "_id name")
