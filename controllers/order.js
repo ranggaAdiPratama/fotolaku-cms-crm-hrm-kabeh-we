@@ -513,7 +513,7 @@ export const update = async (req, res) => {
   try {
     const { id } = req.params;
 
-    let { customer, brand, sales, product, items } = req.body;
+    let { customer, brand, sales, product, items, serviceNote } = req.body;
 
     const oldOrder = await Order.findById(id);
 
@@ -752,6 +752,7 @@ export const update = async (req, res) => {
         sales: karyawanSales,
         product: productIds,
         items: productItemIds,
+        serviceNote,
       },
       {
         new: true,
