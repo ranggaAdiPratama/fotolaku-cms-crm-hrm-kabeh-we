@@ -19,7 +19,6 @@ const orderSchema = new mongoose.Schema(
       {
         type: ObjectId,
         ref: "User",
-        required: true,
       },
     ],
     product: [
@@ -51,6 +50,9 @@ const orderSchema = new mongoose.Schema(
       type: Date,
     },
     note: {
+      type: String,
+    },
+    serviceNote: {
       type: String,
     },
     link: {

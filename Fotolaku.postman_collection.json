@@ -33,8 +33,8 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "username",
-									"value": "supra",
+									"key": "email",
+									"value": "superAdmin@mail.com",
 									"type": "text"
 								},
 								{
@@ -1138,7 +1138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"640a9d5a2ee9233697b5708f\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640a9d5c2ee9233697b57093\",\r\n        \"640a9d5d2ee9233697b57095\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"640a9e6a0f67203939ff3ee8\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640a9e6a0f67203939ff3eea\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\"\r\n    // \"product\": [\r\n    //     {\r\n    //         \"product\": \"Plain Catalogue\",\r\n    //         \"qty\": 1,\r\n    //         \"price\": 2000,\r\n    //         \"total\": 2000\r\n    //     },\r\n    //     {\r\n    //         \"product\": \"Ngewe\",\r\n    //         \"qty\": 1,\r\n    //         \"price\": 2000,\r\n    //         \"total\": 2000\r\n    //     }\r\n    // ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

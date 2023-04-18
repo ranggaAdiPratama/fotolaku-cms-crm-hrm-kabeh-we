@@ -32,15 +32,14 @@ export const index = async (req, res) => {
     }
 
     let data = {};
-    
+
     if (all) {
-    
       let query = {};
-  
+
       if (status) {
         query.status = status;
       }
-      
+
       data = await Order.find(query)
         .populate("customer", "_id name")
         .populate("product", "product qty price brief")
@@ -124,6 +123,7 @@ export const store = async (req, res) => {
       closing_deadline,
       product,
       note,
+      serviceNote,
     } = req.body;
 
     switch (true) {
@@ -131,15 +131,13 @@ export const store = async (req, res) => {
         return helper.response(res, 400, "brand is required");
       case !sales:
         return helper.response(res, 400, "sales is required");
-      case !Array.isArray(sales):
-        return helper.response(res, 400, "sales should be an array");
       case newcustomer < 0:
         return helper.response(res, 400, "newcustomer is required");
     }
 
     let karyawanSales = [];
 
-    if (sales.length > 0) {
+    if (Array.isArray(sales) && sales.length > 0) {
       for (var i = 0; i < sales.length; i++) {
         const salesRole = await Role.findOne({
           name: "Sales",
@@ -239,6 +237,7 @@ export const store = async (req, res) => {
         sales: karyawanSales,
         total: theTotal,
         closing_deadline,
+        serviceNote,
         note,
       });
 
@@ -339,6 +338,7 @@ export const store = async (req, res) => {
         total: theTotal,
         closing_deadline,
         note,
+        serviceNote,
       });
 
       order = await Order.findById(order._id)
@@ -350,7 +350,7 @@ export const store = async (req, res) => {
 
         for (let i = 0; i < product.length; i++) {
           let validProduct = await Product.findOne({
-            name  : product[i].product,
+            name: product[i].product,
           });
 
           if (!validProduct) {
@@ -798,16 +798,15 @@ export const destroy = async (req, res, next) => {
       // Jika order tidak ditemukan
       return helper.response(res, 404, "Order not found");
     }
-    
+
     if (order.status === "Won") {
       return helper.response(res, 400, "Can't delete won lead");
     }
 
     // Menghapus order
     await order.remove();
-    
-    return helper.response(res, 200, "Order deleted");
 
+    return helper.response(res, 200, "Order deleted");
   } catch (error) {
     console.log(error);
     next(error);
