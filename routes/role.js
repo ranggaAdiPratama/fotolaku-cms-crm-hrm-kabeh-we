@@ -6,12 +6,7 @@ import * as middleware from "../middleware.js";
 const router = express.Router();
 
 // NOTE GET /api/roles
-router.get(
-  "/roles",
-  middleware.auth,
-  middleware.checkPermission("view role and permission"),
-  controller.index
-);
+router.get("/roles", controller.index);
 // NOTE GET /api/role/:id
 router.get(
   "/role/:id",

@@ -40,7 +40,14 @@ mongoose
   .then(() => console.log("database connection established"))
   .catch((err) => console.log(`DB error => ${err}`));
 
-app.use(cors());
+const corsOptions = {
+  origin: true,
+  credentials: true,
+  maxAge: 3600,
+};
+
+app.use(cors(corsOptions));
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(

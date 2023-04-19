@@ -484,7 +484,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "supra",
     email: "superAdmin@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -493,7 +492,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "it",
     email: "IT@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -502,7 +500,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "customer1",
     email: "customer1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -511,7 +508,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "customer2",
     email: "customer2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -520,7 +516,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "sales1",
     email: "sales1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -529,7 +524,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "sales2",
     email: "sales2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -538,7 +532,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "projectManager1",
     email: "projectManager1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -547,7 +540,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "projectManager2",
     email: "projectManager2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -556,7 +548,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "photographerLead1",
     email: "photographerLead1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -565,7 +556,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "photographerLead2",
     email: "photographerLead2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -574,7 +564,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "photographer1",
     email: "photographer1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -583,7 +572,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "photographer2",
     email: "photographer2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -592,7 +580,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "videografer1",
     email: "videografer1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -601,7 +588,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "videografer2",
     email: "videografer2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -610,7 +596,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "costumerCare1",
     email: "costumerCare1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -619,7 +604,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "costumerCare2",
     email: "costumerCare2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -628,7 +612,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "stylist1",
     email: "stylist1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -637,7 +620,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "stylist2",
     email: "stylist2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -646,7 +628,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "modelHandler1",
     email: "modelHandler1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -655,7 +636,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "modelHandler2",
     email: "modelHandler2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -664,7 +644,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "productHandler1",
     email: "productHandler1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -673,7 +652,6 @@ const seedDB = async () => {
 
   await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "productHandler2",
     email: "productHandler2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -702,7 +680,6 @@ const seedDB = async () => {
 
   const model1 = await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
-    username: "model1",
     email: "model1@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
@@ -711,7 +688,6 @@ const seedDB = async () => {
 
   const model2 = await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
-    username: "model2",
     email: "model2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
