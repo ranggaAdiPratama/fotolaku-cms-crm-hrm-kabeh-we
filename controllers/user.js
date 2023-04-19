@@ -10,11 +10,6 @@ export const index = async (req, res) => {
       email: { $ne: "superAdmin@mail.com" },
       $and: [
         {
-          email: {
-            $ne: req.user.email,
-          },
-        },
-        {
           status: true,
         },
       ],

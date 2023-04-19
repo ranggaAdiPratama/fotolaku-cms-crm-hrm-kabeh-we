@@ -438,6 +438,7 @@ const seedDB = async () => {
       updatePhotoshootItemsofSPCardPermission,
       updateBriefsofSPCardPermission,
       updatePaymentDetailsofSPCardPermission,
+      viewCrudUserPermission,
     ],
   });
 
