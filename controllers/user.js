@@ -96,7 +96,7 @@ export const show = async (req, res) => {
 // SECTION store
 export const store = async (req, res) => {
   try {
-    const { name, email, password, phone, role, brand } = req.body;
+    const { name, email, password, phone, role } = req.body;
 
     switch (true) {
       case !name:
@@ -135,25 +135,13 @@ export const store = async (req, res) => {
       return helper.response(res, 400, "role is not registered");
     }
 
-    let brandData = null;
-
-    if (brand) {
-      const brandExist = await User.findOne({ brand });
-
-      if (brandExist) {
-        return helper.response(res, 400, "brand is already registered");
-      }
-
-      brandData = brand;
-    }
-
     let user = await User.create({
       name,
       email,
       password: await helper.hashPassword(password),
       phone,
       role,
-      brand: brandData,
+      brand: "",
     });
 
     user = await User.findById(user._id)

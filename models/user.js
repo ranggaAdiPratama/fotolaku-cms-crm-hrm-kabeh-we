@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
       default: "",
     },
-    webiste: {
+    website: {
       type: String,
       trim: true,
       default: "",
