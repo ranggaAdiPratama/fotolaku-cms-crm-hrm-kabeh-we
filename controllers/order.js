@@ -41,7 +41,8 @@ export const index = async (req, res) => {
       }
 
       data = await Order.find(query)
-        .populate("customer", "_id name")
+        .populate("createdBy", "_id name")
+        .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
         .populate("sales", "_id name")
         .populate("items", "_id item status");
@@ -54,7 +55,8 @@ export const index = async (req, res) => {
           },
         ],
       })
-        .populate("customer", "_id name")
+        .populate("createdBy", "_id name")
+        .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
         .populate("sales", "_id name")
         .populate("items", "_id item status");
