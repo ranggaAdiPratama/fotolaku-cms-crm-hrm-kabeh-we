@@ -7,11 +7,11 @@ import * as helper from "../helper.js";
 export const index = async (req, res) => {
   try {
     const data = await User.find({
-      username: { $ne: "supra" },
+      email: { $ne: "superAdmin@mail.com" },
       $and: [
         {
-          username: {
-            $ne: req.user.username,
+          email: {
+            $ne: req.user.email,
           },
         },
         {
