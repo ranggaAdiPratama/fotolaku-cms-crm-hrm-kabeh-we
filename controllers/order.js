@@ -77,6 +77,33 @@ export const index = async (req, res) => {
   }
 };
 // !SECTION list order
+// SECTION delete order
+export const destroy = async (req, res, next) => {
+  try {
+    const orderId = req.params.id;
+
+    // Mencari order berdasarkan id
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      // Jika order tidak ditemukan
+      return helper.response(res, 404, "Order not found");
+    }
+
+    if (order.status === "Won") {
+      return helper.response(res, 400, "Can't delete won lead");
+    }
+
+    // Menghapus order
+    await order.remove();
+
+    return helper.response(res, 200, "Order deleted");
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+// !SECTION delete order
 // SECTION ambil order
 export const show = async (req, res) => {
   try {
@@ -110,6 +137,7 @@ export const show = async (req, res) => {
 // SECTION buat order baru
 export const store = async (req, res) => {
   try {
+    // SECTION deklarasi isi body
     const {
       customer,
       brand,
@@ -124,20 +152,53 @@ export const store = async (req, res) => {
       product,
       note,
       serviceNote,
+      status,
     } = req.body;
+    // !SECTION deklarasi isi body
 
+    // SECTION validasi
+    // SECTION validasi umum
     switch (true) {
-      case !brand:
-        return helper.response(res, 400, "brand is required");
       case !sales:
         return helper.response(res, 400, "sales is required");
       case newcustomer < 0:
         return helper.response(res, 400, "newcustomer is required");
     }
+    // !SECTION validasi umum
 
+    // SECTION validasi brand
+    var brandValue = "";
+
+    if (brand) brandValue = brand;
+    // !SECTION validasi brand
+
+    // SECTION validasi status
+    var statusValue = "New Lead";
+
+    if (status) {
+      // SECTION nilai status harus ada di dalam if
+      if (
+        status !== "New Lead" &&
+        status !== "Opps" &&
+        status !== "Hot" &&
+        status !== "Invoice State" &&
+        status !== "Won" &&
+        status !== "Failed"
+      ) {
+        return helper.response(res, 400, "status is undefined");
+      }
+
+      statusValue = status;
+      // !SECTION nilai status harus ada di dalam if
+    }
+    // !SECTION validasi status
+
+    // SECTION validasi sales
     let karyawanSales = [];
 
     if (Array.isArray(sales) && sales.length > 0) {
+      // SECTION validasi kalau ada sales
+      // validasi apakah sales terdaftar atau tidak
       for (var i = 0; i < sales.length; i++) {
         const salesRole = await Role.findOne({
           name: "Sales",
@@ -161,58 +222,74 @@ export const store = async (req, res) => {
       }
 
       karyawanSales = sales.map((id) => ObjectId(id));
+      // !SECTION validasi kalau ada sales
     } else {
+      // NOTE validasi kalau nggak ada sales
       karyawanSales = [];
     }
+    // !SECTION validasi sales
 
+    // SECTION variable role customer
     const customerRole = await Role.findOne({
       name: "Customer",
     });
+    // !SECTION variable role customer
 
+    // SECTION variable total lead
     let theTotal = 0;
 
     if (total) theTotal = total;
+    // !SECTION variable total lead
+
+    // SECTION variable kosong
+    let order;
+    let logTargetName = "";
+    // !SECTION variable kosong
+
+    // !SECTION validasi
 
     if (newcustomer == 1) {
+      // SECTION new customer
+      // SECTION add user
+      // SECTION validasi
+      // SECTION validasi umum
       switch (true) {
         case !name:
           return helper.response(res, 400, "name is required");
         case !email:
           return helper.response(res, 400, "email is required");
-        case !username:
-          return helper.response(res, 400, "username is required");
         case !phone:
           return helper.response(res, 400, "phone is required");
       }
+      // !SECTION validasi umum
 
+      // SECTION validasi email uniqueness
       const emailExists = await User.findOne({ email });
 
       if (emailExists) {
         return helper.response(res, 400, "email is registered already");
       }
+      // !SECTION validasi email uniqueness
 
-      const usernameExists = await User.findOne({ username });
-
-      if (usernameExists) {
-        return helper.response(res, 400, "username is registered already");
-      }
-
+      // SECTION validasi phone uniqueness
       const phoneExists = await User.findOne({ phone });
 
       if (phoneExists) {
         return helper.response(res, 400, "phone is registered already");
       }
-
+      // !SECTION validasi phone uniqueness
+      // !SECTION validasi
+      // SECTION add user
       const user = await User.create({
         name,
-        username,
         email,
         password: await helper.hashPassword("12345678"),
         phone,
         role: customerRole._id,
-        brand,
+        brand: brandValue,
       });
-
+      // !SECTION add user
+      // SECTION kirim email
       const mailData = {
         from: "fotolaku@test.com",
         to: email,
@@ -230,91 +307,45 @@ export const store = async (req, res) => {
             return helper.response(res, 400, "Error :(", error);
           }
         });
+      // !SECTION kirim email
+      // NOTE untuk logging
+      logTargetName = name;
+      // !SECTION add user
 
-      let order = await Order.create({
+      // SECTION add order
+      order = await Order.create({
         customer: user._id,
-        brand,
+        brand: brandValue,
         sales: karyawanSales,
         total: theTotal,
         closing_deadline,
         serviceNote,
         note,
+        status: statusValue,
       });
+      // !SECTION add order
 
+      // SECTION catat aktivitas
       await UserActivity.create({
         user: req.user._id,
         activity: `menambahkan lead atas nama ${name}`,
       });
+      // !SECTION catat aktivitas
 
+      // SECTION siapin data kembalian
       order = await Order.findById(order._id)
         .populate("customer", "_id name")
         .populate("sales", "_id name");
-
-      if (product) {
-        let orderProducts = [];
-
-        for (let i = 0; i < product.length; i++) {
-          let validProduct = await Product.findOne({
-            name: product[i].product,
-          });
-
-          if (!validProduct) {
-            const dll = await ServiceCategory.findOne({
-              name: "DLL",
-            });
-
-            validProduct = await Product.create({
-              name: product[i].product,
-              price: product[i].price,
-              category: dll._id,
-            });
-          }
-
-          let orderProduct = await OrderProduct.create({
-            product: validProduct._id,
-            category: validProduct.category,
-            qty: product[i].qty,
-            price: product[i].price,
-            total: product[i].total,
-          });
-
-          orderProducts.push(orderProduct._id);
-        }
-
-        let updatedOrder = await Order.findByIdAndUpdate(
-          order._id,
-          {
-            product: orderProducts,
-          },
-          {
-            new: true,
-          }
-        );
-
-        updatedOrder = await Order.findById(order._id)
-          .populate("customer", "_id name")
-          .populate("product")
-          .populate("sales", "_id name");
-
-        updatedOrder = await Product.populate(updatedOrder, {
-          path: "product.product",
-          select: "_id name price",
-        });
-
-        return helper.response(
-          res,
-          201,
-          "Lead berhasil ditambahkan",
-          updatedOrder
-        );
-      }
-
-      return helper.response(res, 201, "Lead berhasil ditambahkan", order);
+      // !SECTION siapin data kembalian
+      // !SECTION new customer
     } else {
+      // SECTION existing customer
+      // SECTION validasi umum
       if (!customer) {
         return helper.response(res, 400, "customer is required");
       }
-
+      // !SECTION validasi umum
+      // SECTION check apakah user terdaftar
       const isValidCustomer = await User.findOne({
         _id: customer,
         $and: [
@@ -328,94 +359,117 @@ export const store = async (req, res) => {
       });
 
       if (!isValidCustomer) {
+        // NOTE kalau customer tidak terdaftar
         return helper.response(res, 400, "customer is not available");
       }
+      // !SECTION check apakah user terdaftar
 
-      let order = await Order.create({
+      // SECTION add order
+      order = await Order.create({
         customer,
-        brand,
+        brand: brandValue,
         sales: karyawanSales,
         total: theTotal,
         closing_deadline,
         note,
         serviceNote,
+        status: statusValue,
       });
+      // !SECTION add order
 
+      // SECTION siapkan kembalian
       order = await Order.findById(order._id)
         .populate("customer", "_id name")
         .populate("sales", "_id name");
+      // SECTION siapkan kembalian
+      // NOTE untuk logging
+      logTargetName = isValidCustomer.name;
+      // !SECTION new customer
+    }
+    // SECTION logging
+    await UserActivity.create({
+      user: req.user._id,
+      activity: `menambahkan lead atas nama ${logTargetName}`,
+    });
+    // !SECTION logging
 
-      if (product) {
-        let orderProducts = [];
+    if (product) {
+      // SECTION kalau ada produk
+      // NOTE untuk list produk di data order
+      let orderProducts = [];
 
-        for (let i = 0; i < product.length; i++) {
-          let validProduct = await Product.findOne({
+      for (let i = 0; i < product.length; i++) {
+        // SECTION loop isi produk untuk dimasukan ke collection OrderProduct
+        // SECTION validasi produk
+        let validProduct = await Product.findOne({
+          name: product[i].product,
+        });
+
+        if (!validProduct) {
+          // SECTION kalau produk tidak terdaftar, tambahkan ke collection produk dengan kategori DLL
+          const dll = await ServiceCategory.findOne({
+            name: "DLL",
+          });
+
+          validProduct = await Product.create({
             name: product[i].product,
-          });
-
-          if (!validProduct) {
-            const dll = await ServiceCategory.findOne({
-              name: "DLL",
-            });
-
-            validProduct = await Product.create({
-              name: product[i].product,
-              price: product[i].price,
-              category: dll._id,
-            });
-          }
-
-          let orderProduct = await OrderProduct.create({
-            product: validProduct._id,
-            category: validProduct.category,
-            qty: product[i].qty,
             price: product[i].price,
-            total: product[i].total,
+            category: dll._id,
           });
-
-          orderProducts.push(orderProduct._id);
+          // SECTION kalau produk tidak terdaftar, tambahkan ke collection produk dengan kategori DLL
         }
+        // !SECTION validasi produk
 
-        let updatedOrder = await Order.findByIdAndUpdate(
-          order._id,
-          {
-            product: orderProducts,
-          },
-          {
-            new: true,
-          }
-        );
-
-        updatedOrder = await Order.findById(order._id)
-          .populate("customer", "_id name")
-          .populate("product")
-          .populate("sales", "_id name");
-
-        updatedOrder = await Product.populate(updatedOrder, {
-          path: "product.product",
-          select: "_id name price",
+        // SECTION tambahkan ke OrderProduct
+        let orderProduct = await OrderProduct.create({
+          product: validProduct._id,
+          category: validProduct.category,
+          qty: product[i].qty,
+          price: product[i].price,
+          total: product[i].total,
         });
+        // !SECTION tambahkan ke OrderProduct
 
-        await UserActivity.create({
-          user: req.user._id,
-          activity: `menambahkan lead atas nama ${isValidCustomer.name}`,
-        });
-
-        return helper.response(
-          res,
-          201,
-          "Lead berhasil ditambahkan",
-          updatedOrder
-        );
+        // NOTE push ke orderProducts
+        orderProducts.push(orderProduct._id);
+        // !SECTION loop isi produk untuk dimasukan ke collection OrderProduct
       }
 
-      await UserActivity.create({
-        user: req.user._id,
-        activity: `menambahkan lead atas nama ${isValidCustomer.name}`,
-      });
+      // SECTION update order dengan list produk dari orderProducts
+      let updatedOrder = await Order.findByIdAndUpdate(
+        order._id,
+        {
+          product: orderProducts,
+        },
+        {
+          new: true,
+        }
+      );
+      // !SECTION update order dengan list produk dari orderProducts
 
-      return helper.response(res, 201, "Lead berhasil ditambahkan", order);
+      // SECTION update kembalian
+      updatedOrder = await Order.findById(order._id)
+        .populate("customer", "_id name")
+        .populate("product")
+        .populate("sales", "_id name");
+
+      updatedOrder = await Product.populate(updatedOrder, {
+        path: "product.product",
+        select: "_id name price",
+      });
+      // !SECTION update kembalian
+
+      // NOTE FINISH
+      return helper.response(
+        res,
+        201,
+        "Lead berhasil ditambahkan",
+        updatedOrder
+      );
+      // !SECTION kalau ada produk
     }
+    // NOTE FINISH
+    return helper.response(res, 201, "Lead berhasil ditambahkan", order);
   } catch (err) {
     console.log(err);
 
@@ -577,7 +631,7 @@ export const update = async (req, res) => {
 
     if (canUpdateBrand) {
       if (!brand) {
-        return helper.response(res, 400, "brand is required");
+        brand = oldOrder.brand;
       }
     } else {
       brand = oldOrder.brand;
@@ -786,30 +840,3 @@ export const update = async (req, res) => {
   }
 };
 // !SECTION update order
-
-// DELETE /orders/:id
-export const destroy = async (req, res, next) => {
-  try {
-    const orderId = req.params.id;
-
-    // Mencari order berdasarkan id
-    const order = await Order.findById(orderId);
-
-    if (!order) {
-      // Jika order tidak ditemukan
-      return helper.response(res, 404, "Order not found");
-    }
-
-    if (order.status === "Won") {
-      return helper.response(res, 400, "Can't delete won lead");
-    }
-
-    // Menghapus order
-    await order.remove();
-
-    return helper.response(res, 200, "Order deleted");
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};

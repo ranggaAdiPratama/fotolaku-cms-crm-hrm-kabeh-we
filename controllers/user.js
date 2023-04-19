@@ -96,15 +96,13 @@ export const show = async (req, res) => {
 // SECTION store
 export const store = async (req, res) => {
   try {
-    const { name, username, email, password, phone, role, brand } = req.body;
+    const { name, email, password, phone, role, brand } = req.body;
 
     switch (true) {
       case !name:
         return helper.response(res, 400, "name is required");
       case !email:
         return helper.response(res, 400, "email is required");
-      case !username:
-        return helper.response(res, 400, "username is required");
       case !password:
         return helper.response(res, 400, "password is required");
       case password.length < 6:
@@ -123,12 +121,6 @@ export const store = async (req, res) => {
 
     if (emailExists) {
       return helper.response(res, 400, "email is already registered");
-    }
-
-    const usernameExists = await User.findOne({ username });
-
-    if (usernameExists) {
-      return helper.response(res, 400, "username is already registered");
     }
 
     const phoneExists = await User.findOne({ phone });
@@ -157,7 +149,6 @@ export const store = async (req, res) => {
 
     let user = await User.create({
       name,
-      username,
       email,
       password: await helper.hashPassword(password),
       phone,
@@ -184,7 +175,7 @@ export const update = async (req, res) => {
 
     let user = await User.findById(_id);
 
-    let { name, username, email, password, phone, role, brand } = req.body;
+    let { name, email, password, phone, role, brand } = req.body;
 
     if (!name) name = user.name;
 
@@ -205,25 +196,6 @@ export const update = async (req, res) => {
       }
     } else {
       email = user.email;
-    }
-
-    if (username) {
-      const usernameExists = await User.findOne({
-        username,
-        $and: [
-          {
-            username: {
-              $ne: user.username,
-            },
-          },
-        ],
-      });
-
-      if (usernameExists) {
-        return helper.response(res, 400, "username is already registered");
-      }
-    } else {
-      username = user.username;
     }
 
     if (password) {
@@ -298,7 +270,6 @@ export const update = async (req, res) => {
 
     await User.findByIdAndUpdate(_id, {
       name,
-      username,
       email,
       password,
       phone,

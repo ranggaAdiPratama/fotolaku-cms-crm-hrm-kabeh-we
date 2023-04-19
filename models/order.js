@@ -13,7 +13,6 @@ const orderSchema = new mongoose.Schema(
     },
     brand: {
       type: String,
-      required: true,
     },
     sales: [
       {

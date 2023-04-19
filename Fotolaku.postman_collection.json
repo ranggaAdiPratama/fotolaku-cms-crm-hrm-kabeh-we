@@ -3,7 +3,8 @@
 		"_postman_id": "c617a979-2a42-47ed-bd0b-d3e1003d9f72",
 		"name": "Fotolaku",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11108847"
+		"_exporter_id": "11108847",
+		"_collection_link": "https://orange-shuttle-39637.postman.co/workspace/My-Workspace~19abc2a1-782c-4d73-8aa2-d8ce678a2725/collection/11108847-c617a979-2a42-47ed-bd0b-d3e1003d9f72?action=share&creator=11108847&source=collection_link"
 	},
 	"item": [
 		{
@@ -1138,7 +1139,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"640a9e6a0f67203939ff3ee8\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"640a9e6a0f67203939ff3eea\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\"\r\n    // \"product\": [\r\n    //     {\r\n    //         \"product\": \"Plain Catalogue\",\r\n    //         \"qty\": 1,\r\n    //         \"price\": 2000,\r\n    //         \"total\": 2000\r\n    //     },\r\n    //     {\r\n    //         \"product\": \"Ngewe\",\r\n    //         \"qty\": 1,\r\n    //         \"price\": 2000,\r\n    //         \"total\": 2000\r\n    //     }\r\n    // ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"643ffa04ce3b9b445d9e13f1\",\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1186,7 +1187,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"username\":\"rangga\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
