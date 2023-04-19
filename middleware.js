@@ -51,7 +51,10 @@ export const auth = expressAsyncHandler(async (req, res, next) => {
 
 export const checkPermission = (alias) => {
   return async (req, res, next) => {
-    if (!req.user.role) return helper.response(res, 401, "Unauthenticated");
+    if (req.user.role == undefined) {
+      console.log(req.user.role);
+      return helper.response(res, 401, "Unauthenticated");
+    }
 
     let go = 0;
 
@@ -69,7 +72,10 @@ export const checkPermission = (alias) => {
 
 export const checkMultiplePermission = (alias1, alias2) => {
   return async (req, res, next) => {
-    if (!req.user.role) return helper.response(res, 401, "Unauthenticated");
+    if (req.user.role == undefined) {
+      console.log(req.user.role);
+      return helper.response(res, 401, "Unauthenticated");
+    }
 
     let go = 0;
 
