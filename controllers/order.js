@@ -110,7 +110,8 @@ export const show = async (req, res) => {
     const { id } = req.params;
 
     let data = await Order.findById(id, {})
-      .populate("customer", "_id name")
+      .populate("createdBy", "_id name")
+      .populate("customer", "_id name email phone")
       .populate("product", "product qty price brief")
       .populate("sales", "_id name")
       .populate("items", "_id item status");
@@ -322,15 +323,9 @@ export const store = async (req, res) => {
         serviceNote,
         note,
         status: statusValue,
+        createdBy: req.user._id,
       });
       // !SECTION add order
-
-      // SECTION catat aktivitas
-      await UserActivity.create({
-        user: req.user._id,
-        activity: `menambahkan lead atas nama ${name}`,
-      });
-      // !SECTION catat aktivitas
 
       // SECTION siapin data kembalian
       order = await Order.findById(order._id)
@@ -374,6 +369,7 @@ export const store = async (req, res) => {
         note,
         serviceNote,
         status: statusValue,
+        createdBy: req.user._id,
       });
       // !SECTION add order
 

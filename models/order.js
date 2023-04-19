@@ -11,6 +11,11 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    createdBy: {
+      type: ObjectId,
+      ref: "User",
+      required: true,
+    },
     brand: {
       type: String,
     },
