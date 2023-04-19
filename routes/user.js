@@ -20,12 +20,7 @@ router.get(
   controller.show
 );
 // NOTE POST /api/user
-router.post(
-  "/user",
-  middleware.auth,
-  middleware.checkPermission("add user"),
-  controller.store
-);
+router.post("/user", controller.store);
 // NOTE PUT /api/user/:id
 router.put(
   "/user/:id",
