@@ -293,23 +293,23 @@ export const store = async (req, res) => {
       });
       // !SECTION add user
       // SECTION kirim email
-      const mailData = {
-        from: "fotolaku@test.com",
-        to: email,
-        subject: "Your user ",
-        text: `Your new account`,
-        html: helper.newCustomerMailTemplate(user),
-      };
+      // const mailData = {
+      //   from: "fotolaku@test.com",
+      //   to: email,
+      //   subject: "Your user ",
+      //   text: `Your new account`,
+      //   html: helper.newCustomerMailTemplate(user),
+      // };
 
-      nodemailer
-        .createTransport(helper.emailConfig())
-        .sendMail(mailData, (error, info) => {
-          if (error) {
-            console.log(error);
+      // nodemailer
+      //   .createTransport(helper.emailConfig())
+      //   .sendMail(mailData, (error, info) => {
+      //     if (error) {
+      //       console.log(error);
 
-            return helper.response(res, 400, "Error :(", error);
-          }
-        });
+      //       return helper.response(res, 400, "Error :(", error);
+      //     }
+      //   });
       // !SECTION kirim email
       // NOTE untuk logging
       logTargetName = name;
