@@ -565,11 +565,16 @@ export const update = async (req, res) => {
   try {
     const { id } = req.params;
 
-    let { customer, brand, sales, product, items, serviceNote } = req.body;
+    let { customer, brand, sales, product, items, serviceNote, total } =
+      req.body;
 
     const oldOrder = await Order.findById(id);
 
     if (!oldOrder) return helper.response(res, 400, "Data not found");
+
+    if (!total) {
+      total = oldOrder.total;
+    }
 
     let karyawanSales = [];
     let productIds = [];
@@ -805,6 +810,7 @@ export const update = async (req, res) => {
         product: productIds,
         items: productItemIds,
         serviceNote,
+        total,
       },
       {
         new: true,
