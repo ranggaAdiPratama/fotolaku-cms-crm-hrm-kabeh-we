@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import Angle from "./models/angle.js";
 import Background from "./models/background.js";
 import Brand from "./models/brand.js";
+import Invoice from "./models/invoice.js";
 import Module from "./models/module.js";
 import Order from "./models/order.js";
 import OrderBrief from "./models/orderBrief.js";
@@ -39,6 +40,7 @@ mongoose
 
 const seedDB = async () => {
   await Brand.deleteMany({});
+  await Invoice.deleteMany({});
   await OrderBrief.deleteMany({});
   await OrderProduct.deleteMany({});
   await Order.deleteMany({});

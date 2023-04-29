@@ -37,6 +37,10 @@ const orderSchema = new mongoose.Schema(
         ref: "OrderItem",
       },
     ],
+    invoice: {
+      type: ObjectId,
+      ref: "Invoice",
+    },
     status: {
       type: String,
       default: "New Lead",

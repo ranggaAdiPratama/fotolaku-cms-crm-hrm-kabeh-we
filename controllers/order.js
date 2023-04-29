@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import nodemailer from "nodemailer";
+// import nodemailer from "nodemailer";
 
 import Order from "../models/order.js";
 import OrderBrief from "../models/orderBrief.js";
@@ -45,6 +45,7 @@ export const index = async (req, res) => {
         .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
         .populate("sales", "_id name")
+        .populate("invoice", "_id number total")
         .populate("items", "_id item status");
     } else {
       data = await Order.find({
@@ -59,6 +60,7 @@ export const index = async (req, res) => {
         .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
         .populate("sales", "_id name")
+        .populate("invoice", "_id number total")
         .populate("items", "_id item status");
     }
 
@@ -92,7 +94,11 @@ export const destroy = async (req, res, next) => {
       return helper.response(res, 404, "Order not found");
     }
 
-    if (order.status === "Won") {
+    if (order.status === "Won (Paid)") {
+      return helper.response(res, 400, "Can't delete won lead");
+    }
+
+    if (order.status === "Won (Receivable)") {
       return helper.response(res, 400, "Can't delete won lead");
     }
 
@@ -116,6 +122,7 @@ export const show = async (req, res) => {
       .populate("customer", "_id name email phone")
       .populate("product", "product qty price brief")
       .populate("sales", "_id name")
+      .populate("invoice", "_id number total")
       .populate("items", "_id item status");
 
     if (!data) return helper.response(res, 404, "Data not found");
@@ -148,7 +155,6 @@ export const store = async (req, res) => {
       newcustomer,
       name,
       email,
-      username,
       phone,
       total,
       closing_deadline,
@@ -185,7 +191,8 @@ export const store = async (req, res) => {
         status !== "Opps" &&
         status !== "Hot" &&
         status !== "Invoice State" &&
-        status !== "Won" &&
+        status !== "Won (Paid)" &&
+        status !== "Won (Receivable)" &&
         status !== "Failed"
       ) {
         return helper.response(res, 400, "status is undefined");
@@ -483,7 +490,8 @@ export const statusList = async (req, res) => {
       "Opps",
       "Hot",
       "Invoice State",
-      "Won",
+      "Won (Paid)",
+      "Won (Receivable)",
       "Failed",
     ]);
   } catch (err) {
@@ -511,15 +519,16 @@ export const statusUpdate = async (req, res) => {
       status !== "Opps" &&
       status !== "Hot" &&
       status !== "Invoice State" &&
-      status !== "Won" &&
+      status !== "Won (Paid)" &&
+      status !== "Won (Receivable)" &&
       status !== "Failed"
     ) {
       return helper.response(res, 400, "status is undefined");
     }
 
-    if (oldOrder.status === "Won" || oldOrder.status === "Failed") {
-      return helper.response(res, 400, "order status can't be changed");
-    }
+    // if (oldOrder.status === "Won (Paid)" || oldOrder.status === "Won (Receivable)" || oldOrder.status === "Failed") {
+    //   return helper.response(res, 400, "order status can't be changed");
+    // }
 
     let order = await Order.findByIdAndUpdate(
       id,
@@ -531,7 +540,7 @@ export const statusUpdate = async (req, res) => {
       }
     );
 
-    if (status == "Won") {
+    if (status == "Won (Paid)" || status == "Won (Receivable)") {
       await Project.create({
         lead: id,
       });
@@ -680,7 +689,10 @@ export const update = async (req, res) => {
     }
 
     if (product) {
-      if (oldOrder.status === "Won") {
+      if (
+        oldOrder.status === "Won (Paid)" ||
+        oldOrder.status === "Won (Receivable)"
+      ) {
         return helper.response(res, 400, "Can't change product on won lead");
       }
 
@@ -768,7 +780,9 @@ export const update = async (req, res) => {
       switch (true) {
         case !Array.isArray(items):
           return helper.response(res, 400, "items should be an array");
-        case oldOrder.status === "Won":
+        case oldOrder.status === "Won (Paid)":
+          return helper.response(res, 400, "Can't change items on won lead");
+        case oldOrder.status === "Won (Receivable)":
           return helper.response(res, 400, "Can't change items on won lead");
       }
 

@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import Invoice from "./models/invoice.js";
 
 export const checkPermission = (alias, user) => {
   let canUpdate = false;
@@ -28,6 +29,57 @@ export const emailConfig = () => {
     },
     secure: true,
   };
+};
+
+export const generateInvoinceNumber = async (date) => {
+  // INV{tahun}{tanggal}-{antrian 3 digit}
+  let inv = "INV";
+
+  inv += new Date(date).getFullYear();
+
+  let month = "0";
+
+  if (new Date(date).getMonth() + 1 < 10) {
+    month += new Date(date).getMonth() + 1;
+  } else {
+    month = new Date(date).getMonth() + 1;
+  }
+
+  inv += month;
+  inv += "-";
+
+  var start = new Date(date);
+  start.setHours(0, 0, 0, 0);
+
+  var end = new Date(date);
+  end.setHours(23, 59, 59, 999);
+
+  var number = await Invoice.countDocuments({
+    createdAt: {
+      $gte: start,
+      $lt: end,
+    },
+  });
+
+  number = number + 1;
+
+  var series = "";
+
+  if (number.length == 1) {
+    series = "00";
+
+    series += number.toString();
+  } else if (number.length == 2) {
+    series = "0";
+
+    series += number.toString();
+  } else {
+    series = number.toString();
+  }
+
+  inv += series;
+
+  return inv;
 };
 
 export const hashPassword = (password) => {

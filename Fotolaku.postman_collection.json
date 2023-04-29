@@ -999,7 +999,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}orders?status=New Lead",
+							"raw": "{{url}}orders",
 							"host": [
 								"{{url}}orders"
 							],
@@ -1007,7 +1007,8 @@
 								{
 									"key": "status",
 									"value": "New Lead",
-									"description": "New Lead, Cold, Hot, Invoice State, Won, Failed"
+									"description": "New Lead, Cold, Hot, Invoice State, Won (Paid), Won (Receivable), Failed",
+									"disabled": true
 								}
 							]
 						}
@@ -1100,12 +1101,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}order/63e30c817260680a0b1bc8c9",
+							"raw": "{{url}}order/644be8f10c33a469661654ef",
 							"host": [
 								"{{url}}order"
 							],
 							"path": [
-								"63e30c817260680a0b1bc8c9"
+								"644be8f10c33a469661654ef"
 							]
 						}
 					},
@@ -1139,7 +1140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"643ffa04ce3b9b445d9e13f1\",\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"644025f5d9e0725c55e8ad43\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"644025f6d9e0725c55e8ad47\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1297,6 +1298,100 @@
 							],
 							"path": [
 								"6405700d17c5406ea9342b59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Invoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order\": \"644be8f10c33a469661654ef\",\r\n    \"date\": \"2023-08-02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}invoice",
+							"host": [
+								"{{url}}invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Invoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}invoice/INV202308-1",
+							"host": [
+								"{{url}}invoice"
+							],
+							"path": [
+								"INV202308-1"
 							]
 						}
 					},
