@@ -723,12 +723,22 @@ export const update = async (req, res) => {
       let orderProducts = [];
 
       for (let i = 0; i < product.length; i++) {
-        const validProduct = await Product.find({
-          _id: product[i].product,
+        let validProduct = await Product.findOne({
+          name: product[i].product,
         });
 
         if (!validProduct) {
-          return helper.response(res, 400, "Product unavailable");
+          // SECTION kalau produk tidak terdaftar, tambahkan ke collection produk dengan kategori DLL
+          const dll = await ServiceCategory.findOne({
+            name: "DLL",
+          });
+
+          validProduct = await Product.create({
+            name: product[i].product,
+            price: product[i].price,
+            category: dll._id,
+          });
+          // SECTION kalau produk tidak terdaftar, tambahkan ke collection produk dengan kategori DLL
         }
 
         if (product[i].brief && typeof product[i].brief !== "object") {
@@ -736,7 +746,7 @@ export const update = async (req, res) => {
         }
 
         let orderProduct = await OrderProduct.create({
-          product: product[i].product,
+          product: validProduct._id,
           qty: product[i].qty,
           price: product[i].price,
           total: product[i].total,

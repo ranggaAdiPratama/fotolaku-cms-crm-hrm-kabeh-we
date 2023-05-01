@@ -1237,7 +1237,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"63e30beabd0a0cf3e8f0736c\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e30bebbd0a0cf3e8f07370\",\r\n        \"63e30bebbd0a0cf3e8f07372\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63e30beebd0a0cf3e8f07384\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"63e30becbd0a0cf3e8f07378\"\r\n                ],\r\n                \"model\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"pose\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"ratio\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"background\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"property\": [\r\n                    \"63e30becbd0a0cf3e8f07374\"\r\n                ],\r\n                \"note\": \"a\",\r\n                \"item\": \"a\"\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"63e30befbd0a0cf3e8f07386\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"6443da08b5433e5f438b9494\",\r\n    \"brand\":\"kenthaky\",\r\n    \"sales\":[\r\n        \"644308c4b5433e5f438b71d0\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"tes edit\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"64402609d9e0725c55e8ad99\"\r\n                ],\r\n                \"model\": [\r\n                    \"64402602d9e0725c55e8ad73\"\r\n                ],\r\n                \"pose\": [\r\n                    \"64402604d9e0725c55e8ad81\"\r\n                ],\r\n                \"ratio\": [\r\n                    \"64402603d9e0725c55e8ad79\"\r\n                ],\r\n                \"background\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"property\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"note\": \"a\",\r\n                \"item\": \"a\"\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"Music Video\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1245,12 +1245,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}order/63e30c817260680a0b1bc8c9",
+							"raw": "{{url}}order/6443da08b5433e5f438b9498",
 							"host": [
 								"{{url}}order"
 							],
 							"path": [
-								"63e30c817260680a0b1bc8c9"
+								"6443da08b5433e5f438b9498"
 							]
 						}
 					},
