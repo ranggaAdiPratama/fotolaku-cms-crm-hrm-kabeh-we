@@ -574,8 +574,17 @@ export const update = async (req, res) => {
   try {
     const { id } = req.params;
 
-    let { customer, brand, sales, product, items, serviceNote, total } =
-      req.body;
+    let {
+      customer,
+      name,
+      brand,
+      sales,
+      product,
+      items,
+      serviceNote,
+      total,
+      phone,
+    } = req.body;
 
     const oldOrder = await Order.findById(id);
 
@@ -627,6 +636,27 @@ export const update = async (req, res) => {
 
       if (!isValidCustomer) {
         return helper.response(res, 400, "customer is not available");
+      }
+
+      if (phone) {
+        const phoneExists = await User.findOne({
+          phone,
+          $and: [
+            {
+              _id: {
+                $ne: customer,
+              },
+            },
+          ],
+        });
+
+        if (phoneExists) {
+          return helper.response(res, 400, "phone is already registered");
+        }
+
+        await User.findByIdAndUpdate(customer, {
+          phone,
+        });
       }
     } else {
       customer = oldOrder.customer;

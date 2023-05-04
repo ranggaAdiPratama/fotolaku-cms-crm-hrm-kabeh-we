@@ -25,7 +25,7 @@ router.post("/user", controller.store);
 router.put(
   "/user/:id",
   middleware.auth,
-  middleware.checkPermission("update user"),
+  // middleware.checkPermission("update user"),
   controller.update
 );
 // NOTE DELETE /api/user/:id

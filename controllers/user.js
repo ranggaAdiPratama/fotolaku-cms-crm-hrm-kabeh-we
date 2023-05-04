@@ -200,8 +200,8 @@ export const update = async (req, res) => {
         phone,
         $and: [
           {
-            phone: {
-              $ne: user.phone,
+            _id: {
+              $ne: user._id,
             },
           },
         ],
