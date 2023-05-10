@@ -44,7 +44,7 @@ export const index = async (req, res) => {
         .populate("createdBy", "_id name")
         .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
-        .populate("sales", "_id name")
+        .populate("sales", "_id name phone")
         .populate("invoice", "_id number total")
         .populate("items", "_id item status");
     } else {
@@ -59,7 +59,7 @@ export const index = async (req, res) => {
         .populate("createdBy", "_id name")
         .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
-        .populate("sales", "_id name")
+        .populate("sales", "_id name phone")
         .populate("invoice", "_id number total")
         .populate("items", "_id item status");
     }
@@ -121,7 +121,7 @@ export const show = async (req, res) => {
       .populate("createdBy", "_id name")
       .populate("customer", "_id name email phone")
       .populate("product", "product qty price brief")
-      .populate("sales", "_id name")
+      .populate("sales", "_id name phone")
       .populate("invoice", "_id number total")
       .populate("items", "_id item status");
 
@@ -162,6 +162,7 @@ export const store = async (req, res) => {
       note,
       serviceNote,
       status,
+      source,
     } = req.body;
     // !SECTION deklarasi isi body
 
@@ -170,6 +171,8 @@ export const store = async (req, res) => {
     switch (true) {
       case !sales:
         return helper.response(res, 400, "sales is required");
+      case !source:
+        return helper.response(res, 400, "source is required");
       case newcustomer < 0:
         return helper.response(res, 400, "newcustomer is required");
     }
@@ -332,6 +335,7 @@ export const store = async (req, res) => {
         serviceNote,
         note,
         status: statusValue,
+        source,
         createdBy: req.user._id,
       });
       // !SECTION add order
@@ -378,6 +382,7 @@ export const store = async (req, res) => {
         note,
         serviceNote,
         status: statusValue,
+        source,
         createdBy: req.user._id,
       });
       // !SECTION add order
@@ -584,6 +589,7 @@ export const update = async (req, res) => {
       serviceNote,
       total,
       phone,
+      source,
     } = req.body;
 
     const oldOrder = await Order.findById(id);
@@ -865,6 +871,7 @@ export const update = async (req, res) => {
         items: productItemIds,
         serviceNote,
         total,
+        source,
       },
       {
         new: true,

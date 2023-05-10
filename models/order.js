@@ -66,6 +66,9 @@ const orderSchema = new mongoose.Schema(
     link: {
       type: String,
     },
+    source: {
+      type: String,
+    },
   },
   {
     timestamps: true,

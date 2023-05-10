@@ -255,12 +255,12 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{url}}user/63dc86189f97564412e0ca3a",
+							"raw": "{{url}}user/644903f191643a914f0cf6a8",
 							"host": [
 								"{{url}}user"
 							],
 							"path": [
-								"63dc86189f97564412e0ca3a"
+								"644903f191643a914f0cf6a8"
 							]
 						}
 					},
@@ -297,17 +297,12 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "tes",
+									"value": "Aep 1",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "tes@mail.com",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "testis",
+									"value": "jubaedah@mail.com",
 									"type": "text"
 								},
 								{
@@ -317,12 +312,12 @@
 								},
 								{
 									"key": "phone",
-									"value": "082716352412",
+									"value": "081726288292",
 									"type": "text"
 								},
 								{
 									"key": "role",
-									"value": "63dc8f1f889d1cacd80feb45",
+									"value": "644025f3d9e0725c55e8ad39",
 									"type": "text"
 								},
 								{
@@ -333,12 +328,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}user/63dc8f527d7618a847a0438f",
+							"raw": "{{url}}user/6443dc04988dc6f2febe2f92",
 							"host": [
 								"{{url}}user"
 							],
 							"path": [
-								"63dc8f527d7618a847a0438f"
+								"6443dc04988dc6f2febe2f92"
 							]
 						}
 					},
@@ -1101,12 +1096,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}order/644be8f10c33a469661654ef",
+							"raw": "{{url}}order/644fa5cd7a9707c1a07366ca",
 							"host": [
 								"{{url}}order"
 							],
 							"path": [
-								"644be8f10c33a469661654ef"
+								"644fa5cd7a9707c1a07366ca"
 							]
 						}
 					},
@@ -1140,7 +1135,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"644025f5d9e0725c55e8ad43\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"644025f6d9e0725c55e8ad47\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"644025f5d9e0725c55e8ad43\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"644025f6d9e0725c55e8ad47\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1162,7 +1157,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1188,7 +1183,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1237,7 +1232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"6443da08b5433e5f438b9494\",\r\n    \"brand\":\"kenthaky\",\r\n    \"sales\":[\r\n        \"644308c4b5433e5f438b71d0\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"tes edit\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"64402609d9e0725c55e8ad99\"\r\n                ],\r\n                \"model\": [\r\n                    \"64402602d9e0725c55e8ad73\"\r\n                ],\r\n                \"pose\": [\r\n                    \"64402604d9e0725c55e8ad81\"\r\n                ],\r\n                \"ratio\": [\r\n                    \"64402603d9e0725c55e8ad79\"\r\n                ],\r\n                \"background\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"property\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"note\": \"a\",\r\n                \"item\": \"a\"\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"Music Video\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customer\":\"6443dc04988dc6f2febe2f92\",\r\n    \"brand\":\"test\",\r\n    \"sales\":[\r\n        \"644308c4b5433e5f438b71d0\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"tes edit\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"64402609d9e0725c55e8ad99\"\r\n                ],\r\n                \"model\": [\r\n                    \"64402602d9e0725c55e8ad73\"\r\n                ],\r\n                \"pose\": [\r\n                    \"64402604d9e0725c55e8ad81\"\r\n                ],\r\n                \"ratio\": [\r\n                    \"64402603d9e0725c55e8ad79\"\r\n                ],\r\n                \"background\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"property\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"note\": \"a\",\r\n                \"item\": \"a\"\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"Music Video\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1245,12 +1240,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}order/6443da08b5433e5f438b9498",
+							"raw": "{{url}}order/644fa5cd7a9707c1a07366ca",
 							"host": [
 								"{{url}}order"
 							],
 							"path": [
-								"6443da08b5433e5f438b9498"
+								"644fa5cd7a9707c1a07366ca"
 							]
 						}
 					},
