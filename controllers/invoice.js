@@ -53,80 +53,80 @@ export const show = async (req, res) => {
 // !SECTION show invoice
 // SECTION generate invoice
 export const store = async (req, res) => {
-  try {
-    // SECTION deklarasi isi body
-    const { order, date, discount, note, total } = req.body;
-    // !SECTION deklarasi isi body
+  // try {
+  // SECTION deklarasi isi body
+  const { order, date, discount, note, total } = req.body;
+  // !SECTION deklarasi isi body
 
-    // SECTION validasi
+  // SECTION validasi
 
-    // SECTION validasi umum
-    switch (true) {
-      case !order:
-        return helper.response(res, 400, "order is required");
-      case !date:
-        return helper.response(res, 400, "date is required");
-      case !total:
-        return helper.response(res, 400, "grand_total is required");
-    }
-    // !SECTION validasi umum
-
-    // SECTION validasi order ini ada atau tidak
-    var validOrder = await Order.findById(order);
-
-    if (!validOrder) return helper.response(res, 400, "invalid order");
-    // !SECTION validasi order ini ada atau tidak
-
-    // SECTION validasi order ini punya invoice atau enggak
-    const orderhasInvoice = await Invoice.findOne({
-      order,
-    });
-
-    if (orderhasInvoice) {
-      return helper.response(res, 400, "invoice already registered");
-    }
-    // !SECTION validasi order ini punya invoice atau enggak
-
-    // SECTION cek apakah order memiliki produk
-    if (validOrder.product.length == 0) {
-      return helper.response(res, 400, "Order doesn't have product registered");
-    }
-    // !SECTION cek apakah order memiliki produk
-
-    // !SECTION validasi
-
-    // NOTE nomor invoice
-    const number = await helper.generateInvoinceNumber(date);
-
-    // SECTION generate invoice
-    var data = await Invoice.create({
-      discount,
-      note,
-      number,
-      order,
-      date,
-      total,
-    });
-    // !SECTION generate invoice
-
-    // SECTION update invoice pada collection order
-    await Order.findByIdAndUpdate(
-      order,
-      {
-        invoice: data._id,
-      },
-      {
-        new: true,
-      }
-    );
-    // !SECTION update invoice pada collection order
-
-    // NOTE FINISH
-    return helper.response(res, 201, "Invoice berhasil ditambahkan", data);
-  } catch (err) {
-    console.log(err);
-
-    return helper.response(res, 400, "Error", err.message);
+  // SECTION validasi umum
+  switch (true) {
+    case !order:
+      return helper.response(res, 400, "order is required");
+    case !date:
+      return helper.response(res, 400, "date is required");
+    case !total:
+      return helper.response(res, 400, "grand_total is required");
   }
+  // !SECTION validasi umum
+
+  // SECTION validasi order ini ada atau tidak
+  var validOrder = await Order.findById(order);
+
+  if (!validOrder) return helper.response(res, 400, "invalid order");
+  // !SECTION validasi order ini ada atau tidak
+
+  // SECTION validasi order ini punya invoice atau enggak
+  const orderhasInvoice = await Invoice.findOne({
+    order,
+  });
+
+  if (orderhasInvoice) {
+    return helper.response(res, 400, "invoice already registered");
+  }
+  // !SECTION validasi order ini punya invoice atau enggak
+
+  // SECTION cek apakah order memiliki produk
+  if (validOrder.product.length == 0) {
+    return helper.response(res, 400, "Order doesn't have product registered");
+  }
+  // !SECTION cek apakah order memiliki produk
+
+  // !SECTION validasi
+
+  // NOTE nomor invoice
+  const number = await helper.generateInvoinceNumber(date);
+
+  // SECTION generate invoice
+  var data = await Invoice.create({
+    discount,
+    note,
+    number,
+    order,
+    date,
+    total,
+  });
+  // !SECTION generate invoice
+
+  // SECTION update invoice pada collection order
+  await Order.findByIdAndUpdate(
+    order,
+    {
+      invoice: data._id,
+    },
+    {
+      new: true,
+    }
+  );
+  // !SECTION update invoice pada collection order
+
+  // NOTE FINISH
+  return helper.response(res, 201, "Invoice berhasil ditambahkan", data);
+  // } catch (err) {
+  //   console.log(err);
+
+  //   return helper.response(res, 400, "Error", err.message);
+  // }
 };
 // !SECTION create invoice

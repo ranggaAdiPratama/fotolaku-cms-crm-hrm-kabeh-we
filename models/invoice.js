@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema;
 
 const invoiceSchema = new mongoose.Schema({
   discount: {
-    type: discount,
+    type: Number,
     default: 0,
   },
   number: {

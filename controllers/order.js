@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 // import nodemailer from "nodemailer";
 
+import Invoice from "../models/invoice.js";
 import Order from "../models/order.js";
 import OrderBrief from "../models/orderBrief.js";
 import OrderItem from "../models/orderItem.js";
@@ -103,6 +104,10 @@ export const destroy = async (req, res, next) => {
     }
 
     // Menghapus order
+    await Invoice.find({
+      order: orderId,
+    }).remove();
+
     await order.remove();
 
     return helper.response(res, 200, "Order deleted");
