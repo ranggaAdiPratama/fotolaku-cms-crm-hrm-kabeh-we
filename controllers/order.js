@@ -171,8 +171,6 @@ export const store = async (req, res) => {
     switch (true) {
       case !sales:
         return helper.response(res, 400, "sales is required");
-      case !source:
-        return helper.response(res, 400, "source is required");
       case newcustomer < 0:
         return helper.response(res, 400, "newcustomer is required");
     }

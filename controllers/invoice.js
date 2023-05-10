@@ -54,10 +54,8 @@ export const show = async (req, res) => {
 // SECTION generate invoice
 export const store = async (req, res) => {
   try {
-    // NOTE variable total
-    var total = 0;
     // SECTION deklarasi isi body
-    const { order, date } = req.body;
+    const { order, date, discount, note, total } = req.body;
     // !SECTION deklarasi isi body
 
     // SECTION validasi
@@ -68,6 +66,8 @@ export const store = async (req, res) => {
         return helper.response(res, 400, "order is required");
       case !date:
         return helper.response(res, 400, "date is required");
+      case !total:
+        return helper.response(res, 400, "grand_total is required");
     }
     // !SECTION validasi umum
 
@@ -93,18 +93,6 @@ export const store = async (req, res) => {
     }
     // !SECTION cek apakah order memiliki produk
 
-    // SECTION hitung total
-    await Promise.all(
-      validOrder.product.map(async (data) => {
-        const orderProduct = await OrderProduct.findById(data);
-
-        console.log(orderProduct.total);
-
-        total += orderProduct.total;
-      })
-    );
-    // !SECTION hitung total
-
     // !SECTION validasi
 
     // NOTE nomor invoice
@@ -112,6 +100,8 @@ export const store = async (req, res) => {
 
     // SECTION generate invoice
     var data = await Invoice.create({
+      discount,
+      note,
       number,
       order,
       date,
