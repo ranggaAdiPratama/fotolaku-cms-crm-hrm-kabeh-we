@@ -20,6 +20,21 @@ const invoiceSchema = new mongoose.Schema({
     type: ObjectId,
     ref: "Order",
   },
+  payment_Progress: {
+    type: Number,
+    trim: true,
+    default: 0,
+  },
+  cicilan: {
+    type: Number,
+    trim: true,
+    default: 0,
+  },
+  items: {
+    type: Number,
+    trim: true,
+    default: 0,
+  },
   total: {
     type: Number,
     trim: true,

@@ -55,7 +55,16 @@ export const show = async (req, res) => {
 export const store = async (req, res) => {
   // try {
   // SECTION deklarasi isi body
-  const { order, date, discount, note, total } = req.body;
+  const {
+    order,
+    date,
+    discount,
+    note,
+    total,
+    items,
+    payment_Progress,
+    cicilan,
+  } = req.body;
   // !SECTION deklarasi isi body
 
   // SECTION validasi
@@ -64,6 +73,8 @@ export const store = async (req, res) => {
   switch (true) {
     case !order:
       return helper.response(res, 400, "order is required");
+    case !payment_Progress:
+      return helper.response(res, 400, "payment_Progress is required");
     case !date:
       return helper.response(res, 400, "date is required");
     case !total:
@@ -106,6 +117,9 @@ export const store = async (req, res) => {
     order,
     date,
     total,
+    items,
+    payment_Progress,
+    cicilan,
   });
   // !SECTION generate invoice
 
