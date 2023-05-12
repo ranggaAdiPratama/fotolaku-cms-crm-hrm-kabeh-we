@@ -57,6 +57,9 @@ const orderSchema = new mongoose.Schema(
     closing_deadline: {
       type: Date,
     },
+    closing_reason: {
+      type: String,
+    },
     note: {
       type: String,
     },

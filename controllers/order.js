@@ -46,7 +46,7 @@ export const index = async (req, res) => {
         .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
         .populate("sales", "_id name phone")
-        .populate("invoice", "_id number total")
+        .populate("invoice")
         .populate("items", "_id item status");
     } else {
       data = await Order.find({
@@ -61,7 +61,7 @@ export const index = async (req, res) => {
         .populate("customer", "_id name email phone")
         .populate("product", "product qty price brief")
         .populate("sales", "_id name phone")
-        .populate("invoice", "_id number total")
+        .populate("invoice")
         .populate("items", "_id item status");
     }
 
@@ -127,7 +127,7 @@ export const show = async (req, res) => {
       .populate("customer", "_id name email phone")
       .populate("product", "product qty price brief")
       .populate("sales", "_id name phone")
-      .populate("invoice", "_id number total")
+      .populate("invoice")
       .populate("items", "_id item status");
 
     if (!data) return helper.response(res, 404, "Data not found");
@@ -584,7 +584,6 @@ export const update = async (req, res) => {
 
     let {
       customer,
-      name,
       brand,
       sales,
       product,
@@ -593,6 +592,7 @@ export const update = async (req, res) => {
       total,
       phone,
       source,
+      closing_reason,
     } = req.body;
 
     const oldOrder = await Order.findById(id);
@@ -875,6 +875,7 @@ export const update = async (req, res) => {
         serviceNote,
         total,
         source,
+        closing_reason,
       },
       {
         new: true,
