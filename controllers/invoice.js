@@ -141,4 +141,50 @@ export const store = async (req, res) => {
     return helper.response(res, 400, "Error", err.message);
   }
 };
-// !SECTION create invoice
+// !SECTION generate invoice
+// SECTION update invoice
+export const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    // SECTION deklarasi isi body
+    const { payment_Progress } = req.body;
+    // !SECTION deklarasi isi body
+
+    // SECTION validasi
+
+    // SECTION validasi umum
+    switch (true) {
+      case !payment_Progress:
+        return helper.response(res, 400, "payment_Progress is required");
+    }
+    // !SECTION validasi umum
+
+    // SECTION validasi invoice ini ada atau tidak
+    var validInvoice = await Invoice.findById(id);
+
+    if (!validInvoice) return helper.response(res, 400, "invalid invoice");
+    // !SECTION validasi validInvoice ini ada atau tidak
+
+    // !SECTION validasi
+
+    // SECTION update invoice
+    var data = await Invoice.findByIdAndUpdate(
+      id,
+      {
+        payment_Progress,
+      },
+      {
+        new: true,
+      }
+    );
+    // !SECTION update invoice
+
+    // NOTE FINISH
+    return helper.response(res, 201, "Invoice berhasil diperbaharui", data);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION update invoice

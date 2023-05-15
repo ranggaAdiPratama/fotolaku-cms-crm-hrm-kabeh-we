@@ -19,5 +19,12 @@ router.post(
   middleware.checkPermission("add crud card"),
   controller.store
 );
+// NOTE PUT /api/invoice/{id}
+router.put(
+  "/invoice/:id",
+  middleware.auth,
+  middleware.checkPermission("add crud card"),
+  controller.update
+);
 
 export default router;

@@ -1326,7 +1326,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"order\": \"645b3464ae973588fe5fc956\",\r\n    \"date\": \"2023-05-10\",\r\n    \"discount\":30,\r\n    \"note\": \"kebodohan\",\r\n    \"total\": 485100,\r\n    \"items\": 0\r\n}",
+							"raw": "{\r\n    \"order\": \"644a65dd3a0c4a6e7daab451\",\r\n    \"date\": \"2023-05-12\",\r\n    \"discount\":30,\r\n    \"note\": \"tes\",\r\n    \"total\": 485100,\r\n    \"items\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1387,6 +1387,53 @@
 							],
 							"path": [
 								"INV202308-1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Invoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payment_Progress\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}invoice/34567890",
+							"host": [
+								"{{url}}invoice"
+							],
+							"path": [
+								"34567890"
 							]
 						}
 					},

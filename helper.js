@@ -48,20 +48,29 @@ export const generateInvoinceNumber = async (date) => {
   inv += month;
   inv += "-";
 
-  var start = new Date(date);
-  start.setHours(0, 0, 0, 0);
+  var start = new Date(
+    new Date(date).getFullYear(),
+    new Date(date).getMonth(),
+    1
+  );
 
-  var end = new Date(date);
-  end.setHours(23, 59, 59, 999);
+  var end = new Date(
+    new Date(date).getFullYear(),
+    new Date(date).getMonth() + 1,
+    0
+  );
 
   var number = await Invoice.countDocuments({
-    createdAt: {
+    date: {
       $gte: start,
       $lt: end,
     },
   });
 
+  console.log(number);
+
   number = number + 1;
+  console.log(number);
 
   var series = "";
 
