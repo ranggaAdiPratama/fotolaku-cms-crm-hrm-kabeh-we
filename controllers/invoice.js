@@ -2,6 +2,7 @@ import Invoice from "../models/invoice.js";
 import Order from "../models/order.js";
 import OrderBrief from "../models/orderBrief.js";
 import OrderProduct from "../models/orderProduct.js";
+import PaymentLog from "../models/paymentLog.js";
 import Product from "../models/service.js";
 import User from "../models/user.js";
 
@@ -12,38 +13,49 @@ export const show = async (req, res) => {
   try {
     const { number } = req.params;
 
-    let data = await Invoice.findOne({ number }).populate(
+    let query = await Invoice.findOne({ number }).populate(
       "order",
       "_id customer brand sales product"
     );
 
-    if (!data) return helper.response(res, 404, "Data not found");
+    if (!query) return helper.response(res, 404, "Data not found");
 
-    data = await User.populate(data, {
+    query = await User.populate(query, {
       path: "order.customer",
       select: "_id name email phone",
     });
 
-    data = await User.populate(data, {
+    query = await User.populate(query, {
       path: "order.sales",
       select: "_id name email phone",
     });
 
-    data = await OrderProduct.populate(data, {
+    query = await OrderProduct.populate(query, {
       path: "order.product",
       select: "_id product qty price brief",
     });
 
-    data = await Product.populate(data, {
+    query = await Product.populate(query, {
       path: "order.product.product",
       select: "_id name price",
     });
 
-    data = await OrderBrief.populate(data, {
+    query = await OrderBrief.populate(query, {
       path: "order.product.brief",
     });
 
-    return helper.response(res, 200, "Data found", data);
+    const logs = await PaymentLog.find({
+      invoice: query._id,
+    }).select("-invoice");
+
+    let data = [];
+
+    data.push({
+      data: query,
+      logs,
+    });
+
+    return helper.response(res, 200, "data found", data);
   } catch (err) {
     console.log(err);
 
@@ -147,7 +159,7 @@ export const update = async (req, res) => {
   try {
     const { id } = req.params;
     // SECTION deklarasi isi body
-    const { payment_Progress } = req.body;
+    const { payment_Progress, termin, total, paid_at, is_paid } = req.body;
     // !SECTION deklarasi isi body
 
     // SECTION validasi
@@ -156,6 +168,10 @@ export const update = async (req, res) => {
     switch (true) {
       case !payment_Progress:
         return helper.response(res, 400, "payment_Progress is required");
+      case !total:
+        return helper.response(res, 400, "total is required");
+      case !paid_at:
+        return helper.response(res, 400, "paid_at is required");
     }
     // !SECTION validasi umum
 
@@ -178,6 +194,15 @@ export const update = async (req, res) => {
       }
     );
     // !SECTION update invoice
+    // SECTION generate log
+    await PaymentLog.create({
+      invoice: id,
+      total,
+      paid_at,
+      termin,
+      is_paid,
+    });
+    // !SECTION generate log
 
     // NOTE FINISH
     return helper.response(res, 201, "Invoice berhasil diperbaharui", data);

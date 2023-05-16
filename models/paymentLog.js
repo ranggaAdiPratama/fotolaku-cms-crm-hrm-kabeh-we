@@ -1,30 +1,36 @@
 import mongoose from "mongoose";
+import invoice from "./invoice.js";
 
 const { ObjectId } = mongoose.Schema;
 
-const paymentLogSchema = new mongoose.Schema({
-  total: {
-    type: Number,
-    required: true,
+const paymentLogSchema = new mongoose.Schema(
+  {
+    total: {
+      type: Number,
+      required: true,
+    },
+    invoice: {
+      type: ObjectId,
+      ref: invoice,
+    },
+    termin: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+    is_paid: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    paid_at: {
+      type: Date,
+      required: true,
+    },
   },
-  method: {
-    type: String,
-    required: true,
-  },
-  status: {
-    type: String,
-    required: true,
-  },
-  payment_method: {
-    type: String,
-    required: true,
-    default: "",
-  },
-  paid_at: {
-    type: Date,
-    required: true,
-    default: "",
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 export default mongoose.model("PaymentLog", paymentLogSchema);
