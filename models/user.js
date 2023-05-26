@@ -61,6 +61,14 @@ const userSchema = new mongoose.Schema(
       ref: Role,
       required: true,
     },
+    source: {
+      type: String,
+      default: "",
+    },
+    isOutbound: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

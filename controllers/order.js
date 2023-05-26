@@ -168,6 +168,8 @@ export const store = async (req, res) => {
       serviceNote,
       status,
       source,
+      userSource,
+      isOutbound,
     } = req.body;
     // !SECTION deklarasi isi body
 
@@ -303,6 +305,8 @@ export const store = async (req, res) => {
         phone,
         role: customerRole._id,
         brand: brandValue,
+        source: userSource,
+        isOutbound,
       });
       // !SECTION add user
       // SECTION kirim email
@@ -593,6 +597,8 @@ export const update = async (req, res) => {
       phone,
       source,
       closing_reason,
+      userSource,
+      isOutbound,
     } = req.body;
 
     const oldOrder = await Order.findById(id);
@@ -665,6 +671,18 @@ export const update = async (req, res) => {
 
         await User.findByIdAndUpdate(customer, {
           phone,
+        });
+      }
+
+      if (userSource) {
+        await User.findByIdAndUpdate(customer, {
+          source: userSource,
+        });
+      }
+
+      if (isOutbound) {
+        await User.findByIdAndUpdate(customer, {
+          isOutbound,
         });
       }
     } else {

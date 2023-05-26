@@ -91,7 +91,7 @@ export const show = async (req, res) => {
 // SECTION store
 export const store = async (req, res) => {
   try {
-    const { name, email, password, phone, role } = req.body;
+    const { name, email, password, phone, role, source, isOutbound } = req.body;
 
     switch (true) {
       case !name:
@@ -136,6 +136,8 @@ export const store = async (req, res) => {
       password: await helper.hashPassword(password),
       phone,
       role,
+      source,
+      isOutbound,
       brand: "",
     });
 
@@ -158,7 +160,8 @@ export const update = async (req, res) => {
 
     let user = await User.findById(_id);
 
-    let { name, email, password, phone, role, brand } = req.body;
+    let { name, email, password, phone, role, brand, source, isOutbound } =
+      req.body;
 
     if (!name) name = user.name;
 
@@ -258,6 +261,8 @@ export const update = async (req, res) => {
       phone,
       role,
       brand,
+      source,
+      isOutbound,
     });
 
     user = await User.findById(user._id)

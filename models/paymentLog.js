@@ -25,7 +25,6 @@ const paymentLogSchema = new mongoose.Schema(
     },
     paid_at: {
       type: Date,
-      required: true,
     },
   },
   {

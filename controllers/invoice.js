@@ -166,12 +166,8 @@ export const update = async (req, res) => {
 
     // SECTION validasi umum
     switch (true) {
-      case !payment_Progress:
-        return helper.response(res, 400, "payment_Progress is required");
       case !total:
         return helper.response(res, 400, "total is required");
-      case !paid_at:
-        return helper.response(res, 400, "paid_at is required");
     }
     // !SECTION validasi umum
 
@@ -184,15 +180,19 @@ export const update = async (req, res) => {
     // !SECTION validasi
 
     // SECTION update invoice
-    var data = await Invoice.findByIdAndUpdate(
-      id,
-      {
-        payment_Progress,
-      },
-      {
-        new: true,
-      }
-    );
+    if (payment_Progress) {
+      var data = await Invoice.findByIdAndUpdate(
+        id,
+        {
+          payment_Progress,
+        },
+        {
+          new: true,
+        }
+      );
+    } else {
+      var data = await Invoice.findById(id, {});
+    }
     // !SECTION update invoice
     // SECTION generate log
     await PaymentLog.create({
