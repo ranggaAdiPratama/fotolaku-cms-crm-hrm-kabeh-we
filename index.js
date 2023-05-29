@@ -27,6 +27,7 @@ import RoleRoute from "./routes/role.js";
 import PermissionRoute from "./routes/permission.js";
 import StaffRoute from "./routes/staff.js";
 import UserActivityRoute from "./routes/userActivity.js";
+import UserSourceRoute from "./routes/userSource.js";
 import ModuleRoute from "./routes/module.js";
 
 dotenv.config();
@@ -81,6 +82,7 @@ app.use("/api", ModuleRoute);
 app.use("/api", PaymentLogRoute);
 app.use("/api", ProjectRoute);
 app.use("/api", StaffRoute);
+app.use("/api", UserSourceRoute);
 app.use("/api/auth", AuthRoute);
 
 app.listen(port, () => {

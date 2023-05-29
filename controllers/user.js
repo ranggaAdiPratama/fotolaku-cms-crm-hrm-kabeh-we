@@ -91,14 +91,16 @@ export const importData = async (req, res) => {
         });
       }
 
-      const userSourceExist = await UserSource.findOne({
-        name: data[i].source_input,
-      });
-
-      if (!userSourceExist) {
-        await UserSource.create({
+      if (data[i].source_input != "") {
+        const userSourceExist = await UserSource.findOne({
           name: data[i].source_input,
         });
+
+        if (!userSourceExist) {
+          await UserSource.create({
+            name: data[i].source_input,
+          });
+        }
       }
 
       await User.create({
