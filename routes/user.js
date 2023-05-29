@@ -21,6 +21,8 @@ router.get(
 );
 // NOTE POST /api/user
 router.post("/user", controller.store);
+// NOTE POST /api/user/import/:role
+router.post("/user/import/:role", middleware.auth, controller.importData);
 // NOTE PUT /api/user/:id
 router.put(
   "/user/:id",

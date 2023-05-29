@@ -1,5 +1,9 @@
+import csvtojson from "csvtojson";
+
+import Brand from "../models/brand.js";
 import Role from "../models/role.js";
 import User from "../models/user.js";
+import UserSource from "../models/userSource.js";
 
 import * as helper from "../helper.js";
 
@@ -62,6 +66,62 @@ export const model = async (req, res) => {
   }
 };
 // !SECTION model
+// SECTION  import customer
+export const importData = async (req, res) => {
+  try {
+    let role = req.params.role;
+
+    let data = req.body.data;
+
+    switch (true) {
+      case !data:
+        return helper.response(res, 400, "data is required");
+      case role != "customer":
+        return helper.response(res, 400, "role unavailable");
+    }
+
+    role = await Role.findOne({
+      name: "Customer",
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      const brandExist = await Brand.findOne({ name: data[i].brand });
+
+      if (!brandExist) {
+        await Brand.create({
+          name: data[i].brand,
+        });
+      }
+
+      const userSourceExist = await UserSource.findOne({
+        name: data[i].source_input,
+      });
+
+      if (!userSourceExist) {
+        await UserSource.create({
+          name: data[i].source_input,
+        });
+      }
+
+      await User.create({
+        name: data[i].name,
+        email: data[i].email,
+        password: await helper.hashPassword("12345678"),
+        phone: data[i].phone,
+        role: role._id,
+        source: data[i].source_input,
+        brand: data[i].brand,
+      });
+    }
+
+    return helper.response(res, 201, "User successfully imported");
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err);
+  }
+};
+// !SECTION import customer
 // SECTION show
 export const show = async (req, res) => {
   try {
@@ -128,6 +188,16 @@ export const store = async (req, res) => {
 
     if (!roleExist) {
       return helper.response(res, 400, "role is not registered");
+    }
+
+    const userSourceExist = await UserSource.findOne({
+      name: source,
+    });
+
+    if (!userSourceExist) {
+      await UserSource.create({
+        name: source,
+      });
     }
 
     let user = await User.create({
@@ -252,6 +322,33 @@ export const update = async (req, res) => {
       }
     } else {
       brand = user.brand;
+    }
+
+    if (source) {
+      if (!user.source) {
+        const sourceExist = await User.findOne({ source });
+
+        if (sourceExist) {
+          return helper.response(res, 400, "source is already registered");
+        }
+      } else {
+        const sourceExist = await User.findOne({
+          source,
+          $and: [
+            {
+              source: {
+                $ne: user.source,
+              },
+            },
+          ],
+        });
+
+        if (sourceExist) {
+          return helper.response(res, 400, "source is already registered");
+        }
+      }
+    } else {
+      source = user.source;
     }
 
     await User.findByIdAndUpdate(_id, {

@@ -23,6 +23,7 @@ import Theme from "./models/theme.js";
 import TokenBlackList from "./models/tokenBlackList.js";
 import User from "./models/user.js";
 import UserActivity from "./models/userActivity.js";
+import UserSource from "../models/userSource.js";
 
 import * as helper from "./helper.js";
 
@@ -39,6 +40,7 @@ mongoose
   .catch((err) => console.log(`DB error => ${err}`));
 
 const seedDB = async () => {
+  await UserSource.deleteMany({});
   await Brand.deleteMany({});
   await Invoice.deleteMany({});
   await OrderBrief.deleteMany({});

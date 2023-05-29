@@ -400,6 +400,54 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Import CSV customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"name\": \"rangga\",\r\n            \"email\": \"masterrangwswswsga@gmail.com\",\r\n            \"phone\": \"081726342312\",\r\n            \"brand\": \"kenthucky\",\r\n            \"source_input\": \"mamamamama\"\r\n        },\r\n        {\r\n            \"name\": \"rangga\",\r\n            \"email\": \"masterrangwswswsga@gmail.com\",\r\n            \"phone\": \"081726342312\",\r\n            \"brand\": \"kenthucky\",\r\n            \"source_input\": \"mamamamama\"\r\n        }\r\n    ]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user/import/customer",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"import",
+								"customer"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
