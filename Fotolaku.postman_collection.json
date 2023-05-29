@@ -21,6 +21,7 @@
 									"\r",
 									"if(jsonData.meta.code == 200) {\r",
 									"postman.setEnvironmentVariable(\"authToken\", jsonData.data.token);\r",
+									"postman.setEnvironmentVariable(\"refreshToken\", jsonData.data.refreshToken);\r",
 									"}"
 								],
 								"type": "text/javascript"
@@ -94,6 +95,59 @@
 							],
 							"path": [
 								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"if(jsonData.meta.code == 200) {\r",
+									"postman.setEnvironmentVariable(\"authToken\", jsonData.data.token);\r",
+									"postman.setEnvironmentVariable(\"refreshToken\", jsonData.data.refreshToken);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{refreshToken}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}auth/refresh",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"refresh"
 							]
 						}
 					},

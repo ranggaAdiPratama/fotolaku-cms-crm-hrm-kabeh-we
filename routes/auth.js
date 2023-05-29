@@ -10,5 +10,6 @@ router.post("/login", controller.login);
 router.get("/test", middleware.auth, controller.test);
 // NOTE POST /api/auth/logout
 router.post("/logout", middleware.auth, controller.logout);
+router.post("/refresh", middleware.auth, controller.refresh);
 
 export default router;

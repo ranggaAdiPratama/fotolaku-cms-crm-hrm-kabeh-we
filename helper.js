@@ -1,5 +1,9 @@
 import bcrypt from "bcrypt";
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
+
 import Invoice from "./models/invoice.js";
+import RefreshToken from "./models/refreshToken.js";
 
 export const checkPermission = (alias, user) => {
   let canUpdate = false;
@@ -91,6 +95,24 @@ export const generateInvoinceNumber = async (date) => {
   return inv;
 };
 
+export const generateRefreshToken = async (id) => {
+  const token = await RefreshToken.create({
+    user: id,
+    token: randomTokenString(),
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+  });
+
+  return token.token;
+};
+
+export const generateToken = (id) => {
+  const env = process.env;
+
+  return jwt.sign({ id }, env.JWT_SECRET, {
+    expiresIn: 60 * 60 * 24 * 365,
+  });
+};
+
 export const hashPassword = (password) => {
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(12, (err, salt) => {
@@ -112,6 +134,10 @@ export const hashPassword = (password) => {
 export const newCustomerMailTemplate = (user) => {
   return `<h1>Hi ${user.name}, Your order's email is: <span style="color:red;">${user.email}</span></h1><p>and your password is: </p><span style="color:red;">12345678</span>`;
 };
+
+function randomTokenString() {
+  return crypto.randomBytes(40).toString("hex");
+}
 
 export const response = (res, code, message, data = {}) => {
   return res.status(code).json({
