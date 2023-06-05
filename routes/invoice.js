@@ -26,5 +26,12 @@ router.put(
   middleware.checkPermission("add crud card"),
   controller.update
 );
+// NOTE DELETE /api/invoice/{id}
+router.delete(
+  "/invoice/:id",
+  middleware.auth,
+  middleware.checkPermission("add crud card"),
+  controller.destroy
+);
 
 export default router;

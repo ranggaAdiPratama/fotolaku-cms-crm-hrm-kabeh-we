@@ -25,6 +25,45 @@ export const index = async (req, res) => {
   }
 };
 // !SECTION list
+// SECTION bulkUpdate
+export const bulkUpdate = async (req, res) => {
+  try {
+    const ids = req.body.ids;
+    const source = req.body.source;
+
+    if (!Array.isArray(ids) || ids.length == 0) {
+      return helper.response(res, 400, "ids is required");
+    }
+
+    for (var i = 0; i < ids.length; i++) {
+      const isValidUser = await User.findOne({
+        _id: ids[i],
+        $and: [
+          {
+            status: true,
+          },
+        ],
+      });
+
+      if (!isValidUser) {
+        return helper.response(res, 400, "user is not available");
+      }
+    }
+
+    for (let i = 0; i < ids.length; i++) {
+      await User.findByIdAndUpdate(ids[i], {
+        source,
+      });
+    }
+
+    return helper.response(res, 200, "User successfully updated");
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err);
+  }
+};
+// !SECTION bulk update
 // SECTION destroy
 export const destroy = async (req, res) => {
   try {

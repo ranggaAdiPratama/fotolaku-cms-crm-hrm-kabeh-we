@@ -23,6 +23,8 @@ router.get(
 router.post("/user", controller.store);
 // NOTE POST /api/user/import/:role
 router.post("/user/import/:role", middleware.auth, controller.importData);
+// NOTE PUT /api/user-bulk
+router.put("/user-bulk", middleware.auth, controller.bulkUpdate);
 // NOTE PUT /api/user/:id
 router.put(
   "/user/:id",

@@ -8,6 +8,39 @@ import User from "../models/user.js";
 
 import * as helper from "../helper.js";
 
+// SECTION hapus invoice
+export const destroy = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // SECTION validasi
+
+    // SECTION validasi invoice ini ada atau tidak
+    var validInvoice = await Invoice.findById(id);
+
+    if (!validInvoice) return helper.response(res, 400, "invalid invoice");
+    // !SECTION validasi validInvoice ini ada atau tidak
+
+    // !SECTION validasi
+
+    // SECTION hapus log
+    await PaymentLog.find({
+      invoice: id,
+    }).deleteMany();
+    // !SECTION hapus log
+
+    // NOTE hapus invoice
+    var data = await Invoice.findByIdAndRemove(id);
+
+    // NOTE FINISH
+    return helper.response(res, 201, "Invoice berhasil dihapus", data);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION hapus invoice
 // SECTION show invoice
 export const show = async (req, res) => {
   try {
