@@ -150,6 +150,7 @@ export const importData = async (req, res) => {
         role: role._id,
         source: data[i].source_input,
         brand: data[i].brand,
+        isNewCustomer: data[i].isNewCustomer,
       });
     }
 
@@ -190,7 +191,16 @@ export const show = async (req, res) => {
 // SECTION store
 export const store = async (req, res) => {
   try {
-    const { name, email, password, phone, role, source, isOutbound } = req.body;
+    const {
+      name,
+      email,
+      password,
+      phone,
+      role,
+      source,
+      isOutbound,
+      isNewCustomer,
+    } = req.body;
 
     switch (true) {
       case !name:
@@ -250,6 +260,7 @@ export const store = async (req, res) => {
       source,
       isOutbound,
       brand: "",
+      isNewCustomer,
     });
 
     user = await User.findById(user._id)
@@ -271,8 +282,17 @@ export const update = async (req, res) => {
 
     let user = await User.findById(_id);
 
-    let { name, email, password, phone, role, brand, source, isOutbound } =
-      req.body;
+    let {
+      name,
+      email,
+      password,
+      phone,
+      role,
+      brand,
+      source,
+      isOutbound,
+      isNewCustomer,
+    } = req.body;
 
     if (!name) name = user.name;
 
@@ -392,6 +412,8 @@ export const update = async (req, res) => {
       source = user.source;
     }
 
+    if (!isNewCustomer) isNewCustomer = user.isNewCustomer;
+
     await User.findByIdAndUpdate(_id, {
       name,
       email,
@@ -401,6 +423,7 @@ export const update = async (req, res) => {
       brand,
       source,
       isOutbound,
+      isNewCustomer,
     });
 
     user = await User.findById(user._id)

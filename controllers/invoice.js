@@ -126,7 +126,7 @@ export const store = async (req, res) => {
     // !SECTION validasi umum
 
     // SECTION validasi order ini ada atau tidak
-    var validOrder = await Order.findById(order);
+    var validOrder = await Order.findById(order, {});
 
     if (!validOrder) return helper.response(res, 400, "invalid order");
     // !SECTION validasi order ini ada atau tidak
@@ -177,6 +177,18 @@ export const store = async (req, res) => {
       }
     );
     // !SECTION update invoice pada collection order
+    // SECTION update customer
+
+    await User.findByIdAndUpdate(
+      validOrder.customer,
+      {
+        isNewCustomer: false,
+      },
+      {
+        new: true,
+      }
+    );
+    // !SECTION update customer
 
     // NOTE FINISH
     return helper.response(res, 201, "Invoice berhasil ditambahkan", data);

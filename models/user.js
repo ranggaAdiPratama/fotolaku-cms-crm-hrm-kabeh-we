@@ -69,6 +69,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isNewCustomer: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
