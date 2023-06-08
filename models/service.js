@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 
+import Angle from "./angle.js";
+import Background from "./background.js";
+import Ratio from "./ratio.js";
+import Pose from "./pose.js";
+import Property from "./property.js";
+import ProductType from "./productType.js";
 import ServiceCategory from "./serviceCategory.js";
+import Theme from "./theme.js";
+import User from "./user.js";
 
 const { ObjectId } = mongoose.SchemaTypes;
 
@@ -65,52 +73,56 @@ const serviceSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    mobile: {
+      type: Number,
+      default: 0,
+    },
     backgroundList: [
       {
         type: ObjectId,
-        ref: "Background",
+        ref: Background,
       },
     ],
     modelList: [
       {
         type: ObjectId,
-        ref: "User",
+        ref: User,
       },
     ],
     ratioList: [
       {
         type: ObjectId,
-        ref: "Ratio",
+        ref: Ratio,
       },
     ],
     poseList: [
       {
         type: ObjectId,
-        ref: "Pose",
+        ref: Pose,
       },
     ],
     propertyList: [
       {
         type: ObjectId,
-        ref: "Property",
+        ref: Property,
       },
     ],
     productTypeList: [
       {
         type: ObjectId,
-        ref: "ProductType",
+        ref: ProductType,
       },
     ],
     angleList: [
       {
         type: ObjectId,
-        ref: "Angle",
+        ref: Angle,
       },
     ],
     themeList: [
       {
         type: ObjectId,
-        ref: "Theme",
+        ref: Theme,
       },
     ],
   },

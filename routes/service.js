@@ -12,10 +12,7 @@ router.get(
   middleware.auth,
   controller.showbyCategory
 );
-router.get(
-  "/services/category",
-  middleware.auth,
-  controller.categoriesService
-);
+router.get("/services/category", middleware.auth, controller.categoriesService);
+router.put("/service/:id", middleware.auth, controller.update);
 
 export default router;

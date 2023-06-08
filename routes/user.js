@@ -9,14 +9,14 @@ const router = express.Router();
 router.get(
   "/users",
   middleware.auth,
-  middleware.checkPermission("view user"),
+  // middleware.checkPermission("view user"),
   controller.index
 );
 // NOTE GET /api/user/:id
 router.get(
   "/user/:id",
   middleware.auth,
-  middleware.checkPermission("view user"),
+  // middleware.checkPermission("view user"),
   controller.show
 );
 // NOTE POST /api/user

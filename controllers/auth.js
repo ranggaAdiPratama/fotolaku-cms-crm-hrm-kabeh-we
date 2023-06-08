@@ -8,6 +8,8 @@ import * as helper from "../helper.js";
 // SECTION login
 export const login = async (req, res) => {
   try {
+    let role;
+
     const { email, password } = req.body;
 
     switch (true) {
@@ -44,11 +46,17 @@ export const login = async (req, res) => {
       select: "alias",
     });
 
+    role = user.role.name;
+
+    if (user.role.name == "Sales" && user.isOutbound == true) {
+      role = "Sales Outbound";
+    }
+
     const data = {
       user: {
         name: user.name,
         email: user.email,
-        role: user.role.name,
+        role: role,
         permission: user.role.permission,
       },
       token,

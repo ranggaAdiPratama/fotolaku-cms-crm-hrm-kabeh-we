@@ -227,21 +227,16 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "name",
-									"value": "tes",
+									"value": "Aep 1",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "tes@mail.com",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "tes",
+									"value": "jubaedah@mail.com",
 									"type": "text"
 								},
 								{
@@ -251,27 +246,27 @@
 								},
 								{
 									"key": "phone",
-									"value": "082716352412",
+									"value": "081726288292",
 									"type": "text"
 								},
 								{
 									"key": "role",
-									"value": "63dc8f1f889d1cacd80feb45",
+									"value": "644025f3d9e0725c55e8ad39",
 									"type": "text"
 								},
 								{
 									"key": "brand",
-									"value": "putao",
-									"type": "text"
-								},
-								{
-									"key": "source",
-									"value": "sxdcfgvbhnj",
+									"value": "putao2",
 									"type": "text"
 								},
 								{
 									"key": "isOutbound",
 									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "source",
+									"value": "zsdexcfgvtbhj",
 									"type": "text"
 								}
 							]
@@ -688,6 +683,53 @@
 							"path": [
 								"delete",
 								"fghjnhbgvfccgvelete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Model detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bust\": 79,\r\n    \"hip\":79,\r\n    \"gender\":\"P\",\r\n    \"height\":159,\r\n    \"weight\":47,\r\n    \"age\":17,\r\n    \"ethnicity\":\"japanese\",\r\n    \"price\":5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}model/647f39d0443cdb5e0fde85be",
+							"host": [
+								"{{url}}model"
+							],
+							"path": [
+								"647f39d0443cdb5e0fde85be"
 							]
 						}
 					},
@@ -1829,12 +1871,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}invoice/645e1cbef857a13beb163182",
+							"raw": "{{url}}invoice/647d8bb937fb7afcc2acd299",
 							"host": [
 								"{{url}}invoice"
 							],
 							"path": [
-								"645e1cbef857a13beb163182"
+								"647d8bb937fb7afcc2acd299"
 							]
 						}
 					},
@@ -2718,6 +2760,58 @@
 							],
 							"path": [
 								"734674637843"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\":6356232\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}service/644fa5cd7a9707c1a07366ca",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"644fa5cd7a9707c1a07366ca"
 							]
 						}
 					},

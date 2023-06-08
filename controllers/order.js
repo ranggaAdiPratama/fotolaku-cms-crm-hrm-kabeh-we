@@ -22,15 +22,15 @@ export const index = async (req, res) => {
   try {
     const { status } = req.query;
 
-    let all = false;
+    let all = true;
 
-    for (let index = 0; index < req.user.role.permission.length; index++) {
-      if (req.user.role.permission[index].alias == "view all crud card") {
-        all = true;
+    // for (let index = 0; index < req.user.role.permission.length; index++) {
+    //   if (req.user.role.permission[index].alias == "view all crud card") {
+    //     all = true;
 
-        break;
-      }
-    }
+    //     break;
+    //   }
+    // }
 
     let data = {};
 

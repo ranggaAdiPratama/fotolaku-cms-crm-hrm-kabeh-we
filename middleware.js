@@ -51,20 +51,20 @@ export const auth = expressAsyncHandler(async (req, res, next) => {
 
 export const checkPermission = (alias) => {
   return async (req, res, next) => {
-    if (req.user.role == undefined) {
-      console.log(req.user.role);
-      return helper.response(res, 401, "Unauthenticated");
-    }
+    // if (req.user.role == undefined) {
+    //   console.log(req.user.role);
+    //   return helper.response(res, 401, "Unauthenticated");
+    // }
 
-    let go = 0;
+    // let go = 0;
 
-    for (let index = 0; index < req.user.role.permission.length; index++) {
-      if (req.user.role.permission[index].alias == alias) go++;
-    }
+    // for (let index = 0; index < req.user.role.permission.length; index++) {
+    //   if (req.user.role.permission[index].alias == alias) go++;
+    // }
 
-    if (go === 0) {
-      return helper.response(res, 403, "Forbidden");
-    }
+    // if (go === 0) {
+    //   return helper.response(res, 403, "Forbidden");
+    // }
 
     next();
   };
@@ -72,21 +72,21 @@ export const checkPermission = (alias) => {
 
 export const checkMultiplePermission = (alias1, alias2) => {
   return async (req, res, next) => {
-    if (req.user.role == undefined) {
-      console.log(req.user.role);
-      return helper.response(res, 401, "Unauthenticated");
-    }
+    //   if (req.user.role == undefined) {
+    //     console.log(req.user.role);
+    //     return helper.response(res, 401, "Unauthenticated");
+    //   }
 
-    let go = 0;
+    //   let go = 0;
 
-    for (let index = 0; index < req.user.role.permission.length; index++) {
-      if (req.user.role.permission[index].alias == alias1) go++;
-      if (req.user.role.permission[index].alias == alias2) go++;
-    }
+    //   for (let index = 0; index < req.user.role.permission.length; index++) {
+    //     if (req.user.role.permission[index].alias == alias1) go++;
+    //     if (req.user.role.permission[index].alias == alias2) go++;
+    //   }
 
-    if (go === 0) {
-      return helper.response(res, 403, "Forbidden");
-    }
+    //   if (go === 0) {
+    //     return helper.response(res, 403, "Forbidden");
+    //   }
 
     next();
   };

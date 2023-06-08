@@ -229,14 +229,16 @@ export const store = async (req, res) => {
       return helper.response(res, 400, "role is not registered");
     }
 
-    const userSourceExist = await UserSource.findOne({
-      name: source,
-    });
-
-    if (!userSourceExist) {
-      await UserSource.create({
+    if (source) {
+      const userSourceExist = await UserSource.findOne({
         name: source,
       });
+
+      if (!userSourceExist) {
+        await UserSource.create({
+          name: source,
+        });
+      }
     }
 
     let user = await User.create({

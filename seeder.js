@@ -23,7 +23,9 @@ import Theme from "./models/theme.js";
 import TokenBlackList from "./models/tokenBlackList.js";
 import User from "./models/user.js";
 import UserActivity from "./models/userActivity.js";
-import UserSource from "../models/userSource.js";
+import UserSource from "./models/userSource.js";
+import CustomerSales from "./models/customerSales.js";
+import ModelDetail from "./models/modelDetail.js";
 
 import * as helper from "./helper.js";
 
@@ -40,6 +42,8 @@ mongoose
   .catch((err) => console.log(`DB error => ${err}`));
 
 const seedDB = async () => {
+  await ModelDetail.deleteMany({});
+  await CustomerSales.deleteMany({});
   await UserSource.deleteMany({});
   await Brand.deleteMany({});
   await Invoice.deleteMany({});
@@ -880,7 +884,7 @@ const seedDB = async () => {
   });
 
   await Service.create({
-    name: "Service on white",
+    name: "Product On White",
     price: "99000",
     category: fotoCategory._id,
     background: 1,
@@ -894,6 +898,7 @@ const seedDB = async () => {
     referrence: 0,
     bts: 0,
     outdoor: 0,
+    mobile: 1,
     backgroundList: [lightGreyBg._id, pureWhiteBg._id],
     modelList: [model1._id, model2._id],
     ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
@@ -929,6 +934,7 @@ const seedDB = async () => {
     referrence: 1,
     bts: 0,
     outdoor: 0,
+    mobile: 1,
     backgroundList: [lightGreyBg._id, pureWhiteBg._id],
     modelList: [model1._id, model2._id],
     ratioList: [ratio1._id, ratio2._id, ratio3._id, ratio4._id],
