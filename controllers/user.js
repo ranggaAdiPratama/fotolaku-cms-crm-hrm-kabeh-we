@@ -202,6 +202,8 @@ export const store = async (req, res) => {
       isNewCustomer,
     } = req.body;
 
+    let priority = null;
+
     switch (true) {
       case !name:
         return helper.response(res, 400, "name is required");
@@ -239,6 +241,10 @@ export const store = async (req, res) => {
       return helper.response(res, 400, "role is not registered");
     }
 
+    if ((roleExist.name = "Customer")) {
+      priority = "P1";
+    }
+
     if (source) {
       const userSourceExist = await UserSource.findOne({
         name: source,
@@ -261,6 +267,7 @@ export const store = async (req, res) => {
       isOutbound,
       brand: "",
       isNewCustomer,
+      priority,
     });
 
     user = await User.findById(user._id)
@@ -292,6 +299,7 @@ export const update = async (req, res) => {
       source,
       isOutbound,
       isNewCustomer,
+      priority,
     } = req.body;
 
     if (!name) name = user.name;
@@ -354,6 +362,19 @@ export const update = async (req, res) => {
       if (!roleExist) {
         return helper.response(res, 400, "role is not registered");
       }
+
+      if ((roleExist.name = "Customer")) {
+        if (!priority) priority = user.priority;
+
+        if (priority !== "P1" && priority !== "P2" && priority !== "P3") {
+          return helper.response(res, 400, "priority not registered");
+        }
+
+        if (!isNewCustomer) isNewCustomer = user.isNewCustomer;
+      } else {
+        priority = null;
+        isNewCustomer = null;
+      }
     } else {
       role = user.role;
     }
@@ -412,8 +433,6 @@ export const update = async (req, res) => {
       source = user.source;
     }
 
-    if (!isNewCustomer) isNewCustomer = user.isNewCustomer;
-
     await User.findByIdAndUpdate(_id, {
       name,
       email,
@@ -424,6 +443,7 @@ export const update = async (req, res) => {
       source,
       isOutbound,
       isNewCustomer,
+      priority,
     });
 
     user = await User.findById(user._id)

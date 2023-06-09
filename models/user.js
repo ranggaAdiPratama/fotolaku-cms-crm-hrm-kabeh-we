@@ -73,6 +73,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    priority: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,

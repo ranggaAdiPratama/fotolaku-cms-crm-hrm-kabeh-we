@@ -227,8 +227,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
+							"mode": "urlencoded",
+							"urlencoded": [
 								{
 									"key": "name",
 									"value": "Aep 1",
@@ -251,7 +251,7 @@
 								},
 								{
 									"key": "role",
-									"value": "644025f3d9e0725c55e8ad39",
+									"value": "6483356d951187c9cf399a94",
 									"type": "text"
 								},
 								{
@@ -272,7 +272,6 @@
 								{
 									"key": "isNewCustomer",
 									"value": "1",
-									"description": "1 atau 0",
 									"type": "text"
 								}
 							]
@@ -382,7 +381,7 @@
 								},
 								{
 									"key": "role",
-									"value": "644025f3d9e0725c55e8ad39",
+									"value": "6483356d951187c9cf399a94",
 									"type": "text"
 								},
 								{
@@ -405,16 +404,21 @@
 									"value": "1",
 									"description": "1 atau 0",
 									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "P2",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}user/6443dc04988dc6f2febe2f92",
+							"raw": "{{url}}user/648335d87a5a9e988ff5c1bc",
 							"host": [
 								"{{url}}user"
 							],
 							"path": [
-								"6443dc04988dc6f2febe2f92"
+								"648335d87a5a9e988ff5c1bc"
 							]
 						}
 					},
