@@ -1893,6 +1893,64 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "List History by customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order-history/6444da29988dc6f2febe9f5c",
+							"host": [
+								"{{url}}order-history"
+							],
+							"path": [
+								"6444da29988dc6f2febe9f5c"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "New Lead",
+									"description": "New Lead, Cold, Hot, Invoice State, Won (Paid), Won (Receivable), Failed",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

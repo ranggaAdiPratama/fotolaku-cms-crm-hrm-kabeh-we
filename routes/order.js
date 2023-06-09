@@ -25,6 +25,13 @@ router.get(
   ),
   controller.show
 );
+// NOTE GET /api/order-history/:id
+router.get(
+  "/order-history/:id",
+  middleware.auth,
+  middleware.checkMultiplePermission("view all crud card"),
+  controller.customerHistory
+);
 // NOTE POST /api/order
 router.post(
   "/order",
@@ -63,9 +70,7 @@ router.put(
 router.delete(
   "/order/:id",
   middleware.auth,
-  middleware.checkMultiplePermission(
-    "delete crud card",
-  ),
+  middleware.checkMultiplePermission("delete crud card"),
   controller.destroy
 );
 

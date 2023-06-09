@@ -82,6 +82,40 @@ export const index = async (req, res) => {
   }
 };
 // !SECTION list order
+// SECTION customer order history
+export const customerHistory = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    let data = await Order.find({
+      customer: id,
+    })
+      .sort({ createdAt: -1 })
+      .populate("createdBy", "_id name")
+      .populate("customer", "_id name email phone")
+      .populate("product", "product qty price brief")
+      .populate("sales", "_id name phone")
+      .populate("invoice")
+      .populate("items", "_id item status");
+
+    if (!data) return helper.response(res, 404, "Data not found");
+    data = await Product.populate(data, {
+      path: "product.product",
+      select: "_id name price",
+    });
+
+    data = await OrderBrief.populate(data, {
+      path: "product.brief",
+    });
+
+    return helper.response(res, 200, "Data found", data);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION customer order history
 // SECTION delete order
 export const destroy = async (req, res, next) => {
   try {
