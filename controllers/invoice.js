@@ -188,6 +188,20 @@ export const store = async (req, res) => {
         new: true,
       }
     );
+
+    const user = await User.findById(validOrder.customer, {});
+
+    if (!user.priority) {
+      await User.findByIdAndUpdate(
+        validOrder.customer,
+        {
+          priority: "P1",
+        },
+        {
+          new: true,
+        }
+      );
+    }
     // !SECTION update customer
 
     // NOTE FINISH

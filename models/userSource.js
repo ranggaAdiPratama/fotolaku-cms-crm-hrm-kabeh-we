@@ -7,6 +7,11 @@ const userSourceSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    active: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
   {
     timestamps: true,

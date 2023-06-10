@@ -251,9 +251,7 @@ export const store = async (req, res) => {
       });
 
       if (!userSourceExist) {
-        await UserSource.create({
-          name: source,
-        });
+        return helper.response(res, 400, "source is not available");
       }
     }
 
@@ -412,6 +410,14 @@ export const update = async (req, res) => {
 
         if (sourceExist) {
           return helper.response(res, 400, "source is already registered");
+        }
+
+        const userSourceExist = await UserSource.findOne({
+          name: source,
+        });
+
+        if (!userSourceExist) {
+          return helper.response(res, 400, "source is not available");
         }
       } else {
         const sourceExist = await User.findOne({
