@@ -1685,7 +1685,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer\":\"644025f5d9e0725c55e8ad43\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"644025f6d9e0725c55e8ad47\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
+							"raw": "{\r\n    \"customer\":\"6483356f951187c9cf399a9c\",\r\n    \"brand\":\"kenthuky\",\r\n    // \"sales\":[\r\n    //     \"644025f6d9e0725c55e8ad47\"\r\n    // ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1876,7 +1876,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"order\": \"644a65dd3a0c4a6e7daab451\",\r\n    \"date\": \"2023-05-12\",\r\n    \"discount\":30,\r\n    \"note\": \"tes\",\r\n    \"total\": 485100,\r\n    \"items\": 0\r\n}",
+							"raw": "{\r\n    \"order\": \"6486daac4eeea4f42b03a934\",\r\n    \"date\": \"2023-05-12\",\r\n    \"discount\":30,\r\n    \"note\": \"tes\",\r\n    \"total\": 485100,\r\n    \"items\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3024,6 +3024,109 @@
 							],
 							"path": [
 								"644fa5cd7a9707c1a07366ca"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow Up",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}notification/follow-up",
+							"host": [
+								"{{url}}notification"
+							],
+							"path": [
+								"follow-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turn it off",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}notification/follow-up/648705cb4cad60a3f068e4b0",
+							"host": [
+								"{{url}}notification"
+							],
+							"path": [
+								"follow-up",
+								"648705cb4cad60a3f068e4b0"
 							]
 						}
 					},

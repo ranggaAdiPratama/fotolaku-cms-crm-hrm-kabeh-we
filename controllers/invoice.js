@@ -99,6 +99,8 @@ export const show = async (req, res) => {
 // SECTION generate invoice
 export const store = async (req, res) => {
   try {
+    let months;
+    let user;
     // SECTION deklarasi isi body
     const {
       order,
@@ -189,7 +191,7 @@ export const store = async (req, res) => {
       }
     );
 
-    const user = await User.findById(validOrder.customer, {});
+    user = await User.findById(validOrder.customer, {});
 
     if (!user.priority) {
       await User.findByIdAndUpdate(
@@ -203,6 +205,29 @@ export const store = async (req, res) => {
       );
     }
     // !SECTION update customer
+
+    // SECTION menentukan DL followup
+    user = await User.findById(validOrder.customer, {});
+
+    if (user.priority == "P1") {
+      months = 3;
+    } else if (user.priority == "P2") {
+      months = 2;
+    } else {
+      months = 1;
+    }
+
+    await User.findByIdAndUpdate(
+      validOrder.customer,
+      {
+        follow_up_at: helper.addMonths(months),
+        is_contacted: false,
+      },
+      {
+        new: true,
+      }
+    );
+    // SECTION menentukan DL followup
 
     // NOTE FINISH
     return helper.response(res, 201, "Invoice berhasil ditambahkan", data);

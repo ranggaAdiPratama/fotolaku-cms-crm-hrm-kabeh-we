@@ -210,8 +210,6 @@ export const store = async (req, res) => {
     // SECTION validasi
     // SECTION validasi umum
     switch (true) {
-      case !sales:
-        return helper.response(res, 400, "sales is required");
       case newcustomer < 0:
         return helper.response(res, 400, "newcustomer is required");
     }

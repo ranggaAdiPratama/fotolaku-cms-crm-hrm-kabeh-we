@@ -5,6 +5,19 @@ import jwt from "jsonwebtoken";
 import Invoice from "./models/invoice.js";
 import RefreshToken from "./models/refreshToken.js";
 
+export const addMonths = (months) => {
+  var date = new Date();
+
+  var d = date.getDate();
+
+  date.setMonth(date.getMonth() + +months);
+  if (date.getDate() != d) {
+    date.setDate(0);
+  }
+
+  return date;
+};
+
 export const checkPermission = (alias, user) => {
   let canUpdate = false;
 

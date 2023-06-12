@@ -77,6 +77,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    follow_up_at: {
+      type: Date,
+      default: null,
+    },
+    is_contacted: {
+      type: Boolean,
+      default: false,
+    },
+    last_contact: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,

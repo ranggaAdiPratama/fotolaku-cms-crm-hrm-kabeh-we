@@ -26,6 +26,7 @@ import UserActivity from "./models/userActivity.js";
 import UserSource from "./models/userSource.js";
 import CustomerSales from "./models/customerSales.js";
 import ModelDetail from "./models/modelDetail.js";
+import FollowUpNotification from "./models/followUpNotification.js";
 
 import * as helper from "./helper.js";
 
@@ -42,6 +43,7 @@ mongoose
   .catch((err) => console.log(`DB error => ${err}`));
 
 const seedDB = async () => {
+  await FollowUpNotification.deleteMany({});
   await ModelDetail.deleteMany({});
   await CustomerSales.deleteMany({});
   await UserSource.deleteMany({});
