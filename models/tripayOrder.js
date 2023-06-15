@@ -8,7 +8,6 @@ const tripayOrderScheme = new mongoose.Schema(
   {
     reference: {
       type: String,
-      required: true,
     },
     method: {
       type: String,

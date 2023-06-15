@@ -1,8 +1,15 @@
+import axios from "axios";
+import crypto from "crypto";
+
+import Brand from "../models/brand.js";
 import Role from "../models/role.js";
 import TripayOrder from "../models/tripayOrder.js";
 import User from "../models/user.js";
+import UserSource from "../models/userSource.js";
 
 import * as helper from "../helper.js";
+
+const env = process.env;
 
 // SECTION masukan data order
 export const callback = async (req, res) => {
@@ -37,6 +44,7 @@ export const callback = async (req, res) => {
 
       await User.create({
         name: data.name,
+        brand: data.brand,
         email: data.email,
         password: await helper.hashPassword("12345678"),
         phone: data.phone,
@@ -61,23 +69,76 @@ export const callback = async (req, res) => {
   }
 };
 // !SECTION masukan data order
+// SECTION calculator biaya
+export const calculator = async (req, res) => {
+  const code = req.query.code;
+  const amount = req.query.amount;
 
+  switch (true) {
+    case !code:
+      return helper.response(res, 400, "code is required");
+    case !amount:
+      return helper.response(res, 400, "amount is required");
+  }
+
+  await axios
+    .get(
+      `${env.TRIPAY_API_URL}merchant/fee-calculator?code=${code}&amount=${amount}`,
+      {
+        headers: {
+          Authorization: `Bearer ${env.TRIPAY_API_KEY}`,
+        },
+        validateStatus: (status) => {
+          return status < 999;
+        },
+      }
+    )
+    .then((result) => {
+      return helper.response(res, 200, "Channel List", result["data"]);
+    })
+    .catch((err) => {
+      console.log(err);
+
+      return helper.response(res, 400, "Error", err);
+    });
+};
+// !SECTION calculator biaya
+// SECTION list channel
+export const channel = async (req, res) => {
+  await axios
+    .get(`${env.TRIPAY_API_URL}merchant/payment-channel`, {
+      headers: {
+        Authorization: `Bearer ${env.TRIPAY_API_KEY}`,
+      },
+      validateStatus: (status) => {
+        return status < 999;
+      },
+    })
+    .then((result) => {
+      return helper.response(res, 200, "Channel List", result["data"]);
+    })
+    .catch((err) => {
+      console.log(err);
+
+      return helper.response(res, 400, "Error", err);
+    });
+};
+// !SECTION list channel
 // SECTION masukan data order
 export const order = async (req, res) => {
   try {
-    const reference = req.body.reference;
     const method = req.body.method;
     const source = req.body.source;
     const name = req.body.name;
+    let brand = req.body.brand;
     const email = req.body.email;
     const phone = req.body.phone;
     const total = req.body.total;
 
     let data;
+    let sourceData;
 
     switch (true) {
-      case !reference:
-        return helper.response(res, 400, "Data not found");
       case !method:
         return helper.response(res, 400, "Data not found");
       case !source:
@@ -92,17 +153,94 @@ export const order = async (req, res) => {
         return helper.response(res, 400, "Data not found");
     }
 
+    sourceData = await UserSource.findOne({
+      name: source,
+    });
+
+    if (!sourceData) {
+      sourceData = await UserSource.create({
+        name: source,
+      });
+    }
+
+    const brandExist = await Brand.findOne({
+      name: brand,
+    });
+
+    if (!sourceData) {
+      await Brand.create({
+        name: brand,
+      });
+    }
+
+    const signature = crypto
+      .createHmac("sha256", env.TRIPAY_PRIVATE_KEY)
+      .update(env.TRIPAY_KODE_MERCHANT + "" + total)
+      .digest("hex");
+
     data = await TripayOrder.create({
-      reference,
       method,
-      source,
+      source: sourceData._id,
+      brand,
       name,
       email,
       phone,
       total,
     });
 
-    return helper.response(res, 200, "Tripay order has been created", data);
+    var expiry = parseInt(Math.floor(new Date() / 1000) + 24 * 60 * 60);
+
+    var payload = {
+      method,
+      merchant_ref: "",
+      amount: total,
+      customer_name: name,
+      customer_email: email,
+      customer_phone: phone,
+      order_items: [
+        {
+          sku: "",
+          name: sourceData.name,
+          price: total,
+          quantity: 1,
+        },
+      ],
+      return_url: "https://belajarlaku.fotolaku.com/paid_success",
+      expired_time: expiry,
+      signature: signature,
+    };
+
+    let tripay = await axios.post(
+      `${env.TRIPAY_API_URL}transaction/create`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${env.TRIPAY_API_KEY}`,
+        },
+        validateStatus: (status) => {
+          return status < 999;
+        },
+      }
+    );
+
+    if (tripay["data"]["success"]) {
+      console.log(tripay["data"]);
+      await TripayOrder.findByIdAndUpdate(
+        data._id,
+        {
+          reference: tripay["data"]["data"]["reference"],
+        },
+        {
+          new: true,
+        }
+      );
+
+      return helper.response(res, 200, "Order success", {
+        checkout_url: tripay["data"]["data"]["checkout_url"],
+      });
+    }
+
+    return helper.response(res, 400, "Error", tripay["data"]);
   } catch (err) {
     console.log(err);
 
