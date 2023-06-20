@@ -52,6 +52,28 @@ export const callback = async (req, res) => {
         source: data.source,
         isNewCustomer: true,
       });
+
+      let payload;
+
+      const sourceData = await UserSource.findById(data.source, {});
+
+      if (sourceData.name.includes("bundling")) {
+        payload = {
+          api_key: env.WAPISENDER_API_KEY,
+          device_key: env.WAPISENDER_DEVICE_KEY,
+          destination: data.phone,
+          message: `Halo ${data.name}!\n\nTerima kasih atas pembelian anda!\n\nSilahkan klik link berikut untuk masuk ke grup Telegram Peserta Webinar Fotolaku!\n\n https://belajarlaku.fotolaku.com/thanks \n\nUntuk Kupon Diskon 10% akan dikirimkan oleh Sales Kami!\n\nSampai jumpa di kelas nanti!\n\nTerima Kasih!`,
+        };
+      } else {
+        payload = {
+          api_key: env.WAPISENDER_API_KEY,
+          device_key: env.WAPISENDER_DEVICE_KEY,
+          destination: data.phone,
+          message: `Halo ${data.name}!\n\nTerima kasih atas pembelian anda!\n\nSilahkan klik link berikut untuk masuk ke grup Telegram Peserta Webinar Fotolaku!\n\n https://belajarlaku.fotolaku.com/thanks \n\nSampai jumpa di kelas nanti!\n\nTerima Kasih!`,
+        };
+      }
+
+      await axios.post(`https://wapisender.id/api/v1/send-message`, payload);
     } else if (status == "EXPIRED") {
       if (data) {
         await TripayOrder.findByIdAndRemove(data._id);
@@ -124,6 +146,33 @@ export const channel = async (req, res) => {
     });
 };
 // !SECTION list channel
+// SECTION detail order
+export const detailOrder = async (req, res) => {
+  const reference = req.query.reference;
+
+  if (!reference) {
+    return helper.response(res, 400, "reference is required");
+  }
+
+  await axios
+    .get(`${env.TRIPAY_API_URL}transaction/detail?reference=${reference}`, {
+      headers: {
+        Authorization: `Bearer ${env.TRIPAY_API_KEY}`,
+      },
+      validateStatus: (status) => {
+        return status < 999;
+      },
+    })
+    .then((result) => {
+      return helper.response(res, 200, "Channel List", result["data"]);
+    })
+    .catch((err) => {
+      console.log(err);
+
+      return helper.response(res, 400, "Error", err);
+    });
+};
+// !SECTION detail order
 // SECTION masukan data order
 export const order = async (req, res) => {
   try {
@@ -133,6 +182,7 @@ export const order = async (req, res) => {
     let brand = req.body.brand;
     const email = req.body.email;
     const phone = req.body.phone;
+    const phone_indo = req.body.phone_indo;
     const total = req.body.total;
 
     let data;
@@ -167,10 +217,18 @@ export const order = async (req, res) => {
       name: brand,
     });
 
-    if (!sourceData) {
+    if (!brandExist) {
       await Brand.create({
         name: brand,
       });
+    }
+
+    const phoneExists = await User.findOne({
+      phone,
+    });
+
+    if (phoneExists) {
+      return helper.response(res, 400, "phone is already registered");
     }
 
     const signature = crypto
@@ -188,15 +246,15 @@ export const order = async (req, res) => {
       total,
     });
 
-    var expiry = parseInt(Math.floor(new Date() / 1000) + 24 * 60 * 60);
+    var expiry = parseInt(Math.floor(new Date() / 1000) + 2 * 60 * 60);
 
-    var payload = {
+    let payload = {
       method,
       merchant_ref: "",
       amount: total,
       customer_name: name,
       customer_email: email,
-      customer_phone: phone,
+      customer_phone: phone_indo,
       order_items: [
         {
           sku: "",
@@ -224,7 +282,6 @@ export const order = async (req, res) => {
     );
 
     if (tripay["data"]["success"]) {
-      console.log(tripay["data"]);
       await TripayOrder.findByIdAndUpdate(
         data._id,
         {
@@ -235,8 +292,27 @@ export const order = async (req, res) => {
         }
       );
 
+      payload = {
+        api_key: env.WAPISENDER_API_KEY,
+        device_key: env.WAPISENDER_DEVICE_KEY,
+        destination: phone,
+        message: `Halo ${name}!\n\nTerima kasih telah melakukan pendaftaran untuk kelas Webinar Fotolaku bersama Faisal Ardans.\n\nSilahkan lakukan pembayaran dengan nominal Rp.${String(
+          total
+        ).replace(
+          /(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g,
+          "$1,"
+        )} dengan cara klik link berikut\n\n${
+          tripay["data"]["data"]["checkout_url"]
+        }\n\natau anda juga bisa melakukan pembayaran dengan cara melalui ${
+          tripay["data"]["data"]["payment_name"]
+        } dengan kode ${tripay["data"]["data"]["pay_code"]}\n\nTerima Kasih!`,
+      };
+
+      await axios.post(`https://wapisender.id/api/v1/send-message`, payload);
+
       return helper.response(res, 200, "Order success", {
         checkout_url: tripay["data"]["data"]["checkout_url"],
+        reference: tripay["data"]["data"]["reference"],
       });
     }
 

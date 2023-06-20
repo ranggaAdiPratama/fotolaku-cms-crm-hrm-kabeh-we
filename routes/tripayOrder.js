@@ -6,6 +6,8 @@ const router = express.Router();
 
 // NOTE GET /api/tripay/channels
 router.get("/tripay/channels", controller.channel);
+// NOTE GET /api/tripay/detail-order
+router.get("/tripay/detail-order", controller.detailOrder);
 // NOTE GET /api/tripay/fee-calculator
 router.get("/tripay/fee-calculator", controller.calculator);
 // NOTE POST /api/tripay/order
