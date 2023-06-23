@@ -117,7 +117,7 @@ export const add = async (req, res) => {
     });
 
     if (checkData == 1) {
-      const oldData = await CustomerSales.countDocuments({
+      let oldData = await CustomerSales.findOne({
         sales,
       });
 
@@ -213,7 +213,7 @@ export const deleteCustomer = async (req, res) => {
     });
 
     if (checkData == 1) {
-      const oldData = await CustomerSales.countDocuments({
+      const oldData = await CustomerSales.findOne({
         sales,
       });
 

@@ -101,6 +101,10 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    survey_results: {
+      type: {},
+      default: null,
+    },
   },
   {
     timestamps: true,

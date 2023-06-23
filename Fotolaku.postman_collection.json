@@ -36,7 +36,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "sales2@mail.com",
+									"value": "superAdmin@mail.com",
 									"type": "text"
 								},
 								{
@@ -227,54 +227,13 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "name",
-									"value": "Aep 1",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "jubaedah@mail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "123456",
-									"type": "text"
-								},
-								{
-									"key": "phone",
-									"value": "081726288292",
-									"type": "text"
-								},
-								{
-									"key": "role",
-									"value": "6483356d951187c9cf399a94",
-									"type": "text"
-								},
-								{
-									"key": "brand",
-									"value": "putao2",
-									"type": "text"
-								},
-								{
-									"key": "isOutbound",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "source",
-									"value": "zsdexcfgvtbhj",
-									"type": "text"
-								},
-								{
-									"key": "isNewCustomer",
-									"value": "1",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Aep 1\",\r\n\"email\":\"jubaedah@mail.com,\",\r\n\"password\":\"123456\",\r\n\"phone\":\"081726288292\",\r\n\"role\":\"6495c7120031bb4f324f81ad\",\r\n\"brand\":\"putao2\",\r\n\"isOutbound\":0,\r\n\"source\":\"zsdexcfgvtbhj\",\r\n\"isNewCustomer\":1,\r\n\"survey_results\": [\r\n    {\r\n        \"question\":\"pernah ngewe?\",\r\n        \"answer\":\"pernah\"\r\n    },\r\n    {\r\n        \"question\":\"crot tiap malam berapa kali?\",\r\n        \"answer\":\"10X\"\r\n    }\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "{{url}}user",
@@ -3488,12 +3447,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}sales-outbound/fghjnhbgvfccgvbhj",
+							"raw": "{{url}}sales-outbound/6495778e95608a6a263235cf",
 							"host": [
 								"{{url}}sales-outbound"
 							],
 							"path": [
-								"fghjnhbgvfccgvbhj"
+								"6495778e95608a6a263235cf"
 							]
 						}
 					},
@@ -3574,7 +3533,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customers\": [\r\n        \"tvgvgfvercddscsd\",\r\n        \"dcfgvbhnjmkjnhbgvfc\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"customers\": [\r\n        \"6495778b95608a6a263235c7\",\r\n        \"6495778c95608a6a263235c9\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3582,13 +3541,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}sales-outbound/add/fghjnhbgvfccgvbhj",
+							"raw": "{{url}}sales-outbound/add/6495778e95608a6a263235cf",
 							"host": [
 								"{{url}}sales-outbound"
 							],
 							"path": [
 								"add",
-								"fghjnhbgvfccgvbhj"
+								"6495778e95608a6a263235cf"
 							]
 						}
 					},

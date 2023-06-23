@@ -200,6 +200,7 @@ export const store = async (req, res) => {
       source,
       isOutbound,
       isNewCustomer,
+      survey_results,
     } = req.body;
 
     let priority = null;
@@ -251,7 +252,9 @@ export const store = async (req, res) => {
       });
 
       if (!userSourceExist) {
-        return helper.response(res, 400, "source is not available");
+        await UserSource.create({
+          name: source,
+        });
       }
     }
 
@@ -266,6 +269,7 @@ export const store = async (req, res) => {
       brand: "",
       isNewCustomer,
       priority,
+      survey_results,
     });
 
     user = await User.findById(user._id)

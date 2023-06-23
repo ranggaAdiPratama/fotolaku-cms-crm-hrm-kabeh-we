@@ -555,6 +555,15 @@ const seedDB = async () => {
     isOutbound: true,
   });
 
+  const sales3 = await User.create({
+    name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
+    email: "sales3@mail.com",
+    password: await helper.hashPassword("12345678"),
+    phone: faker.phone.number("62##########"),
+    role: sales._id,
+    isOutbound: true,
+  });
+
   await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
     email: "projectManager1@mail.com",
