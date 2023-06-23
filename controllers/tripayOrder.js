@@ -238,7 +238,7 @@ export const order = async (req, res) => {
 
     data = await TripayOrder.create({
       method,
-      source: sourceData._id,
+      source,
       brand,
       name,
       email,

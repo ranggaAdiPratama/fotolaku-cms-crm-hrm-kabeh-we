@@ -404,40 +404,7 @@ export const update = async (req, res) => {
       brand = user.brand;
     }
 
-    if (source) {
-      if (!user.source) {
-        const sourceExist = await User.findOne({ source });
-
-        if (sourceExist) {
-          return helper.response(res, 400, "source is already registered");
-        }
-
-        const userSourceExist = await UserSource.findOne({
-          name: source,
-        });
-
-        if (!userSourceExist) {
-          return helper.response(res, 400, "source is not available");
-        }
-      } else {
-        const sourceExist = await User.findOne({
-          source,
-          $and: [
-            {
-              source: {
-                $ne: user.source,
-              },
-            },
-          ],
-        });
-
-        if (sourceExist) {
-          return helper.response(res, 400, "source is already registered");
-        }
-      }
-    } else {
-      source = user.source;
-    }
+    if (!source) source = user.source;
 
     await User.findByIdAndUpdate(_id, {
       name,
