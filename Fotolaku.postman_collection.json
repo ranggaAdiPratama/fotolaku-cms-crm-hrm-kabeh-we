@@ -36,7 +36,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "superAdmin@mail.com",
+									"value": "sales2@mail.com",
 									"type": "text"
 								},
 								{
@@ -362,63 +362,72 @@
 								{
 									"key": "name",
 									"value": "Aep 1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "email",
 									"value": "jubaedah@mail.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "password",
 									"value": "123456",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "phone",
 									"value": "081726288292",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "role",
 									"value": "6483356d951187c9cf399a94",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "brand",
 									"value": "putao2",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "isOutbound",
 									"value": "1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "source",
-									"value": "zsdexcfgvtbhj",
+									"value": "tes source",
 									"type": "text"
 								},
 								{
 									"key": "isNewCustomer",
 									"value": "1",
 									"description": "1 atau 0",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "priority",
 									"value": "P2",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}user/648335d87a5a9e988ff5c1bc",
+							"raw": "{{url}}user/64917654545d0669b6f1f345",
 							"host": [
 								"{{url}}user"
 							],
 							"path": [
-								"648335d87a5a9e988ff5c1bc"
+								"64917654545d0669b6f1f345"
 							]
 						}
 					},
@@ -553,152 +562,6 @@
 							"raw": "{{url}}user-bulk",
 							"host": [
 								"{{url}}user-bulk"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "List Customer Sales",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}customer-sales/fghjnhbgvfccgvbhj",
-							"host": [
-								"{{url}}customer-sales"
-							],
-							"path": [
-								"fghjnhbgvfccgvbhj"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add Customer Sales",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"customers\": [\r\n        \"tvgvgfvercddscsd\",\r\n        \"dcfgvbhnjmkjnhbgvfc\"\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}customer-sales/add/fghjnhbgvfccgvbhj",
-							"host": [
-								"{{url}}customer-sales"
-							],
-							"path": [
-								"add",
-								"fghjnhbgvfccgvbhj"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Remove Customer Sales",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"customers\": [\r\n        \"tvgvgfvercddscsd\",\r\n        \"dcfgvbhnjmkjnhbgvfc\"\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}customer-sales/delete/fghjnhbgvfccgvelete",
-							"host": [
-								"{{url}}customer-sales"
-							],
-							"path": [
-								"delete",
-								"fghjnhbgvfccgvelete"
 							]
 						}
 					},
@@ -3158,7 +3021,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"method\":\"BCAVA\",\r\n    \"source\": \"648335d87a5a9e988ff5c1ba\",\r\n    \"name\": \"Dadang Kehed\",\r\n    \"email\": \"Iniemail@mail.com\",\r\n    \"phone\": \"3453543534\",\r\n    \"total\": 100000\r\n}",
+							"raw": "{\r\n    \"method\":\"BCAVA\",\r\n    \"source\": \"bundling aja\",\r\n    \"name\": \"Dadang Kehed\",\r\n    \"email\": \"Iniemail@mail.com\",\r\n    \"phone\": \"6281573650396\",\r\n    \"phone_indo\":\"081573650396\",\r\n    \"total\": 100000,\r\n    \"brand\":\"aaa\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3464,18 +3327,17 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}tripay/transaction/detail?reference=gvtrbgtrgbtrgbt",
+							"raw": "{{url}}tripay/detail-order?reference=DEV-T292496905AHWOS",
 							"host": [
 								"{{url}}tripay"
 							],
 							"path": [
-								"transaction",
-								"detail"
+								"detail-order"
 							],
 							"query": [
 								{
 									"key": "reference",
-									"value": "gvtrbgtrgbtrgbt"
+									"value": "DEV-T292496905AHWOS"
 								}
 							]
 						}
@@ -3534,6 +3396,346 @@
 							"body": null
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Sales Outbound",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound",
+							"host": [
+								"{{url}}sales-outbound"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/fghjnhbgvfccgvbhj",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"fghjnhbgvfccgvbhj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Personal customer list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales\": \"649550b9f45d4e6ba57cf9c0\",\r\n    \"customers\": [\r\n        \"649550b7f45d4e6ba57cf9ba\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound-me",
+							"host": [
+								"{{url}}sales-outbound-me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customers\": [\r\n        \"tvgvgfvercddscsd\",\r\n        \"dcfgvbhnjmkjnhbgvfc\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/add/fghjnhbgvfccgvbhj",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"add",
+								"fghjnhbgvfccgvbhj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customers\": [\r\n        \"tvgvgfvercddscsd\",\r\n        \"dcfgvbhnjmkjnhbgvfc\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/delete/fghjnhbgvfccgvelete",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"delete",
+								"fghjnhbgvfccgvelete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Customer to FU",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales\": \"649550b9f45d4e6ba57cf9c0\",\r\n    \"customers\": [\r\n        \"649550b7f45d4e6ba57cf9ba\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/set/fghjnhbgvfccgvbhj",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"set",
+								"fghjnhbgvfccgvbhj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FU",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customers\": [\r\n        \"649550b7f45d4e6ba57cf9ba\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/fu",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"fu"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

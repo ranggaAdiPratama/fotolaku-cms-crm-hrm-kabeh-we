@@ -522,7 +522,7 @@ const seedDB = async () => {
     role: IT._id,
   });
 
-  await User.create({
+  const customer1 = await User.create({
     name: `${faker.name.firstName("male")} ${faker.name.lastName()}`,
     email: "customer1@mail.com",
     password: await helper.hashPassword("12345678"),
@@ -530,7 +530,7 @@ const seedDB = async () => {
     role: customer._id,
   });
 
-  await User.create({
+  const customer2 = await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
     email: "customer2@mail.com",
     password: await helper.hashPassword("12345678"),
@@ -546,12 +546,13 @@ const seedDB = async () => {
     role: sales._id,
   });
 
-  await User.create({
+  const sales2 = await User.create({
     name: `${faker.name.firstName("female")} ${faker.name.lastName()}`,
     email: "sales2@mail.com",
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
     role: sales._id,
+    isOutbound: true,
   });
 
   await User.create({
@@ -680,6 +681,11 @@ const seedDB = async () => {
     password: await helper.hashPassword("12345678"),
     phone: faker.phone.number("62##########"),
     role: product_handler._id,
+  });
+
+  await CustomerSales.create({
+    sales: sales2._id,
+    customers: [customer1._id, customer2._id],
   });
 
   const lightGreyBg = await Background.create({
