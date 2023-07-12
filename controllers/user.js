@@ -252,6 +252,7 @@ export const store = async (req, res) => {
       isNewCustomer,
       survey_results,
       interest,
+      category,
     } = req.body;
 
     let priority = null;
@@ -330,6 +331,7 @@ export const store = async (req, res) => {
       priority,
       survey_results,
       interest,
+      category,
     });
 
     user = await User.findById(user._id)
@@ -363,6 +365,7 @@ export const update = async (req, res) => {
       isNewCustomer,
       priority,
       interest,
+      category,
     } = req.body;
 
     if (!name) name = user.name;
@@ -471,6 +474,7 @@ export const update = async (req, res) => {
 
     if (!source) source = user.source;
     if (!interest) interest = user.interest;
+    if (!category) category = user.category;
 
     await User.findByIdAndUpdate(_id, {
       name,
@@ -484,6 +488,7 @@ export const update = async (req, res) => {
       isNewCustomer,
       priority,
       interest,
+      category,
     });
 
     user = await User.findById(user._id)

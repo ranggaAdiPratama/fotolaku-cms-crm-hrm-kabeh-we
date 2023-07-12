@@ -1,0 +1,3791 @@
+{
+	"info": {
+		"_postman_id": "c617a979-2a42-47ed-bd0b-d3e1003d9f72",
+		"name": "Fotolaku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11108847",
+		"_collection_link": "https://orange-shuttle-39637.postman.co/workspace/My-Workspace~19abc2a1-782c-4d73-8aa2-d8ce678a2725/collection/11108847-c617a979-2a42-47ed-bd0b-d3e1003d9f72?action=share&creator=11108847&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"if(jsonData.meta.code == 200) {\r",
+									"postman.setEnvironmentVariable(\"authToken\", jsonData.data.token);\r",
+									"postman.setEnvironmentVariable(\"refreshToken\", jsonData.data.refreshToken);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "superAdmin@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}auth/login",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "supra",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}auth/logout",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"if(jsonData.meta.code == 200) {\r",
+									"postman.setEnvironmentVariable(\"authToken\", jsonData.data.token);\r",
+									"postman.setEnvironmentVariable(\"refreshToken\", jsonData.data.refreshToken);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{refreshToken}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}auth/refresh",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Aep 1\",\r\n    \"email\": \"jubaedaxh@mail.com,\",\r\n    \"password\": \"123456\",\r\n    \"phone\": \"0817264288292\",\r\n    \"role\": \"6495c7120031bb4f324f81ad\",\r\n    \"brand\": \"putao2\",\r\n    \"isOutbound\": 0,\r\n    \"source\": \"zsdexcfgvtbhj\",\r\n    \"isNewCustomer\": 1,\r\n    \"survey_results\": [\r\n        {\r\n            \"question\": \"pernah ngewe?\",\r\n            \"answer\": \"pernah\"\r\n        },\r\n        {\r\n            \"question\": \"crot tiap malam berapa kali?\",\r\n            \"answer\": \"10X\"\r\n        }\r\n    ],\r\n    \"interest\": \"interest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}user/644903f191643a914f0cf6a8",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"644903f191643a914f0cf6a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Aep 1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "jubaedah@mail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "081726288292",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "6483356d951187c9cf399a94",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "brand",
+									"value": "putao2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "isOutbound",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "source",
+									"value": "tes source",
+									"type": "text"
+								},
+								{
+									"key": "isNewCustomer",
+									"value": "1",
+									"description": "1 atau 0",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "priority",
+									"value": "P2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "interest",
+									"value": "dcxsdcds",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "umbi-umbian",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/64917654545d0669b6f1f345",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"64917654545d0669b6f1f345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}user/63dc86189f97564412e0ca3a",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"63dc86189f97564412e0ca3a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Import CSV customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"name\": \"rangga\",\r\n            \"email\": \"masterrangwswswsga@gmail.com\",\r\n            \"phone\": \"081726342312\",\r\n            \"brand\": \"kenthucky\",\r\n            \"source_input\": \"mamamamama\"\r\n        },\r\n        {\r\n            \"name\": \"rangga\",\r\n            \"email\": \"masterrangwswswsga@gmail.com\",\r\n            \"phone\": \"081726342312\",\r\n            \"brand\": \"kenthucky\",\r\n            \"source_input\": \"mamamamama\"\r\n        }\r\n    ]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user/import/customer",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"import",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update bulk",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\":\"aaaa\",\r\n    \"ids\": [\r\n        \"tvgvgfvercddscsd\",\r\n        \"dcfgvbhnjmkjnhbgvfc\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-bulk",
+							"host": [
+								"{{url}}user-bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Model detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bust\": 79,\r\n    \"hip\":79,\r\n    \"gender\":\"P\",\r\n    \"height\":159,\r\n    \"weight\":47,\r\n    \"age\":17,\r\n    \"ethnicity\":\"japanese\",\r\n    \"price\":5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}model/647f39d0443cdb5e0fde85be",
+							"host": [
+								"{{url}}model"
+							],
+							"path": [
+								"647f39d0443cdb5e0fde85be"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Master Data",
+			"item": [
+				{
+					"name": "Brand",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}brands",
+							"host": [
+								"{{url}}brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}customers",
+							"host": [
+								"{{url}}customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Background",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}backgrounds",
+							"host": [
+								"{{url}}backgrounds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Model",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}models",
+							"host": [
+								"{{url}}models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pose",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}poses",
+							"host": [
+								"{{url}}poses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}services",
+							"host": [
+								"{{url}}services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Property",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}properties",
+							"host": [
+								"{{url}}properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ratio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}ratios",
+							"host": [
+								"{{url}}ratios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Theme",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}themes",
+							"host": [
+								"{{url}}themes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}product-types",
+							"host": [
+								"{{url}}product-types"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Aksesoris",
+									"description": "Aksesoris, Bawahan, Atasan",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Angle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}angles",
+							"host": [
+								"{{url}}angles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}staffs?position=Project Manager",
+							"host": [
+								"{{url}}staffs"
+							],
+							"query": [
+								{
+									"key": "position",
+									"value": "Project Manager",
+									"description": "Project Manager, Photografer Lead, Photografer / Editor, Videografer, Costumer Care, Makeup Artis / Stylist, Model Handler, Product Handler"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service by category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}service-by-category/640a9e7d0f67203939ff3f46",
+							"host": [
+								"{{url}}service-by-category"
+							],
+							"path": [
+								"640a9e7d0f67203939ff3f46"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Source",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}user-sources",
+							"host": [
+								"{{url}}user-sources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Source",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"tes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-source",
+							"host": [
+								"{{url}}user-source"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Source",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"tes 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-source/64833ba0bd40490a7af16f39",
+							"host": [
+								"{{url}}user-source"
+							],
+							"path": [
+								"64833ba0bd40490a7af16f39"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inactivated User Source",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"tes 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-source/64833ba0bd40490a7af16f39",
+							"host": [
+								"{{url}}user-source"
+							],
+							"path": [
+								"64833ba0bd40490a7af16f39"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales Inbound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}sales",
+							"host": [
+								"{{url}}sales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}sales-all",
+							"host": [
+								"{{url}}sales-all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}orders",
+							"host": [
+								"{{url}}orders"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "New Lead",
+									"description": "New Lead, Cold, Hot, Invoice State, Won (Paid), Won (Receivable), Failed",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List order status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order-status",
+							"host": [
+								"{{url}}order-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order/644fa5cd7a9707c1a07366ca",
+							"host": [
+								"{{url}}order"
+							],
+							"path": [
+								"644fa5cd7a9707c1a07366ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add lead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"6483356f951187c9cf399a9c\",\r\n    \"brand\":\"kenthuky\",\r\n    // \"sales\":[\r\n    //     \"644025f6d9e0725c55e8ad47\"\r\n    // ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-08-02\",\r\n    \"serviceNote\": \"tes service note\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order",
+							"host": [
+								"{{url}}order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "existing customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "new customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\",\r\n    \"userSource\":\"sedrtfgyhuj\",\r\n    \"isOutbound\":0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Lead Content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"6443dc04988dc6f2febe2f92\",\r\n    \"brand\":\"test\",\r\n    \"sales\":[\r\n        \"644308c4b5433e5f438b71d0\"\r\n    ],\r\n    \"product\": [\r\n        {\r\n            \"product\": \"tes edit\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000,\r\n            \"brief\" : {\r\n                \"theme\": [\r\n                    \"64402609d9e0725c55e8ad99\"\r\n                ],\r\n                \"model\": [\r\n                    \"64402602d9e0725c55e8ad73\"\r\n                ],\r\n                \"pose\": [\r\n                    \"64402604d9e0725c55e8ad81\"\r\n                ],\r\n                \"ratio\": [\r\n                    \"64402603d9e0725c55e8ad79\"\r\n                ],\r\n                \"background\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"property\": [\r\n                    \"64402600d9e0725c55e8ad6b\"\r\n                ],\r\n                \"note\": \"a\",\r\n                \"item\": \"a\"\r\n            }\r\n        },\r\n        {\r\n            \"product\": \"Music Video\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"items\": [\r\n        \"baju\",\r\n        \"celana\"\r\n    ],\r\n    \"source\": \"Internal\",\r\n    \"closing_reason\": \"\",\r\n    \"userSource\":\"sedrtfgyhuj\",\r\n    \"isOutbound\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order/644fa5cd7a9707c1a07366ca",
+							"host": [
+								"{{url}}order"
+							],
+							"path": [
+								"644fa5cd7a9707c1a07366ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status Lead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"Won\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order-status/6405700d17c5406ea9342b59",
+							"host": [
+								"{{url}}order-status"
+							],
+							"path": [
+								"6405700d17c5406ea9342b59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Invoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order\": \"6486daac4eeea4f42b03a934\",\r\n    \"date\": \"2023-05-12\",\r\n    \"discount\":30,\r\n    \"note\": \"tes\",\r\n    \"total\": 485100,\r\n    \"items\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}invoice",
+							"host": [
+								"{{url}}invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Invoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}invoice/INV202305-1",
+							"host": [
+								"{{url}}invoice"
+							],
+							"path": [
+								"INV202305-1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Invoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payment_Progress\": 20,\r\n    \"total\": 1000,\r\n    \"paid_at\":\"2023-05-15\",\r\n    \"termin\": 1,\r\n    \"is_paid\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}invoice/645e1cbef857a13beb163182",
+							"host": [
+								"{{url}}invoice"
+							],
+							"path": [
+								"645e1cbef857a13beb163182"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Invoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}invoice/647d8bb937fb7afcc2acd299",
+							"host": [
+								"{{url}}invoice"
+							],
+							"path": [
+								"647d8bb937fb7afcc2acd299"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List History by customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order-history/6444da29988dc6f2febe9f5c",
+							"host": [
+								"{{url}}order-history"
+							],
+							"path": [
+								"6444da29988dc6f2febe9f5c"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "New Lead",
+									"description": "New Lead, Cold, Hot, Invoice State, Won (Paid), Won (Receivable), Failed",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Permission",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}permissions",
+							"host": [
+								"{{url}}permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}permission/63e07cafba0e53ce15547b67",
+							"host": [
+								"{{url}}permission"
+							],
+							"path": [
+								"63e07cafba0e53ce15547b67"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "add",
+									"type": "text"
+								},
+								{
+									"key": "alias",
+									"value": "add module",
+									"type": "text"
+								},
+								{
+									"key": "module",
+									"value": "63e07cadba0e53ce15547b56",
+									"type": "text"
+								},
+								{
+									"key": "sub_module",
+									"value": "",
+									"description": "nullable",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}permission",
+							"host": [
+								"{{url}}permission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "add",
+									"type": "text"
+								},
+								{
+									"key": "alias",
+									"value": "add module",
+									"type": "text"
+								},
+								{
+									"key": "module",
+									"value": "63e07cadba0e53ce15547b56",
+									"type": "text"
+								},
+								{
+									"key": "sub_module",
+									"value": "63e07caeba0e53ce15547b5c",
+									"description": "nullable",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}permission/63e09ceed4e3e298073b9f6b",
+							"host": [
+								"{{url}}permission"
+							],
+							"path": [
+								"63e09ceed4e3e298073b9f6b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}permission/63e07cb2ba0e53ce15547b77",
+							"host": [
+								"{{url}}permission"
+							],
+							"path": [
+								"63e07cb2ba0e53ce15547b77"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}roles",
+							"host": [
+								"{{url}}roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}role/63e06f1c8c0c954fcaef115d",
+							"host": [
+								"{{url}}role"
+							],
+							"path": [
+								"63e06f1c8c0c954fcaef115d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Tes\",\r\n    \"permissions\":[\r\n        \"63e06f118c0c954fcaef1115\",\r\n        \"63e06f118c0c954fcaef1117\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}roles",
+							"host": [
+								"{{url}}roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Tes 1\",\r\n    \"permissions\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}role/63e06f4ab7f0511cb4f91d1c",
+							"host": [
+								"{{url}}role"
+							],
+							"path": [
+								"63e06f4ab7f0511cb4f91d1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Tes 1\",\r\n    \"permissions\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}role/63e06f1c8c0c954fcaef115d",
+							"host": [
+								"{{url}}role"
+							],
+							"path": [
+								"63e06f1c8c0c954fcaef115d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Activity",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-activities",
+							"host": [
+								"{{url}}user-activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start\":\"2023-02-07\",\r\n    \"end\":\"2023-02-08\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user-activities",
+							"host": [
+								"{{url}}user-activities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}projects",
+							"host": [
+								"{{url}}projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/status",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectLead\":\"640562136c0a98646b603c6b\",\r\n    \"preparedBy\":\"640562136c0a98646b603c6b\",\r\n    \"photographer\":\"640562136c0a98646b603c6b\",\r\n    \"editor\":\"640562136c0a98646b603c6b\",\r\n    \"revised_by\":\"640562136c0a98646b603c6b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/assign/640570a67640d2691ea54b8e",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
+								"assign",
+								"640570a67640d2691ea54b8e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"New Deals\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/status/640570a67640d2691ea54b8e",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
+								"status",
+								"640570a67640d2691ea54b8e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\":\"mamamama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}project/640570a67640d2691ea54b8e",
+							"host": [
+								"{{url}}project"
+							],
+							"path": [
+								"640570a67640d2691ea54b8e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment Log",
+			"item": [
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paid_at\": \"2023-09-20 09:08:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}payment/734674637843",
+							"host": [
+								"{{url}}payment"
+							],
+							"path": [
+								"734674637843"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\":6356232\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}service/644fa5cd7a9707c1a07366ca",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"644fa5cd7a9707c1a07366ca"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow Up",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}notification/follow-up",
+							"host": [
+								"{{url}}notification"
+							],
+							"path": [
+								"follow-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turn it off",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}notification/follow-up/648705cb4cad60a3f068e4b0",
+							"host": [
+								"{{url}}notification"
+							],
+							"path": [
+								"follow-up",
+								"648705cb4cad60a3f068e4b0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tripay",
+			"item": [
+				{
+					"name": "Set Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"method\":\"BCAVA\",\r\n    \"source\": \"bundling aja\",\r\n    \"name\": \"Dadang Kehed\",\r\n    \"email\": \"Iniemail@mail.com\",\r\n    \"phone\": \"6281573650396\",\r\n    \"phone_indo\":\"081573650396\",\r\n    \"total\": 100000,\r\n    \"brand\":\"aaa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}tripay/order",
+							"host": [
+								"{{url}}tripay"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "existing customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "new customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\",\r\n    \"userSource\":\"sedrtfgyhuj\",\r\n    \"isOutbound\":0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Channel List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}tripay/channels",
+							"host": [
+								"{{url}}tripay"
+							],
+							"path": [
+								"channels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "existing customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "new customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\",\r\n    \"userSource\":\"sedrtfgyhuj\",\r\n    \"isOutbound\":0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Fee Calculator",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}tripay/fee-calculator?code=QRIS&amount=50000",
+							"host": [
+								"{{url}}tripay"
+							],
+							"path": [
+								"fee-calculator"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "QRIS"
+								},
+								{
+									"key": "amount",
+									"value": "50000"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "existing customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "new customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\",\r\n    \"userSource\":\"sedrtfgyhuj\",\r\n    \"isOutbound\":0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Order Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}tripay/detail-order?reference=DEV-T292496905AHWOS",
+							"host": [
+								"{{url}}tripay"
+							],
+							"path": [
+								"detail-order"
+							],
+							"query": [
+								{
+									"key": "reference",
+									"value": "DEV-T292496905AHWOS"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "existing customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\":\"63edebda538b0926b6a401c7\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63edebdb538b0926b6a401cb\",\r\n        \"63edebdc538b0926b6a401cd\"\r\n    ],\r\n    \"newcustomer\": 0,\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401df\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"63edebdf538b0926b6a401e1\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "new customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"643ffa06ce3b9b445d9e13f5\",\r\n        \"643ffa06ce3b9b445d9e13f7\"\r\n    ],\r\n    \"newcustomer\": 1,\r\n    \"name\":\"Rangga\",\r\n    \"email\":\"ranggaadipratama96@yahoo.com\",\r\n    \"phone\":\"081573650396\",\r\n    \"total\": 10,\r\n    \"closing_deadline\": \"2023-04-02\",\r\n    \"product\": [\r\n        {\r\n            \"product\": \"Plain Catalogue\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        },\r\n        {\r\n            \"product\": \"Ngewe\",\r\n            \"qty\": 1,\r\n            \"price\": 2000,\r\n            \"total\": 2000\r\n        }\r\n    ],\r\n    \"source\": \"Internal\",\r\n    \"userSource\":\"sedrtfgyhuj\",\r\n    \"isOutbound\":0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}order",
+									"host": [
+										"{{url}}order"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Sales Outbound",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound",
+							"host": [
+								"{{url}}sales-outbound"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/6495778e95608a6a263235cf",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"6495778e95608a6a263235cf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Personal customer list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales\": \"649550b9f45d4e6ba57cf9c0\",\r\n    \"customers\": [\r\n        \"649550b7f45d4e6ba57cf9ba\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound-me",
+							"host": [
+								"{{url}}sales-outbound-me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customers\": [\r\n        \"6495778b95608a6a263235c7\",\r\n        \"6495778c95608a6a263235c9\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/add/6495778e95608a6a263235cf",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"add",
+								"6495778e95608a6a263235cf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customers\": [\r\n        \"tvgvgfvercddscsd\",\r\n        \"dcfgvbhnjmkjnhbgvfc\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/delete/fghjnhbgvfccgvelete",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"delete",
+								"fghjnhbgvfccgvelete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Customer to FU",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales\": \"649550b9f45d4e6ba57cf9c0\",\r\n    \"customers\": [\r\n        \"649550b7f45d4e6ba57cf9ba\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/set/fghjnhbgvfccgvbhj",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"set",
+								"fghjnhbgvfccgvbhj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FU",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customers\": [\r\n        \"649550b7f45d4e6ba57cf9ba\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}sales-outbound/fu",
+							"host": [
+								"{{url}}sales-outbound"
+							],
+							"path": [
+								"fu"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
