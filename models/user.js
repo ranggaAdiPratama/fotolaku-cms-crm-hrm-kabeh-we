@@ -105,6 +105,10 @@ const userSchema = new mongoose.Schema(
       type: {},
       default: null,
     },
+    interest: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,

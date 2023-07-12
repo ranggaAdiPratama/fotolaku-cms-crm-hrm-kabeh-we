@@ -8,16 +8,65 @@ import * as helper from "../helper.js";
 // SECTION list
 export const index = async (req, res) => {
   try {
-    const data = await User.find({
-      email: { $ne: "superAdmin@mail.com" },
-      $and: [
-        {
-          status: true,
-        },
-      ],
-    }).populate("role", "name");
+    let page = req.query.page;
+    const usePage = req.query.usePage;
 
-    return helper.response(res, 200, "Data found", data);
+    if (usePage && usePage == 1) {
+      if (!page) page = 1;
+
+      const data = await User.find({
+        email: { $ne: "superAdmin@mail.com" },
+        $and: [
+          {
+            status: true,
+          },
+        ],
+      })
+        .limit(10)
+        .skip(10 * (page - 1))
+        .populate("role", "name");
+
+      const total = await User.countDocuments({
+        email: { $ne: "superAdmin@mail.com" },
+        $and: [
+          {
+            status: true,
+          },
+        ],
+      });
+
+      let lastPage;
+
+      if (total % 10 == 0) {
+        lastPage = parseInt(total / 10);
+      } else {
+        lastPage = parseInt(total / 10) + 1;
+      }
+
+      return res.status(200).json({
+        meta: {
+          code: 200,
+          message: "Data found",
+        },
+        data,
+        perPage: 10,
+        currentPage: page,
+        pageName: "page",
+        total,
+        lastPage,
+      });
+    } else {
+      const data = await User.find({
+        email: { $ne: "superAdmin@mail.com" },
+        $and: [
+          {
+            status: true,
+          },
+        ],
+      }).populate("role", "name");
+
+      return helper.response(res, 200, "Data found", data);
+    }
   } catch (err) {
     console.log(err);
 
@@ -195,12 +244,14 @@ export const store = async (req, res) => {
       name,
       email,
       password,
+      brand,
       phone,
       role,
       source,
       isOutbound,
       isNewCustomer,
       survey_results,
+      interest,
     } = req.body;
 
     let priority = null;
@@ -258,6 +309,14 @@ export const store = async (req, res) => {
       }
     }
 
+    if (brand) {
+      const brandExist = await Brand.findOne({ name: brand });
+
+      if (!brandExist) {
+        await Brand.create({ name: brand });
+      }
+    }
+
     let user = await User.create({
       name,
       email,
@@ -266,10 +325,11 @@ export const store = async (req, res) => {
       role,
       source,
       isOutbound,
-      brand: "",
+      brand,
       isNewCustomer,
       priority,
       survey_results,
+      interest,
     });
 
     user = await User.findById(user._id)
@@ -302,6 +362,7 @@ export const update = async (req, res) => {
       isOutbound,
       isNewCustomer,
       priority,
+      interest,
     } = req.body;
 
     if (!name) name = user.name;
@@ -409,6 +470,7 @@ export const update = async (req, res) => {
     }
 
     if (!source) source = user.source;
+    if (!interest) interest = user.interest;
 
     await User.findByIdAndUpdate(_id, {
       name,
@@ -421,6 +483,7 @@ export const update = async (req, res) => {
       isOutbound,
       isNewCustomer,
       priority,
+      interest,
     });
 
     user = await User.findById(user._id)

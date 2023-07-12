@@ -9,6 +9,9 @@ import moment from "moment";
 // SECTION index
 export const index = async (req, res) => {
   try {
+    let page = req.query.page;
+    const usePage = req.query.usePage;
+
     const salesRole = await Role.findOne({
       name: "Sales",
     });
@@ -43,13 +46,50 @@ export const index = async (req, res) => {
       })
     );
 
-    const data = await CustomerSales.find({
-      sales: { $in: ids },
-    })
-      .populate("customers", "-password")
-      .populate("sales", "-password");
+    if (usePage && usePage == 1) {
+      if (!page) page = 1;
 
-    return helper.response(res, 200, "Data found", data);
+      const data = await CustomerSales.find({
+        sales: { $in: ids },
+      })
+        .limit(10)
+        .skip(10 * (page - 1))
+        .populate("customers", "-password")
+        .populate("sales", "-password");
+
+      const total = await CustomerSales.countDocuments({
+        sales: { $in: ids },
+      });
+
+      let lastPage;
+
+      if (total % 10 == 0) {
+        lastPage = parseInt(total / 10);
+      } else {
+        lastPage = parseInt(total / 10) + 1;
+      }
+
+      return res.status(200).json({
+        meta: {
+          code: 200,
+          message: "Data found",
+        },
+        data,
+        perPage: 10,
+        currentPage: page,
+        pageName: "page",
+        total,
+        lastPage,
+      });
+    } else {
+      const data = await CustomerSales.find({
+        sales: { $in: ids },
+      })
+        .populate("customers", "-password")
+        .populate("sales", "-password");
+
+      return helper.response(res, 200, "Data found", data);
+    }
   } catch (err) {
     console.log(err);
 
