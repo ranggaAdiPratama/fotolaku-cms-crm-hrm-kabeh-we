@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import moment from "moment";
 // import nodemailer from "nodemailer";
 
 import Invoice from "../models/invoice.js";
@@ -151,6 +152,146 @@ export const destroy = async (req, res, next) => {
   }
 };
 // !SECTION delete order
+// SECTION laporan
+export const report = async (req, res) => {
+  try {
+    let range = req.query.range;
+
+    let gte, lte;
+
+    if (range == "monthly") {
+      gte = moment().startOf("month").toDate();
+      lte = moment().endOf("month").toDate();
+    } else {
+      gte = moment().startOf("week").toDate();
+      lte = moment().endOf("week").toDate();
+    }
+
+    let orders = await Order.find({
+      createdAt: {
+        $gte: gte,
+        $lte: lte,
+      },
+    })
+      .populate("createdBy")
+      .populate("customer")
+      .populate("product")
+      .populate("sales")
+      .populate("invoice")
+      .populate("items")
+      .lean();
+
+    orders = await Product.populate(orders, {
+      path: "product.product",
+    });
+
+    orders = await OrderBrief.populate(orders, {
+      path: "product.brief",
+    });
+
+    moment.locale("id");
+
+    let data = [];
+
+    await Promise.all(
+      orders.map(async (row, i) => {
+        // if (i == 0) console.log(row.product);
+
+        let beautyShot = 0;
+        let creativeShot = 0;
+        let digitalImaging = 0;
+        let dll = 0;
+        let dp = 0;
+        let productOnWhite = 0;
+        let fnbConcept = 0;
+        let lookbookCatalogue = 0;
+        let plainCatalogue = 0;
+        let privateProject = 0;
+        let video = 0;
+        let videoC = 0;
+
+        row.product.map((p) => {
+          if (p.product.name == "Product On White") {
+            productOnWhite = p.total;
+          } else if (p.product.name == "Creative shot") {
+            creativeShot = p.total;
+          } else if (p.product.name == "Digital Imaging") {
+            digitalImaging = p.total;
+          } else if (p.product.name == "FnB Concept") {
+            fnbConcept = p.total;
+          } else if (p.product.name == "Plain Catalogue") {
+            plainCatalogue = p.total;
+          } else if (p.product.name == "Lookbook Catalogue") {
+            lookbookCatalogue = p.total;
+          } else if (p.product.name == "Beauty Shot") {
+            beautyShot = p.total;
+          } else if (p.product.name == "Video Creative") {
+            videoC = p.total;
+          } else if (
+            p.product.name.includes("Video") &&
+            p.product.name !== "Video Creative"
+          ) {
+            video = p.total;
+          } else if (p.product.name == "Private Project") {
+            privateProject = p.total;
+          } else {
+            dll = p.total;
+          }
+        });
+
+        const orderTotal =
+          productOnWhite +
+          creativeShot +
+          digitalImaging +
+          fnbConcept +
+          plainCatalogue +
+          lookbookCatalogue +
+          beautyShot +
+          videoC +
+          video +
+          privateProject +
+          dll;
+
+        const invoice = await Invoice.findOne({
+          order: row._id,
+          $and: [
+            {
+              cicilan: 1,
+            },
+          ],
+        });
+
+        if (invoice) dp = invoice.total;
+
+        data.push({
+          date: moment(row.createdAt).format("Do MMMM YYYY"),
+          brand: row.brand ?? row.customer.brand,
+          status: row.status,
+          salesPerson: row.sales[0].name,
+          productOnWhite,
+          creativeShot,
+          digitalImaging,
+          fnbConcept,
+          plainCatalogue,
+          lookbookCatalogue,
+          beautyShot,
+          videoC,
+          video,
+          privateProject,
+          orderTotal,
+          dp,
+        });
+      })
+    );
+
+    return helper.response(res, 200, "Data found", data);
+  } catch (err) {
+    console.log(err);
+
+    return helper.response(res, 400, "Error", err.message);
+  }
+};
+// !SECTION laporan
 // SECTION ambil order
 export const show = async (req, res) => {
   try {

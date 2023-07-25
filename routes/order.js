@@ -32,6 +32,8 @@ router.get(
   middleware.checkMultiplePermission("view all crud card"),
   controller.customerHistory
 );
+// NOTE GET /api/order-report
+router.get("/order-report", middleware.auth, controller.report);
 // NOTE POST /api/order
 router.post(
   "/order",

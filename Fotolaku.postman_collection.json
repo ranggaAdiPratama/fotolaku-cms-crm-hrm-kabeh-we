@@ -2004,6 +2004,61 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"63e07cbeba0e53ce15547bcb\",\r\n    \"brand\":\"kenthuky\",\r\n    \"sales\":[\r\n        \"63e07cc0ba0e53ce15547bcf\",\r\n        \"63e07cc0ba0e53ce15547bd1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}order-report",
+							"host": [
+								"{{url}}order-report"
+							],
+							"query": [
+								{
+									"key": "range",
+									"value": "monthly",
+									"description": "weekly, monthly",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
