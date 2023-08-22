@@ -156,15 +156,25 @@ export const destroy = async (req, res, next) => {
 export const report = async (req, res) => {
   try {
     let range = req.query.range;
+    
 
     let gte, lte;
 
     if (range == "monthly") {
       gte = moment().startOf("month").toDate();
       lte = moment().endOf("month").toDate();
-    } else {
+    } else if(range === "weekly") {
       gte = moment().startOf("week").toDate();
       lte = moment().endOf("week").toDate();
+    } else if(range === "custom"){
+      let dateRange = req.query.dateRange;
+      const [startDate,endDate] = dateRange.split('-')
+      gte = moment(startDate).toDate();
+      lte = moment(endDate).toDate();
+    } else if(range === 'today'){
+      const today = new Date().toISOString().slice(0,10)
+      gte = moment(today).toDate();
+      lte = moment(today).toDate();
     }
 
     let orders = await Order.find({
